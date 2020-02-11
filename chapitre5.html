@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="testMenu.css">
+
+    <title>Jean Forteroche Ecrivain</title>
+</head>
+
+
+<body>
+    <div class="siteContainer">
+        <div class="sitePusher">
+            <section class="burger">
+                <a href="#" class="burgerIcon" id="burgerIcon"></a>
+                <!-- <a href="#" class="headerLogo">Logo</a> -->
+                <ul class="menu">
+                    <li><a href="index.html">Acceuil</a></li>
+                    <li><a href="tousLesChapitres.html">Un Billet Simple pour l'Alaska</a></li>
+                    <ul>
+                        <li><a href="tousLesChapitres.html">Tous les chapitres</a></li>
+                        <li><a href="prologue.html">Prologue</a></li>
+                        <li><a href="chapitre1.html">Chapitre 1</a></li>
+                        <li><a href="chapitre2.html">Chapitre 2</a></li>
+                        <li><a href="chapitre3.html">Chapitre 3</a></li>
+                        <li><a href="chapitre4.html">Chapitre 4</a></li>
+                        <li><a href="chapitre5.html">Chapitre 5</a></li>
+                    </ul>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+            </section>
+
+            <div class="siteContent">
+                <div class="container">
+
+                    <div id="chapitreBanniere">
+                        <div class="banniere">
+                            <h2>Chapitres 5</h2>
+                        </div>
+                    </div>
+
+                    <div class="contentChapitre">
+                        <div class="Chapitre">
+                            <p>Je savais que cette machine finirait par être installée, que les postes d’analystes
+                                seraient réduits et le travail redistribué.</p>
+                            <p>Mais j’ai été assez stupide pour me croire indispensable et penser que je serais
+                                épargnée.</p>
+                            <p>D’ailleurs, combien d’autres têtes étaient tombées, aujourd’hui ? Suis-je la seule à
+                                avoir perdu la mienne ? Mon Dieu ! Et si j’étais la seule de l’équipe à avoir été virée
+                                ?
+
+                                Les larmes menacent et je cligne des yeux pour les chasser, mais quelques-unes
+                                parviennent à s’échapper. D’un geste rapide, je sors mouchoir et miroir de poche du
+                                carton et entreprends de me tamponner délicatement les yeux pour ne pas ruiner mon
+                                maquillage.</p>
+                        </div>
+                    </div>
+
+                    <div class="commentaire">
+                        <div class="commentHeader">
+                            <h5><span class="commentCount"></span>Commentaires</h5>
+                            <div class="addComment">
+                                <button class="btn">Ajouter un commentaire</button>
+                            </div>
+                        </div>
+
+                        <div class="addCommentForm">
+                            <form action="chapitre1.html" method="post">
+                                <div class="formGroup">
+                                    <label for="firstname">Prénom</label>
+                                    <input id="firstname" name="firstname" type="text" class="formControl" required="">
+                                </div>
+                                <div class="formGroup">
+                                    <label for="lastname">Nom</label>
+                                    <input id="lastname" name="lastname" type="text" class="formControl" required="">
+                                </div>
+                                <div class="formGroup">
+                                    <label for="comment">Commentaire</label>
+                                    <textarea id="comment" name="comment" class="formControl" rows="3"
+                                        required=""></textarea>
+                                </div>
+
+                                <input type="submit" class="btn" value="Publier">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="siteCache" id="siteCache"></div>
+            </div>
+        </div>
+
+        <script src="public/js/menu.js"></script>
+
+</body>
+
+</html>

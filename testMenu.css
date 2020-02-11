@@ -1,0 +1,572 @@
+html, body{
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+/* .afficheForm{
+    display: block;
+} */
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.aboutTitle, i, .readChapitre{
+    color: #e4573d;
+}
+
+.aboutTitle{
+    font-size: 18px;
+    margin-top: 7%;
+}
+
+h1{
+    font-size: 5em;
+    overflow: hidden;
+    margin: 0;
+}
+
+h2, h3 {
+    font-weight: 300;
+}
+
+header{
+    height: 16em;
+    background-image: url(public/images/jeanforterochefond.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+header h1 {
+    text-align: center;
+    color: midnightblue;
+    font-weight: 300;
+    font-size: 3em;
+    margin: 0;
+    padding: 0 20px;
+}
+
+h2.aboutTitles{
+    display: block;
+    font-size: 2.2em;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    padding-bottom: 1.2em;
+}
+
+h2.newRoman{
+    font-size: 1.3em;
+    color: #696969;
+}
+
+h3.subTitles{
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 1.7em;
+    line-height: 1.33em;
+    font-weight: 400;
+    padding-bottom: 0.5em;
+}
+
+.photoAbout{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.author{
+    display: flex;
+    list-style-type: none;
+}
+
+.author li{
+    padding: 5%;
+}
+
+.ecrivain{
+    margin-left: 20%;
+}
+
+i{
+    padding-left: 2%;
+}
+
+/* .container{
+    margin: 0 20px;
+} */
+
+section{
+    margin: 0 20px;
+}
+
+.siteContent{
+    padding-top: 48%;
+}
+
+.burger{
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 66px;
+
+    line-height: 66px;
+    color: #FFF;
+
+    background-color: transparent;
+}
+
+.menu{
+    display: flex;
+    display: inline-block;
+}
+
+.menu a{
+    padding: 0 10px;
+}
+
+.menu a:hover{
+    color: #c6ff00;
+}
+
+.siteContainer{
+    overflow: hidden;
+    height: 100%;
+}
+
+.menu{
+    padding: 0;
+    margin-top: auto;
+    list-style-type: none;
+    width: 250px;
+    background: #191918;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-250px);
+}
+
+.menu li a{
+    display: block;
+    text-decoration: none;
+    color: azure;
+    padding-left: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.menu li ul li a{
+    font-size: 14px;
+}
+
+.menu li a:hover{
+    background: #4a6ba2;
+}
+
+.menu ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: 0;
+    overflow: hidden;
+    
+   transition: 1s;
+    -moz-transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.menu li:hover ul{
+    height: 270px;
+    overflow-y: auto;
+}
+
+.menu ul li a{
+    background: #d2d2d2;
+    color: #47689d;
+    font-size: 14px;
+    padding-left: 40px;
+}
+
+.menu ul li a:hover{
+    background: #c1c1c1;
+}
+
+/* menuResponsive */
+
+.sitePusher{
+    transition-duration: 0.3s;
+    transform: translateX(0px);
+    height: 100%;
+}
+
+.siteContent{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding-top: 0;
+    overflow-y: scroll;
+}
+
+.burger {
+       position: static;
+       z-index: 3;
+}
+
+.burgerIcon{
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 66px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.burgerIcon::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 1rem;
+    height: 0;
+    top: 16px;
+    left: 15px;
+    box-shadow: 0 10px 0 1px #FFF, 
+                0 16px 0 1px #FFF, 
+                0 22px 0 1px #FFF;
+    z-index: 3;
+    cursor: pointer;
+    
+}
+
+.withSidebar .sitePusher{
+    transform: translateX(250px);
+}
+
+.withSidebar  .siteCache{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.imgLastestBook{
+    margin-top: 3%;
+}
+
+.imgLastestBook img{
+    margin-left: 14%;
+    margin-top: 2%;
+}
+
+/* Tous les chapitres */
+
+.chapitreTitle{
+    top: 68%;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.contentAllChapitre p{
+    top: 83%;
+    width: 55%;
+    font-size: 0.9em;
+}
+
+.chapitre{
+    margin-bottom: 9%;
+}
+
+#chapitreBanniere{
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(public/images/banniere.jpg);
+    padding: 4%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.banniere{
+    text-align: center;
+    color: azure;
+}
+
+.banniere h2{
+    font-size: 2em;
+    margin-bottom: 18%;
+}
+
+.allChapitre{
+    display: block;
+    padding: 8%;
+    margin: 0;
+}
+
+.allChapitre h3{
+    text-align: center;
+}
+
+.allChapitre p{
+    font-size: 0.9em;
+    text-align: justify;
+    width: 90%;
+}
+
+.lireChapitre{
+    background-color: #47689d;
+    border-color: #47689d;
+    border-radius: 2%;
+    padding: 2%;
+    font-size: 13px;
+    line-height: 20px;
+    display: inline-block;
+    margin: 5% 35% 8%;
+
+    cursor: pointer;
+}
+
+.lireChapitre a{
+    color: azure;
+}
+
+/* Chapitres */
+
+.contentChapitre{
+    padding-top: 2em;
+}
+
+.contentChapitre .chapitre{
+    width: 70%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 14%;
+}
+
+.contentChapitre p{
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+}
+
+/* Commentaire */
+
+.commentPusher{
+    transition-duration: 0.3s;
+    transform: translatey(0px);
+}
+
+.withSidebar .commentPusher{
+    transform: translateY(350px);
+}
+
+.contentComment{
+    padding: 0;
+    margin: 0;
+}
+
+.commentHeader{
+    padding-bottom: 10%;
+    border-bottom: 1px solid #47689d;
+}
+
+.commentHeader h5{
+    margin-top: 3em;
+    margin-left: 4em;
+    font-size: 1.5em;
+}
+
+.commentsCount{
+    color: #e4573d;
+    font-size: 1.5em;
+}
+
+.addComment{
+    margin-left: 66%;
+}
+
+.addComment .btn{
+    color: #e4573d;
+    font-style: italic;
+    padding: 10px 30px;
+    border: 1px solid #e13d3d;
+    background: #fff;
+}
+
+.addCommentForm{
+    display: none;
+    padding: 2em 0;
+}
+
+form{
+    padding: 6%;
+}
+
+.formGroup{
+    margin-bottom: 1.5em;
+}
+
+label{
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.formControl{
+    display: block;
+    width: 100%;
+    padding: 4px;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    border-radius: 0.3em;
+}
+
+textarea{
+    height: auto;
+}
+
+.addCommentForm .btn{
+    cursor: pointer;
+    color: #FFF;
+    background-color: #47689d;
+    border-color: #47689d;
+    border: 1px solid transparent;
+    border-radius: 0.3em;
+    padding: 0.3em 0.3em;
+    text-align: center;
+}
+
+
+/* Tablettes */
+
+@media only screen and (min-width: 601px) {
+    header{
+        height: 42em;
+    }
+
+    header h1{
+        font-size: 5em;
+        padding-top: 21%;
+    }
+
+    .author li{
+        font-size: 2em;
+    }
+
+    .ecrivain{
+        margin-left: 26%;
+    }
+
+    .aboutTitle{
+        font-size: 2em;
+        margin-bottom: 7%;
+    }
+
+    h3.subTitles{
+        font-size: 2.7em;
+    }
+
+    .aboutText p{
+        font-size: 1.5em;
+    }
+
+    h2.newRoman {
+        font-size: 2em;
+    }
+
+    #lastestBook .container{
+        position: relative;
+    }
+
+    .billet{
+        position: relative;
+        width: 58%;
+    }
+
+    .imgLastestBook{
+        position: absolute;
+        width: 42%;
+        top: 9%;
+        left: 55%;
+    }
+
+    .imgLastestBook img{
+        vertical-align: middle;
+    }
+
+    .resumeBilletAlaska p{
+        font-size: 1.4em;
+    }
+
+    .readChapitre{
+        font-size: 1.5em;
+        margin-bottom: 15%;
+    }
+
+    /* tousLesChapitres */
+
+    .contentAllChapitre{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: unset;
+        flex-wrap: wrap;
+        margin: 0 45px;
+        text-align: center;
+        margin-top: 7%;
+        height: auto;
+    }
+
+    .prologue, .chapitre{
+        width: 45%;
+        position: relative;
+        padding-bottom: 3%;
+        display: inline-block;
+    }
+
+    .contentAllChapitre img{
+        width: 100%;
+        border: none;
+    }
+
+    .chapitreTitle{
+        top: 66%;
+        left: 5%;
+    }
+
+    .contentAllChapitre p{
+        top: 78%;
+        left: 2%;
+        width: 93%;
+    }
+
+    .lireChapitre{
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+
+}
+
+@media only screen and (min-width: 760px){
+   
+    .prologue, .chapitre{
+        width: 30%;      
+    }
+}
+
+
+/* PC */
+
+@media only screen and (min-width: 1025px){
+    
+}
+

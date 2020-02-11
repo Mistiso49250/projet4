@@ -1,0 +1,174 @@
+body{
+    margin: 0;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    font-size: 5em;
+}
+  
+h2 {
+    font-size: 4em;
+    font-weight: 300;
+}
+  
+h3 {
+    font-size: 3.5em;
+    font-weight: 300;
+}
+
+header h1 {
+    color: midnightblue;
+    font-family: 'PayTone One';
+    font-weight: 300;
+    font-size: 6.5em;
+    margin: 0;
+    padding: 0 20px;
+}
+
+h2.aboutTitle{
+    display: block;
+    font-size: 2.2em;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    padding-bottom: 1.2em;
+}
+
+h2.newRoman{
+    font-size: 2em;
+    font-weight: 500;
+}
+
+h3.subTitles{
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 3.5em;
+    line-height: 1.33em;
+    font-weight: 400;
+    padding-bottom: 0.5em;
+}
+
+i{
+    font-size: 1.6em;
+}
+
+a {
+    font-size: 1.6em;
+    color: #e4573d;
+    text-decoration: none;
+    line-height: inherit;
+}
+  
+a:hover {
+    color: #e4573d;
+    text-decoration: none;
+  }
+
+nav a{
+    display: block;
+    color: #b3b3b1;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.openLeft{
+    margin: 0;
+    padding: 0;
+}
+
+.navContent ul{
+    padding: 2%;
+}
+
+
+
+/* .openLeft closed{
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.openLeft open{
+    visibility: visible;
+} */
+
+li{
+    list-style-type: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    header h1 {
+        font-size: 4.2em;
+      }
+
+      .openLeft{
+        position: fixed;
+        width: 200px;
+        height: 100%;
+        top: 0;
+        z-index: 9999;
+        background: #191918;
+        overflow: auto;
+    }
+    
+    .openLeft button{
+        position: relative;
+        width: 100%;
+        color: #b3b3b1;
+        padding: 15px 30px;
+        text-align: left;
+        background: transparent;
+        border: 0;
+        text-transform: none;
+        cursor: pointer;
+    }
+    
+    .openLeft button:hover{
+        color: #fff;
+    }
+    
+    .accueil:hover{
+        color: #fff;
+    }
+    
+    article, aside, footer, header, nav, section {
+        display: block;
+    }
+    
+    header{
+        height: 16em;
+        background-image: url(images/jeanforterochefond.jpg);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    
+    .menuBt{
+        position: absolute;
+        top: 0px;
+        left: 10px;
+        font-size: 3.5em;
+        color: #fff;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .author {
+        display: flex;
+    }
+      
+    .author li {
+        padding: 2em;
+        font-size: 1.8em;
+        color: midnightblue;
+    }
+    
+    
+}
