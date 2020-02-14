@@ -1,9 +1,13 @@
-<?php
-$title = 'Jean Forteroche';
+<?php  ?>
 
-ob_start();
-?>
-<!-- homePage -->
+<header>
+    <h1>Jean Forteroche</h1>
+    <ul class="author">
+        <li class="ecrivain">Écrivain</li>
+        <li>Acteur</li>
+    </ul>
+</header>
+
 <section id="about">
     <div class="container">
         <article class="aboutText">
@@ -63,10 +67,5 @@ ob_start();
                 <img src="public/images/book1.jpeg" alt="Billet simple pour lAlaska'">
             </div>
         </aside>
-
     </div>
 </section>
-<?php
-$content=ob_get_clean();
-require('template/homePage.php');
-?>

@@ -4,7 +4,7 @@ class ChapitreManager
 {
     function findChapitres()
     {
-        $db = dbConnect();
+        $db =  $this->dbConnect();
 
         $req = $db->query('SELECT * FROM chapitre ORDER BY date_publication DESC ');
 
