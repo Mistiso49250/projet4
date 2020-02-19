@@ -1,8 +1,8 @@
 <?php
 
 require_once('src/Model/ChapitreManager.php');
-
 require_once('src/View/View.php');
+
 class FrontController{
     function listChapitre() {
         $chapitreManager = new ChapitreManager();
@@ -17,6 +17,3 @@ class FrontController{
         $commentaires = findCommentaires($_GET['id_commentaire']);
     }
 }
-
-
-// where id param
