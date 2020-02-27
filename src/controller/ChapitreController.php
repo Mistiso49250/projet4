@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require_once('src/Model/ChapitreManager.php');
-require_once('src/Model/CommentaireManager.php');
+use \Oc\Projet4\Model\ChapitreManager;
+use \Oc\Projet4\Model\CommentaireManager;
+// require_once('src/Model/ChapitreManager.php');
+// require_once('src/Model/CommentaireManager.php');
 require_once('src/View/View.php');
 
 class ChapitreController 
@@ -11,8 +13,10 @@ class ChapitreController
     private $commentaireManager;
 
     public function __construct() {
-        $this->chapitreManager = new ChapitreManager();
-        $this->commentaireManager = new CommentaireManager();
+        $chapitreManager = new ChapitreManager();
+        $chapitreManager = new CommentaireManager();
+        // $this->chapitreManager = new ChapitreManager();
+        // $this->commentaireManager = new CommentaireManager();
     }
 
     public function listChapitre() {

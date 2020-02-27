@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-class CommentaireManager 
+namespace Oc\Projet4\Model;
+
+class CommentaireManager extends Manager
 {
     private $db;
     private $chapitreManager;

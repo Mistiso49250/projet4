@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 
-class HomePageManager
+namespace Oc\Projet4\Model;
+
+class HomePageManager extends Manager
 { 
     private $db;
 

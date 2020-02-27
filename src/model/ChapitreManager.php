@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-class ChapitreManager
+namespace Oc\Projet4\Model;
+
+class ChapitreManager extends Manager
 {
     private $db;
 
