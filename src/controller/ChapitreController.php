@@ -1,36 +1,40 @@
 <?php
 declare(strict_types=1);
 
-use \Oc\Projet4\Model\ChapitreManager;
-use \Oc\Projet4\Model\CommentaireManager;
-// require_once('src/Model/ChapitreManager.php');
-// require_once('src/Model/CommentaireManager.php');
-require_once('src/View/View.php');
+namespace Oc\Controller;
+
+use Oc\Model\ChapitreManager;
+use Oc\Model\CommentaireManager;
+use Oc\View\View;
+
 
 class ChapitreController 
 {
     private $chapitreManager;
     private $commentaireManager;
+    private $view;
 
-    public function __construct() {
-        $chapitreManager = new ChapitreManager();
-        $chapitreManager = new CommentaireManager();
-        // $this->chapitreManager = new ChapitreManager();
-        // $this->commentaireManager = new CommentaireManager();
+    public function __construct() 
+    {
+        $this->chapitreManager = new ChapitreManager();
+        $this->commentaireManager = new CommentaireManager();
     }
 
-    public function listChapitre() {
-        
+    public function listChapitre() 
+    {
         $chapitres = $this->chapitreManager->findChapitres();
         // var_dump($chapitres);die();
-        render('listechapitres', $chapitres);
+        $this->view = render('listechapitres', $chapitres);
     }
     
-    public function chapitre($idChapitre){
+    public function chapitre(int $idChapitre) : void // retour : void = rien
+    { //$idChapitre = numerique donc devant int
         
         $post = $this->chapitreManager->findChapitre($idChapitre);
         // var_dump($post); die;
         $commentaires = $this->commentaireManager->findComments($idChapitre);
+        $this->view =
+        render();
     }
 }
     

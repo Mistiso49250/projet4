@@ -1,12 +1,23 @@
 <?php
-use \Oc\Projet4\Model\HomePageManager;
+declare(strict_types=1);
 
-// require_once('src/Model/HomePageManager.php');
-require_once('src/View/View.php');
+namespace Oc\Controller;
 
-function homePage(){
-   function home() {
-       $homePageManager = new HomePageManager();
-   }
-    
+use Oc\Model\homePageManager;
+use Oc\View\View;
+
+
+class homePageController
+{
+    private $homePageManager;
+
+    public function __construct()
+    {
+        $this->$homePageManager = new HomePageManager();
+    }
+
+    public function homePage()
+    {
+         
+    }
 }

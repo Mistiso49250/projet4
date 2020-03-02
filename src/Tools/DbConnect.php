@@ -1,6 +1,6 @@
 <?php
 
-namespace Oc\Projet4\Tools;
+namespace Oc\Tools;
 
 class DbConnect {
     private $db;

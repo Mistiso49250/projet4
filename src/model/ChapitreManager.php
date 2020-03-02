@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Oc\Projet4\Model;
+namespace Oc\Model;
 
 class ChapitreManager extends Manager
 {
     private $db;
 
-    public function __construct(){
-        
+    public function __construct()
+    {
         $this->db = new DbConnect();        
         
     }
 
-    public function findChapitres()
+    public function findChapitres() : array// retour = tableau    ?array = findChapitre va renvoyer null ou un tableau
     {
         
         $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication DESC ');
@@ -22,7 +22,7 @@ class ChapitreManager extends Manager
         return $req->fetchAll();
     }
 
-    public function findChapitre($postId)
+    public function findChapitre($postId) : array
     {
         
         $req = $this->db->prepare('SELECT id_chapitre, titre, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, images FROM posts WHERE id = :idchapitre');

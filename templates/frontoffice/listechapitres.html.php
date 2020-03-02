@@ -1,6 +1,6 @@
 <?php foreach($data as $episodes): ?>
 <div class="chapitre">
-    <img src="public/images/<?=$episodes['image']?>" alt="route Alaska">
+    <img src="public/images/<?=$episodes['image']?>" alt="">
     <h3 class="chapitreTitle"><?=$episodes['titre']?></h3>
     <?= $episodes['contenu_chapitre'] ?>
     <div class="lireChapitre">

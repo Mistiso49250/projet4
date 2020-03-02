@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Oc\Projet4\Model;
+namespace Oc\Model;
 
 class HomePageManager extends Manager
 { 
