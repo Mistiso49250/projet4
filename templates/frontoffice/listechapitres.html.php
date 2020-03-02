@@ -8,5 +8,5 @@
     </div>
 </div>
 <?php endforeach; ?>
-<h1>SALUT</h1>
+
 

@@ -20,10 +20,9 @@ class ChapitreController
         $this->commentaireManager = new CommentaireManager();
     }
 
-    public function listChapitre() 
+    public function listChapitre()
     {
         $chapitres = $this->chapitreManager->findChapitres();
-        // var_dump($chapitres);die();
         $this->view = render('listechapitres', $chapitres);
     }
     
@@ -33,8 +32,8 @@ class ChapitreController
         $post = $this->chapitreManager->findChapitre($idChapitre);
         // var_dump($post); die;
         $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $this->view =
-        render();
+        $this->view = render('chapitres', $post);
+        
     }
 }
     

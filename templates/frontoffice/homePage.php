@@ -56,7 +56,7 @@
             </div>
 
             <div>
-                <a href="tousLesChapitres.html" class="readChapitre">Lire les chapitres</a>
+                <a href="index.php?action=listchapitre" class="readChapitre">Lire les chapitres</a>
                 <i class="fas fa-angle-double-right"></i>
             </div>
 
@@ -69,3 +69,4 @@
         </aside>
     </div>
 </section>
+
