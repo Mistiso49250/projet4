@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require'vendor/autoload.php';
+require'../vendor/autoload.php';
+
+use Oc\Controller\HomePageController;
+use Oc\Controller\ChapitreController;
 
 
 if (isset($_GET['action'])) {

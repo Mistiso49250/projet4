@@ -3,13 +3,15 @@ declare(strict_types=1);
 
 namespace Oc\Model;
 
-class ChapitreManager extends Manager
+use Oc\Tools\DbConnect;
+
+class ChapitreManager
 {
     private $db;
 
     public function __construct()
     {
-        $this->db = new DbConnect();        
+        $this->db = (new DbConnect())->connectToDb();        
         
     }
 

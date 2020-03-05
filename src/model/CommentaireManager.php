@@ -3,14 +3,16 @@ declare(strict_types=1);
 
 namespace Oc\Model;
 
-class CommentaireManager extends Manager
+use Oc\Tools\DbConnect;
+
+class CommentaireManager
 {
     private $db;
     private $chapitreManager;
 
     public function __construct() {
         $this->chapitreManager = new ChapitreManager();
-        $this->db = new DbConnect();
+        $this->db = (new DbConnect())->connectToDb();
     }
 
     public function findComments($postId) : array

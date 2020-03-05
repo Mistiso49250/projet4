@@ -1,7 +1,5 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="testMenu.css">
+    <link rel="stylesheet" href="css/front/testMenu.css">
 
     <title>Jean Forteroche Ecrivain</title>
 </head>
@@ -22,7 +20,6 @@
         <div class="sitePusher">
             <section class="burger">
                 <a href="#" class="burgerIcon" id="burgerIcon"></a>
-                <!-- <a href="#" class="headerLogo">Logo</a> -->
                 <ul class="menu">
                     <li><a href="index.html">Acceuil</a></li>
                     <li><a href="tousLesChapitres.html">Un Billet Simple pour l'Alaska</a></li>
@@ -41,29 +38,15 @@
 
             <div class="siteContent">
                 <div class="container">
-
-                    <div id="chapitreBanniere">
-                        <div class="banniere">
-                            <h2>Liste des chapitres</h2>
-                        </div>
-                    </div>
-
-                    <section class="allChapitre">
-                        <div class="contentAllChapitre">
-                        <?= $content ?>
-                        </div>
-                    </section>
+                    <?= $content ?>
                 </div>
             </div>
             <div class="siteCache" id="siteCache"></div>
         </div>
     </div>
 
-    <script src="public/js/menu.js"></script>
+    <script src="js/front/main.js"></script>
 
 </body>
 
 </html>
-
-
-

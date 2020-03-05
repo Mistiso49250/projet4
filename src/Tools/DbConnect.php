@@ -4,8 +4,8 @@ namespace Oc\Tools;
 
 class DbConnect {
     private $db;
-    
-    public function dbConnect()
+
+    public function connectToDb()
     {
         try
         {

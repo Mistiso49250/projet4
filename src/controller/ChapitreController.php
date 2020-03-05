@@ -18,12 +18,14 @@ class ChapitreController
     {
         $this->chapitreManager = new ChapitreManager();
         $this->commentaireManager = new CommentaireManager();
+        $this->view = new View();
+        
     }
 
-    public function listChapitre()
+    public function listChapitre() 
     {
         $chapitres = $this->chapitreManager->findChapitres();
-        $this->view = render('listechapitres', $chapitres);
+        $this->view->render('listechapitres', $chapitres);
     }
     
     public function chapitre(int $idChapitre) : void // retour : void = rien
@@ -32,7 +34,7 @@ class ChapitreController
         $post = $this->chapitreManager->findChapitre($idChapitre);
         // var_dump($post); die;
         $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $this->view = render('chapitres', $post);
+        $this->view->render('chapitres', $post);
         
     }
 }

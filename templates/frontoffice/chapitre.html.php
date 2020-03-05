@@ -1,12 +1,21 @@
 <?php foreach($data as $episodes): ?>
-<div class="prologue">
-    <img src="public/images/<?=$episodes['image']?>" alt="train Alaska">
+<div class="chapitre">
+    <img src="public/images/<?=$episodes['image']?>" alt="">
     <h3 class="chapitreTitle"><?=$episodes['titre']?></h3>
-
-    <?= $content ?>
-
-    <div class="lireChapitre">
-    <a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Lire le chapitre</a>
+    <?= $episodes['contenu_chapitre'] ?>
     </div>
 </div>
 <?php endforeach; ?>
+
+
+<!--<div id="chapitreBanniere">
+        <div class="banniere">
+            <h2>Chapitres 1</h2>
+        </div>
+    </div>
+
+    <div class="contentChapitre">
+        <div class="Chapitre">
+            php content
+        </div>
+    </div> -->

@@ -10,3 +10,14 @@
 <?php endforeach; ?>
 
 
+<!-- <div id="chapitreBanniere">
+        <div class="banniere">
+            <h2>Liste des chapitres</h2>
+        </div>
+    </div> -->
+
+    <!-- <section class="allChapitre"> -->
+        <!-- <div class="contentAllChapitre"> -->
+        <!-- php content  -->
+        <!-- </div> -->
+    <!-- </section> -->

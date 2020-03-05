@@ -55,4 +55,4 @@ class Main{
     
 }
 
-let javascript = new Main
+let javascript = new Main();
