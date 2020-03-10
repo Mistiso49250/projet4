@@ -1,8 +1,21 @@
 <?php
-require_once('src/Model/AdminManager.php');
-require('src/View/View.php');
+declare(strict_types=1);
 
+namespace Oc\Controller;
 
-function admin(){
+use Oc\Model\AdminManager;
+use Oc\View\View;
 
+class AdminController
+{
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View('../templates/backoffice/');
+    }
+
+    function admin(){
+
+    }
 }

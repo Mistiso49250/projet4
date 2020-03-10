@@ -20,17 +20,17 @@
             <section class="burger">
                 <a href="#" class="burgerIcon" id="burgerIcon"></a>
                 <ul class="menu">
-                    <li><a href="index.html">Acceuil</a></li>
+                    <li><a href="index.php">Acceuil</a></li>
                     <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
-                    <ul>
-                        <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
-                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Prologue</a></li>
-                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 1</a></li>
-                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 2</a></li>
-                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 3</a></li>
-                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 4</a></li>
-                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 5</a></li>
-                    </ul>
+                        <ul>
+                            <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Prologue</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 1</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 2</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 3</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 4</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 5</a></li>
+                        </ul>
                     <li><a href="admin.html">Admin</a></li>
                 </ul>
             </section>

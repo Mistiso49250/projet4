@@ -8,11 +8,7 @@ use Oc\Controller\ChapitreController;
 
 
 if (isset($_GET['action'])) {
-    if ($_GET['action'] === 'homepage') {
-        $controller = new HomePageController();
-        $controller->homePage();
-    }
-    elseif ($_GET['action'] === 'listchapitre') {
+    if ($_GET['action'] === 'listchapitre') {
         $controller = new ChapitreController();
         $controller->listChapitre();
 
@@ -22,6 +18,6 @@ if (isset($_GET['action'])) {
         // $controller->chapitre();
     }
 }
-else {
-    homePage();
-}
+
+    $controller = new HomePageController();
+    $controller->homePage();

@@ -1,14 +1,14 @@
-<?php foreach($data as $episodes): ?>
 <div id="chapitreBanniere">
     <div class="banniere">
         <h2>Liste des chapitres</h2>
     </div>
 </div> 
 
+<?php foreach($data as $episodes): ?>
 <section class="allChapitre"> 
     <div class="contentAllChapitre"> 
             <div class="chapitre">
-                <img src="public/images/<?=$episodes['image']?>" alt="">
+                <img src="images/<?=$episodes['image']?>" alt="">
                 <h3 class="chapitreTitle"><?=$episodes['titre']?></h3>
                 <?= $episodes['contenu_chapitre'] ?>
                 <div class="lireChapitre">

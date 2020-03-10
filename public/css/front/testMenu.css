@@ -43,7 +43,7 @@ h2, h3 {
 
 header{
     height: 16em;
-    background-image: url(public/images/jeanforterochefond.jpg);
+    background-image: url(../../images/jeanforterochefond.jpg);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -221,8 +221,8 @@ section{
 }
 
 .burger {
-       position: static;
-       z-index: 3;
+    position: static;
+    z-index: 3;
 }
 
 .burgerIcon{
@@ -291,7 +291,7 @@ section{
 }
 
 #chapitreBanniere{
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(public/images/banniere.jpg);
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url(../../images/banniere.jpg);
     padding: 4%;
     background-size: cover;
     background-position: center;

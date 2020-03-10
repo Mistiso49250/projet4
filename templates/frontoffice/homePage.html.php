@@ -28,7 +28,7 @@
 
     <aside class="photoAbout">
         <div class="imgAbout">
-            <img src="public/images/Jean_Forteroche.jpg" alt="Billet simple pour lAlaska'">
+            <img src="../../images/Jean_Forteroche.jpg" alt="Billet simple pour lAlaska'">
         </div>
     </aside>
 
@@ -64,7 +64,7 @@
 
         <aside class="alaska">
             <div class="imgLastestBook">
-                <img src="public/images/book1.jpg" alt="Billet simple pour lAlaska'">
+                <img src="../../images/book1.jpg" alt="Billet simple pour lAlaska'">
             </div>
         </aside>
     </div>

@@ -5,14 +5,19 @@ namespace Oc\View;
 
 class View
 {
-    private $frontoffice = '../templates/frontoffice/';
-//  private $backoffice = '../templates/backoffice';
+    private $path;
 
-    public function render($templates, $data) {
+    public function __construct(string $path)
+    {
+        $this->path = $path;
+    }
+
+    public function render(string $templates, ?array $data) : void //?Array => soit un array soit null
+    {
         ob_start();
-        require_once($this->frontoffice.$templates.'.html.php');
+        require_once($this->path.$templates.'.html.php');
         $content=ob_get_clean();
-        require_once($this->frontoffice.'layout.html.php');
+        require_once($this->path.'layout.html.php');
     
     }
 }

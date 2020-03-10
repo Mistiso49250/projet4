@@ -19,19 +19,18 @@ class ChapitreManager
     {
         
         $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication DESC ');
-
+// var_dump($req->fetchAll);die();
 
         return $req->fetchAll();
     }
 
-    public function findChapitre($postId) : array
+    public function findChapitre(int $postId) : array
     {
         
         $req = $this->db->prepare('SELECT id_chapitre, titre, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, images FROM posts WHERE id = :idchapitre');
         $req->execute(['idchapitre'=>$postId]);
-        $post = $req->fetch();
+        return $req->fetch();
 
-        return $post;
     }
 
 }

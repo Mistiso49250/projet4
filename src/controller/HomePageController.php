@@ -3,21 +3,20 @@ declare(strict_types=1);
 
 namespace Oc\Controller;
 
-use Oc\Model\homePageManager;
 use Oc\View\View;
 
 
 class homePageController
 {
-    private $homePageManager;
+    private $view;
 
     public function __construct()
     {
-        $this->$homePageManager = new HomePageManager();
+        $this->view = new View('../templates/frontoffice/');
     }
 
     public function homePage()
     {
-         
+        $this->view->render('homePage', null);
     }
 }

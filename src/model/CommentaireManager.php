@@ -15,7 +15,7 @@ class CommentaireManager
         $this->db = (new DbConnect())->connectToDb();
     }
 
-    public function findComments($postId) : array
+    public function findComments(int $postId) : array
     {
         $comments = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE post_id = :idchapitre ORDER BY date_commentaire DESC');
         $comments->execute(['idchapitre'=>$postId]);

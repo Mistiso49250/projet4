@@ -18,11 +18,10 @@ class ChapitreController
     {
         $this->chapitreManager = new ChapitreManager();
         $this->commentaireManager = new CommentaireManager();
-        $this->view = new View();
-        
+        $this->view = new View('../templates/frontoffice/');
     }
 
-    public function listChapitre() 
+    public function listChapitre() : void
     {
         $chapitres = $this->chapitreManager->findChapitres();
         $this->view->render('listechapitres', $chapitres);
@@ -32,10 +31,8 @@ class ChapitreController
     { //$idChapitre = numerique donc devant int
         
         $post = $this->chapitreManager->findChapitre($idChapitre);
-        // var_dump($post); die;
         $commentaires = $this->commentaireManager->findComments($idChapitre);
         $this->view->render('chapitres', $post);
-        
     }
 }
     
