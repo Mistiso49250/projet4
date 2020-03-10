@@ -14,7 +14,6 @@
     <title>Jean Forteroche Ecrivain</title>
 </head>
 
-
 <body>
     <div class="siteContainer">
         <div class="sitePusher">
@@ -22,15 +21,15 @@
                 <a href="#" class="burgerIcon" id="burgerIcon"></a>
                 <ul class="menu">
                     <li><a href="index.html">Acceuil</a></li>
-                    <li><a href="tousLesChapitres.html">Un Billet Simple pour l'Alaska</a></li>
+                    <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
                     <ul>
-                        <li><a href="tousLesChapitres.html">Tous les chapitres</a></li>
-                        <li><a href="prologue.html">Prologue</a></li>
-                        <li><a href="chapitre1.html">Chapitre 1</a></li>
-                        <li><a href="chapitre2.html">Chapitre 2</a></li>
-                        <li><a href="chapitre3.html">Chapitre 3</a></li>
-                        <li><a href="chapitre4.html">Chapitre 4</a></li>
-                        <li><a href="chapitre5.html">Chapitre 5</a></li>
+                        <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
+                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Prologue</a></li>
+                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 1</a></li>
+                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 2</a></li>
+                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 3</a></li>
+                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 4</a></li>
+                        <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 5</a></li>
                     </ul>
                     <li><a href="admin.html">Admin</a></li>
                 </ul>

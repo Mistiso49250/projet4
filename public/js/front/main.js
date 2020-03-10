@@ -9,11 +9,11 @@ class Main{
         this.siteCache.addEventListener('click', () => this.cache());
 
         //formulaire
-        this.ajoutComm = document.getElementById('ajout');
-        this.ajoutComm.addEventListener('click', () => {
-            this.addCommentForm.style.display= 'block';
-            this.sidebar();
-        })
+        // this.ajoutComm = document.getElementById('ajout');
+        // this.ajoutComm.addEventListener('click', () => {
+        //     this.addCommentForm.style.display= 'block';
+        //     this.sidebar();
+        // })
         this.submit = document.getElementById('submit');
         this.addCommentForm = document.getElementById('addCommentForm');
         this.commentContainer = document.getElementById('commentContainer');

@@ -64,7 +64,7 @@
 
         <aside class="alaska">
             <div class="imgLastestBook">
-                <img src="public/images/book1.jpeg" alt="Billet simple pour lAlaska'">
+                <img src="public/images/book1.jpg" alt="Billet simple pour lAlaska'">
             </div>
         </aside>
     </div>
