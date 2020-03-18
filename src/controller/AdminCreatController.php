@@ -1,8 +1,22 @@
 <?php
-require_once('src/Model/AdminCreatManager.php');
-require('src/View/View.php');
+declare(strict_types=1);
 
+namespace Oc\Controller;
 
-function adminCreat(){
+use Oc\View\View;
 
+class adminCreatController
+{
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View('../templates/backoffice/');
+    }
+
+    public function adminCreat(){
+
+    }
 }
+
+

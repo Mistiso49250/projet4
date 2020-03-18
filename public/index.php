@@ -5,6 +5,7 @@ require'../vendor/autoload.php';
 
 use Oc\Controller\HomePageController;
 use Oc\Controller\ChapitreController;
+use Oc\Controller\AdminController;
 
 
 if (isset($_GET['action'])) {
@@ -16,6 +17,9 @@ if (isset($_GET['action'])) {
         chapitre($_GET['id']);
         // $controller = new ChapitreController();
         // $controller->chapitre();
+    }elseif ($_GET['action'] === 'admin') {
+        $controller = new AdminController();
+        $controller->admin();
     }
 }
 
