@@ -19,7 +19,7 @@ if (isset($_GET['action'])) {
         // $controller->chapitre();
     }elseif ($_GET['action'] === 'admin') {
         $controller = new AdminController();
-        $controller->admin();
+        $controller->logAdmin();
     }
 }
 
