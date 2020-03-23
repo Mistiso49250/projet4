@@ -11,31 +11,6 @@
 <body>
 
 <?php
-
-$password = '$2y$12$VZAPxiYA5mhpxXz6tG90iegMorkrSQpvy1KgqCCg7iIYQoC8x.Sfe';
-// Le mot de passe n'a pas été envoyé
-var_dump($_POST); die();
-if (!isset($_POST['mot_de_passe']))
-{
-    // Afficher le formulaire de saisie du mot de passe
-   ?>
-    <p>Veuillez saisir le mot de passe pour accéder à la partie administrateur</p>
-        <form action="index.php?action=admin" method="post">
-            <!-- action chemin redirection et method = methode d'envoie -->
-            <p><input type="text" name="utilisateur" placeholder="Utilisateur" /></p>
-            <p><input type="password" name="motDePasse" placeholder="Mot de passe"/></p>
-            <button class="btn btn-primary">Se connecter</button>
-        </form>
-   <?php
-}// Le mot de passe n'est pas le bon
-else if ($_POST['utilisateur'] != 'Forteroche' || password_verify($_POST['motDePase'], $password))
-{
-    {
-        echo '<p>Mot de passe ou utilisateur incorrect</p>';
-    }
-}// Le mot de passe a été envoyé et il est bon
-else
-{
     // Afficher la page
     ?>
      <header>
@@ -57,8 +32,6 @@ else
         </nav>
     </header>
     <?= $content ?>
-<?php
-}
-?>
+
 </body>
 </html>

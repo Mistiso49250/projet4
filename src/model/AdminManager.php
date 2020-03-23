@@ -12,7 +12,6 @@ class AdminManager
     public function __construct()
     {
         $this->db = (new DbConnect())->connectToDb();        
-        
     }
 
     public function user() : ?user
@@ -22,12 +21,13 @@ class AdminManager
 
     public function auth(string $name, string $password) : ?user
     {
-        // Vérification des identifiants
+        // // Vérification des identifiants
         $req = $bdd->prepare('SELECT * FROM user WHERE name = :name');
         $req->execute(['name' => $name]);
         $user = $req->fetch();
-
-       
+        if ($user === false) {
+            return null;
+        }
     }
     
 }

@@ -25,3 +25,4 @@ if (isset($_GET['action'])) {
 
     $controller = new HomePageController();
     $controller->homePage();
+    $controller->login();
