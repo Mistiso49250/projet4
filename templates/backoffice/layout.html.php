@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tiny.cloud/1/87ylpwmfvj5agj87x60ppz6xujw6td9ztbkfeauvvh645dgo/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Document</title>
 </head>
 
@@ -14,6 +15,7 @@
     // Afficher la page
     ?>
      <header>
+     <button class="btn btn-exit"><a href='../logout.html.php'>Se déconnecter</button>
         <nav>
             <ul>
                 <li><a href=""></a><i class="fas fa-pen-nib"></i>

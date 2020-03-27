@@ -7,6 +7,7 @@ use Oc\Controller\HomePageController;
 use Oc\Controller\ChapitreController;
 use Oc\Controller\AdminController;
 
+session_start();
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] === 'listchapitre') {
@@ -18,11 +19,11 @@ if (isset($_GET['action'])) {
         // $controller = new ChapitreController();
         // $controller->chapitre();
     }elseif ($_GET['action'] === 'admin') {
-        $controller = new AdminController();
-        $controller->logAdmin();
+        $controller = new HomePageController();
+        $controller->login();
     }
 }
 
     $controller = new HomePageController();
     $controller->homePage();
-    $controller->login();
+    

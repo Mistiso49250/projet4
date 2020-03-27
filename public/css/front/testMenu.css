@@ -561,6 +561,26 @@ textarea{
     .prologue, .chapitre{
         width: 30%;      
     }
+
+    /* ADMIN */
+    .titleConnection{
+        font-size: 1em;
+        text-align: center;
+        margin-top: 2em;
+    }
+
+    .formConnection{
+        text-align: center;
+    }
+
+    .alert-danger{
+        color: chocolate;
+        background-color: lightpink;
+        padding: 0.5em;
+        text-align: center;
+        margin-top: 2em;
+    }
+    
 }
 
 

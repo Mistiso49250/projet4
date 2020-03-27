@@ -95,7 +95,7 @@
                                          </a>
                                      </p>
                                  </div>
-                                 <button type="button" class="btn danger" data-dismiss="modal"> <i class="fas fa-times"></i> annuler
+                                 <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fas fa-times"></i> annuler
                                  </button>
                              </div>
                          </div>
