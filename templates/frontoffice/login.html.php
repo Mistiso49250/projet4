@@ -1,6 +1,6 @@
 <div id="chapitreBanniere">
     <div class="banniere">
-        <h2>Connection</h2>
+        <h2>Se connecter</h2>
     </div>
 </div> 
 
@@ -11,9 +11,9 @@ if($data['messageError'] !== null){
 ?>
     <!-- Afficher le formulaire de saisie du mot de passe -->
     <h1 class="titleConnection">Veuillez saisir votre identifiant et le mot de passe pour accéder à la partie administrateur</h1>
-        <form class="formConnection" action="index.php?action=admin" method="post">
+        <form class="formConnection" action="index.php?action=login" method="post">
             <!-- action chemin redirection et method = methode d'envoie -->
             <p><input type="text" name="utilisateur" placeholder="Utilisateur" /></p>
-            <p><input type="password" name="motDePasse" placeholder="Mot de passe"/></p>
+            <p><input type="password" name="password" placeholder="Mot de passe"/></p>
             <button class="btn btn-primary">Se connecter</button>
         </form>

@@ -18,10 +18,8 @@ class AdminController
         $this->adminManager = new AdminManager();         
     }
 
-    public function logAdmin(string $name, string $password) : ?user
+    public function logAdmin()
     {
-       
-        
         // $login = $this->adminManager->auth();
         $this->view->render('admin', null);
     }

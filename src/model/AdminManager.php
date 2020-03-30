@@ -26,20 +26,26 @@ class AdminManager
         // }
         $query = $this->db->prepare('SELECT * FROM user WHERE id = :iduser');
         $query->execute([$id]);
-        $user = $query->fetchObject(User::class);
+        $user = $query->fetch();
         return $user ?: null;
     }
 
-    public function auth(string $name) : ?user
+    public function auth(string $name): ?array
     {
         // // Vérification des identifiants
         $req = $this->db->prepare('SELECT * FROM user WHERE name = :name');
         $req->execute(['name' => $name]);
         $user = $req->fetch();
+        // var_dump($user, null);die();
+
         if ($user === false) {
+
             return null;
         }
+        // elseif ($user === true) {
+        //     return $user;
+        // }
         return $user;
+        
     }
-    
 }

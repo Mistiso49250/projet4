@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tiny.cloud/1/87ylpwmfvj5agj87x60ppz6xujw6td9ztbkfeauvvh645dgo/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <title>Document</title>
+    <script src="https://cdn.tiny.cloud/1/sgucpkg0rglmeqtnxrrh880aputls1kntjwzgi5htko37n9y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <title>Administration</title>
 </head>
 
 <body>

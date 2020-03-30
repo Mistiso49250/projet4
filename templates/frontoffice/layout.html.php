@@ -31,7 +31,7 @@
                             <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 4</a></li>
                             <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 5</a></li>
                         </ul>
-                    <li><a href="index.php?action=admin">Admin</a></li>
+                    <li><a href="index.php?action=login">Admin</a></li>
                 </ul>
             </section>
 

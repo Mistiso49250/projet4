@@ -18,9 +18,13 @@ if (isset($_GET['action'])) {
         chapitre($_GET['id']);
         // $controller = new ChapitreController();
         // $controller->chapitre();
-    }elseif ($_GET['action'] === 'admin') {
+    }elseif ($_GET['action'] === 'login') {
         $controller = new HomePageController();
         $controller->login();
+    }elseif ($_GET['action'] === 'admin') {
+        // $controller = new HomePageController();
+        // $controller->login();
+        var_dump('admin');die();
     }
 }
 
