@@ -24,12 +24,13 @@ class ChapitreManager
         return $req->fetchAll();
     }
 
-    public function findChapitre(int $postId) : array
+    public function findChapitre(int $idChapitre) : array
     {
         $req = $this->db->prepare('SELECT id_chapitre, titre, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
-        $req->execute(['idchapitre'=>$postId]);
+        $req->execute(['idchapitre'=>$idChapitre]);
         $episodes = $req->fetch();
-        return [$req->fetch()]; 
+        
+        return $episodes; 
     }
 
 }
