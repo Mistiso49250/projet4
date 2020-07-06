@@ -11,13 +11,11 @@ class HomePageController
 {
     private $view;
     private $adminManager;
-    // private $password;
 
     public function __construct()
     {
         $this->view = new View('../templates/frontoffice/');
         $this->adminManager = new AdminManager();
-        // $this->password = '$2y$12$2TmWZeplKZFTh9Sd4wy9SeBVHdjatXMPxyovckmDYANnka6lvx/Z2';
     }
 
     public function login() 

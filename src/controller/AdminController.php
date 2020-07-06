@@ -18,9 +18,19 @@ class AdminController
         $this->adminManager = new AdminManager();         
     }
 
-    public function logAdmin()
+    public function logout()
     {
-        // $login = $this->adminManager->auth();
+        session_destroy();
+        header('Location: index.php');
+        exit();
+    }
+
+    public function Admin()
+    {
+        if(!isset($_SESSION['auth'])){
+            header('Location: index.php?action=login');
+            exit();
+        }
         $this->view->render('admin', null);
     }
 }

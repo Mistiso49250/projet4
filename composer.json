@@ -4,5 +4,8 @@
             "Oc\\":"src/"
         }
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "filp/whoops": "^2.7"
+    }
 }

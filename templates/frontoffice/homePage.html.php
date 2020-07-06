@@ -1,11 +1,8 @@
 <?php  ?>
 
 <header>
-    <h1>Jean Forteroche</h1>
-    <ul class="author">
-        <li class="ecrivain">Écrivain</li>
-        <li>Acteur</li>
-    </ul>
+    <h1 class="headerTitle">Jean Forteroche</h1>
+    <p class="author">Écrivain et acteur</p>
 </header>
 
 <section id="about">

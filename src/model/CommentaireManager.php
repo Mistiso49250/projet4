@@ -17,10 +17,10 @@ class CommentaireManager
 
     public function findComments(int $postId) : array
     {
-        $comments = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE post_id = :idchapitre ORDER BY date_commentaire DESC');
+        $comments = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
         $comments->execute(['idchapitre'=>$postId]);
 
-        return $comments;
+        return [$comments];
     }
 
 }

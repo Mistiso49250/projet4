@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/front/testMenu.css">
+    <link rel="stylesheet" href="css/front/style.css">
 
     <title>Jean Forteroche Ecrivain</title>
 </head>
@@ -31,7 +30,7 @@
                             <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 4</a></li>
                             <li><a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Chapitre 5</a></li>
                         </ul>
-                    <li><a href="index.php?action=login">Admin</a></li>
+                    <li><a href="index.php?action=admin">Admin</a></li>
                 </ul>
             </section>
 

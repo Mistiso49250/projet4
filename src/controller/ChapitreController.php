@@ -13,12 +13,26 @@ class ChapitreController
     private $chapitreManager;
     private $commentaireManager;
     private $view;
-
+    
+    private $chapterModel;
+    private $bookModel;
+    private $commentModel;
     public function __construct() 
     {
         $this->chapitreManager = new ChapitreManager();
         $this->commentaireManager = new CommentaireManager();
         $this->view = new View('../templates/frontoffice/');
+    }
+
+    public function index($id = null)
+    {
+        $chapters = $this->chapterModel->getChapters();
+        $chapter = $this->chapterModel->getChapterById($id);
+
+        $data = [
+        'chapters' => $chapters,
+        'chapter' => $chapter,
+        ];
     }
 
     public function listChapitre() : void
@@ -29,10 +43,9 @@ class ChapitreController
     
     public function chapitre(int $idChapitre) : void // retour : void = rien
     { //$idChapitre = numerique donc devant int
-        
         $post = $this->chapitreManager->findChapitre($idChapitre);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $this->view->render('chapitres', $post);
+        $this->view->render('chapitre', $post);
     }
 }
     

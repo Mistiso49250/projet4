@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require'../vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Oc\Controller\HomePageController;
 use Oc\Controller\ChapitreController;
@@ -9,25 +9,37 @@ use Oc\Controller\AdminController;
 
 session_start();
 
-if (isset($_GET['action'])) {
-    if ($_GET['action'] === 'listchapitre') {
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
+
+
+$action = isset($_GET['action']) ? $_GET['action'] : null;
+    
+switch ($action) {
+    case 'listchapitre':
         $controller = new ChapitreController();
         $controller->listChapitre();
-
-    }elseif ($_GET['action'] === 'chapitre') {
-        chapitre($_GET['id']);
-        // $controller = new ChapitreController();
-        // $controller->chapitre();
-    }elseif ($_GET['action'] === 'login') {
+    break;
+    case 'chapitre':
+        $controller = new ChapitreController();
+        $controller->chapitre((int)$_GET['id']);
+    break;
+    case 'login':
         $controller = new HomePageController();
         $controller->login();
-    }elseif ($_GET['action'] === 'admin') {
-        // $controller = new HomePageController();
-        // $controller->login();
-        var_dump('admin');die();
-    }
+    break;
+    case 'admin':
+        $controller = new AdminController();
+        $controller->admin();
+    break;
+    case 'logout':
+        $controller = new AdminController();
+        $controller->logout();
+    break;
+    default:
+        $controller = new HomePageController();
+        $controller->homePage();
 }
 
-    $controller = new HomePageController();
-    $controller->homePage();
     
