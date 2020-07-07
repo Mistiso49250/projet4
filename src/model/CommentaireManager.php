@@ -15,12 +15,13 @@ class CommentaireManager
         $this->db = (new DbConnect())->connectToDb();
     }
 
-    public function findComments(int $idCommentaire) : array
+    public function findComments(int $idCommentaire) : ?array
     {
-        $comments = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
-        $comments->execute(['idchapitre'=>$idCommentaire]);
+        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
+        $req->execute(['idchapitre'=>$idCommentaire]);
+        $comments = $req->fetchAll();
 
-        return [$comments];
+        return $comments === false ? null : $comments;
     }
 
     public function articleComment(int $idCommentaire, $pseudo, $contenu) : array
@@ -28,7 +29,8 @@ class CommentaireManager
         $comments = $this->db->prepare('INSERT into commentaires(id_commentaire, pseudo, contenu, date_commentaire) VALUES(?, ?, ?, NOW())');
         $affectedLines = $comments->execute([$idCommentaire, $pseudo, $contenu]);
 
-        return [$affectedLines];
+
+        return $affectedLines === false ? null : $affectedLines; 
     }
 
 }

@@ -8,11 +8,11 @@
 <section class="allChapitre"> 
     <div class="contentAllChapitre"> 
             <div class="chapitre">
-                <img src="images/<?=$episodes['image']?>" alt="">
-                <h3 class="chapitreTitle"><?=$episodes['titre']?></h3>
-                <?= $episodes['contenu_chapitre'] ?>
+                <img src="images/<?=htmlspecialchars($episodes['image'])?>" alt="">
+                <h3 class="chapitreTitle"><?=htmlspecialchars($episodes['titre'])?></h3>
+                <?=htmlspecialchars($episodes['contenu_chapitre'])?>
                 <div class="lireChapitre">
-                <a href="index.php?action=chapitre&id=<?=$episodes['id_chapitre']?>">Lire le chapitre</a>
+                <a href="index.php?action=chapitre&id=<?=htmlspecialchars($episodes['id_chapitre'])?>">Lire le chapitre</a>
             </div>
         </div>
     </div> 

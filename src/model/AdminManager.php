@@ -36,7 +36,6 @@ class AdminManager
         $req = $this->db->prepare('SELECT * FROM user WHERE name = :name');
         $req->execute(['name' => $name]);
         $user = $req->fetch();
-        // var_dump($user, null);die();
 
         if ($user === false) {
 

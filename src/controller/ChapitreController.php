@@ -31,15 +31,8 @@ class ChapitreController
     { //$idChapitre = numerique donc devant int
         $episodes = $this->chapitreManager->findChapitre($idChapitre);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $this->view->render('chapitre', $episodes);
+        $this->view->render('chapitre', ['episode'=>$episodes,'commentaires'=>$commentaires]);
     }
-    
-    // public function chapitre()
-    // {
-    //     $episodes = $this->chapitreManager->findChapitre($_GET['id']);
-    //     $commentaires = $this->commentaireManager->findComments($_GET['id']);
-    //     $this->view->render('chapitre', $episodes);
-    // }
 
     public function addComment(int $idCommentaire, $pseudo, $contenu)
     {
