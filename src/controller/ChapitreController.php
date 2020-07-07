@@ -23,8 +23,8 @@ class ChapitreController
 
     public function listChapitre() : void
     {
-        $chapitres = $this->chapitreManager->findChapitres();
-        $this->view->render('listechapitres', $chapitres);
+        $chapitres = $this->chapitreManager->findChapitres(); 
+        $this->view->render('listechapitres', ['episode'=>$chapitres]);
     }
     
     public function chapitre(int $idChapitre) : void // retour : void = rien

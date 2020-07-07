@@ -16,14 +16,6 @@ class AdminManager
 
     public function user() : ?user
     {
-        // if (session_status() === PHP_SESSION_NONE){
-        //     session_start();
-        // }
-        // $id = $_SESSION['auth'] ?? null; 
-        // // ?? = pas defini
-        // if ($id === null) {
-        //     return null;
-        // }
         $query = $this->db->prepare('SELECT * FROM user WHERE id = :iduser');
         $query->execute([$id]);
         $user = $query->fetch();
@@ -41,10 +33,6 @@ class AdminManager
 
             return null;
         }
-        // elseif ($user === true) {
-        //     return $user;
-        // }
         return $user;
-        
     }
 }

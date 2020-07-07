@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="css/front/style.css">
 
+     <!-- bootstrap -->
+     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
     <title>Jean Forteroche Ecrivain</title>
 </head>
 
@@ -23,12 +26,12 @@
                     <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
                         <ul>
                             <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Prologue</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Chapitre 1</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Chapitre 2</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Chapitre 3</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Chapitre 4</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Chapitre 5</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episodes']['id_chapitre'])?>">Prologue</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episodes']['id_chapitre'])?>">Chapitre 1</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episodes']['id_chapitre'])?>">Chapitre 2</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episodes']['id_chapitre'])?>">Chapitre 3</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episodes']['id_chapitre'])?>">Chapitre 4</a></li>
+                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['episodes']['id_chapitre'])?>">Chapitre 5</a></li>
                         </ul>
                     <li><a href="index.php?action=admin">Admin</a></li>
                 </ul>

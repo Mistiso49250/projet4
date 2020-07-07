@@ -24,7 +24,7 @@ class CommentaireManager
         return $comments === false ? null : $comments;
     }
 
-    public function articleComment(int $idCommentaire, $pseudo, $contenu) : array
+    public function articleComment(int $idCommentaire, $pseudo, $contenu) : ?array
     {
         $comments = $this->db->prepare('INSERT into commentaires(id_commentaire, pseudo, contenu, date_commentaire) VALUES(?, ?, ?, NOW())');
         $affectedLines = $comments->execute([$idCommentaire, $pseudo, $contenu]);

@@ -15,6 +15,7 @@ $whoops->register();
 
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
+$image = isset($_GET['image']) ? $_GET['image'] : null;
     
 switch ($action) {
     case 'listchapitre':
@@ -40,6 +41,7 @@ switch ($action) {
     default:
         $controller = new HomePageController();
         $controller->homePage();
+        $controller->chapitre((int)$_GET['id']);
 }
 
     

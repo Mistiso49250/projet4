@@ -4,11 +4,11 @@
     </div>
 </div> 
 
-<?php foreach($data as $episodes): ?>
+<?php foreach($data['episode'] as $episodes): ?>
 <section class="allChapitre"> 
     <div class="contentAllChapitre"> 
             <div class="chapitre">
-                <img src="images/<?=htmlspecialchars($episodes['image'])?>" alt="">
+                <img src="images/<?= htmlspecialchars($episodes['image'])?>" alt="">
                 <h3 class="chapitreTitle"><?=htmlspecialchars($episodes['titre'])?></h3>
                 <?=htmlspecialchars($episodes['contenu_chapitre'])?>
                 <div class="lireChapitre">
