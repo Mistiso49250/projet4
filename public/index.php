@@ -20,11 +20,11 @@ $image = isset($_GET['image']) ? $_GET['image'] : null;
 switch ($action) {
     case 'listchapitre':
         $controller = new ChapitreController();
-        $controller->listChapitre();
+        $controller->listeChapitre();
     break;
     case 'chapitre':
         $controller = new ChapitreController();
-        $controller->chapitre((int)$_GET['id']);
+        $controller->chapitre();
     break;
     case 'login':
         $controller = new HomePageController();
@@ -41,7 +41,6 @@ switch ($action) {
     default:
         $controller = new HomePageController();
         $controller->homePage();
-        $controller->chapitre((int)$_GET['id']);
 }
 
     

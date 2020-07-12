@@ -25,7 +25,7 @@
 
     <aside class="photoAbout">
         <div class="imgAbout">
-            <img src="../../images/Jean_Forteroche.jpg" alt="Billet simple pour lAlaska'">
+            <img src="../../images/téléchargement.jpg" alt="Billet simple pour lAlaska'">
         </div>
     </aside>
 

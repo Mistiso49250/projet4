@@ -12,7 +12,6 @@ class HomePageController
 {
     private $view;
     private $adminManager;
-    private $chapitreManager;
 
     public function __construct()
     {
@@ -43,6 +42,9 @@ class HomePageController
 
     public function homePage()
     {
-        $this->view->render('homePage', null);
+        
+        $episodes = $this->chapitreManager->findAll();
+        var_dump($episodes); die();
+        $this->view->render('homePage', null, ['episode'=>$episodes]);
     }
 }
