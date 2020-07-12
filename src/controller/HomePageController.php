@@ -42,9 +42,6 @@ class HomePageController
 
     public function homePage()
     {
-        
-        $episodes = $this->chapitreManager->findAll();
-        var_dump($episodes); die();
-        $this->view->render('homePage', null, ['episode'=>$episodes]);
+        $this->view->render('homePage', null);
     }
 }

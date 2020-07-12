@@ -4,15 +4,15 @@
     </div>
 </div>
 
-<?php foreach($data as $episodes): ?>
+<?php foreach($data as $episode): ?>
 <section class="allChapitre">
     <div class="contentAllChapitre">
         <div class="chapitre">
-            <img src="images/<?= htmlspecialchars($data->img)?>" alt="">
-            <h3 class="chapitreTitle"><?=htmlspecialchars($data->title)?></h3>
-            <?=htmlspecialchars($data->content)?>
+            <img src="images/<?= htmlspecialchars($data['episode']['image'])?>" alt="">
+            <h3 class="chapitreTitle"><?=htmlspecialchars($data['title'])?></h3>
+            <?=htmlspecialchars($data['content'])?>
             <div class="lireChapitre">
-                <a href="index.php?action=chapitre&id=<?=htmlspecialchars($data->id)?>">Lire le
+                <a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id'])?>">Lire le
                     chapitre</a>
             </div>
         </div>

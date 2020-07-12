@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Oc\Controller;
 
-use Exception;
 use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
 use Oc\View\View;
@@ -32,7 +31,7 @@ class ChapitreController
     public function listeChapitre()
     {
         $list = $this->chapitreManager->findAll();
-        $this->view->render('list', $list);
+        $this->view->render('listechapitres', $list);
     }
 
     // public function findByIdChapitre(int $idChapitre)
