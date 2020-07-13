@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,700,700i,900,900i" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/front/style.css">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+    <title>Jean FORTEROCHE</title>
 </head>
+
 <body>
-<section class="burger">
+    <div class="siteContainer">
+        <div class="sitePusher">
+            <section class="burger">
                 <a href="#" class="burgerIcon" id="burgerIcon"></a>
                 <ul class="menu">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
-                        <ul>
-                        <?php while( $data = $episode){ ?>
-                            <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id_chaptire'])?>">Prologue</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id_chaptire'])?>">Chapitre 1</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id_chaptire'])?>">Chapitre 2</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id_chaptire'])?>">Chapitre 3</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id_chaptire'])?>">Chapitre 4</a></li>
-                            <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id_chaptire'])?>">Chapitre 5</a></li>
-                        <?php } ?>
-                        </ul>
+                    <ul>
+                        <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
+                        <?php foreach($data as $episode) : ?>
+                        <li><a
+                                href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">chapitre<?= $episode['titre'] ?></a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
                     <li><a href="index.php?action=admin">Admin</a></li>
                 </ul>
             </section>
 
+            <div class="siteContent">
+                <div class="container">
+                    <?= $content ?>
+                </div>
+            </div>
+
+            <div class="siteCache" id="siteCache"></div>
+        </div>
+    </div>
+
 </body>
+
 </html>

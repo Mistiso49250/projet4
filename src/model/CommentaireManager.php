@@ -33,4 +33,21 @@ class CommentaireManager
         return $affectedLines === false ? null : $affectedLines; 
     }
 
+    public function getComment(int $idCommentaire) : ?array
+    {
+        $req = $this->db->prepare('SELECT id_commentaire, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre');
+        $req->execute(['idchapitre'=>$idCommentaire]);
+        $comments = $req->fetchAll();
+
+        return $comments === false ? null : $comments;
+    }
+
+    public function updateComment(int $idCommentaire, $contenu) : ?array
+    {
+        $req = $this->db->prepare('UPDATE commentaires set contenu = ?, date_commentaire = now() where id_chapitre = :idchapitre');
+        $newComment = $req->execute([$idCommentaire, $contenu]);
+
+        return $newComment === false ? null : $newComment;
+    }
+
 }

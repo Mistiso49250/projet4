@@ -8,11 +8,11 @@
 <section class="allChapitre">
     <div class="contentAllChapitre">
         <div class="chapitre">
-            <img src="images/<?= htmlspecialchars($data['episode']['image'])?>" alt="">
-            <h3 class="chapitreTitle"><?=htmlspecialchars($data['title'])?></h3>
-            <?=htmlspecialchars($data['content'])?>
+            <img src="images/<?=$episode['image']?>" alt="">
+            <h3 class="chapitreTitle"><?=htmlspecialchars($episode['titre'])?></h3>
+            <?=nl2br(htmlspecialchars($episode['contenu_chapitre']))?>
             <div class="lireChapitre">
-                <a href="index.php?action=chapitre&id=<?=htmlspecialchars($data['id'])?>">Lire le
+                <a href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">Lire le
                     chapitre</a>
             </div>
         </div>
@@ -20,16 +20,20 @@
 </section>
 <?php endforeach; ?>
 
-<!-- <section class="row">
+<!-- 
+<?php foreach($data as $episode): ?>    
+<section class="row">
     <div class="col-md-3 col-lg-3">
         <div class="chapitre">
-            <img src="images/" alt="">
-            <h3 class="chapitreTitle"></h3>
-            
+            <img src="images/<?=$episode['image']?>" alt="">
+            <h3 class="chapitreTitle"><?=htmlspecialchars($episode['titre'])?></h3>
+            <?=nl2br(htmlspecialchars($episode['contenu_chapitre']))?>
             <div class="lireChapitre">
-                <a href="index.php?action=chapitre&id=">Lire le
+                <a href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">Lire le
                     chapitre</a>
             </div>
         </div>
     </div>
-</section> -->
+</section> 
+<?php endforeach; ?>
+-->

@@ -19,27 +19,23 @@ class ChapitreController
         $this->chapitreManager = new ChapitreManager();
         $this->commentaireManager = new CommentaireManager();
         $this->view = new View('../templates/frontoffice/');
-        // $this->findById = $this->chapitreManager->findChapitres($_GET['id_chapitre']);
     }
 
-    public function chapitre()
+    // test 2
+    public function chapitre(int $idChapitre)
     {
-        $episode = $this->chapitreManager->find($_GET['id_chapitre']);
+        $episode = $this->chapitreManager->findChapitre($idChapitre);
         $this->view->render('chapitre', ['episode'=>$episode]);
     }
 
     public function listeChapitre()
     {
-        $list = $this->chapitreManager->findAll();
+        $list = $this->chapitreManager->findChapitres();
+        // var_dump($list, 'toto', $list[0], count($list)); die();
         $this->view->render('listechapitres', $list);
     }
 
-    // public function findByIdChapitre(int $idChapitre)
-    // {
-    //     $findById = $this->chapitreManager->findChapitre($idChapitre);
-    //     $this->view->render('findChapitre', $findById);
-    // }
-
+//   Original
     // public function listChapitre() : void
     // { 
     //     $chapitres = $this->chapitreManager->findChapitres(); 
@@ -53,7 +49,10 @@ class ChapitreController
     //     $this->view->render('chapitre', ['episode'=>$episodes,'commentaires'=>$commentaires]);
     // }
 
-    // public function addComment(int $idCommentaire, $pseudo, $contenu)
+
+    // Commentaires
+    
+         // public function addComment(int $idCommentaire, $pseudo, $contenu)
     // {
     //     $affectedLines = $this->commentaireManager->articleComment($idCommentaire, $pseudo, $contenu);
     //     if ($affectedLines === false){
@@ -81,6 +80,5 @@ class ChapitreController
     //         header('Location: index.php?action=commentaire&id=' . $id);
     //     }
     // }
-
 }
 

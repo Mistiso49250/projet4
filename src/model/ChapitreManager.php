@@ -17,9 +17,9 @@ class ChapitreManager
     {
         $this->db = (new DbConnect())->connectToDb();        
         $this->id=0;
-        $this->title="article";
-        $this->content="Contenu chapitre";
-        $this->image="image";
+        $this->title="titre";
+        $this->content="contenu_chapitre";
+        $this->img="image";
     }
 
     public function setId($id) {
@@ -46,22 +46,10 @@ class ChapitreManager
 		return $this->content;
     }
 
-    public function find(int $idChapitre) : ?array
-    {
-        $req = $this->db->prepare('SELECT id_chapitre, titre, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
-        $req->execute(['idchapitre'=>$idChapitre]);
-        $episodes = $req->fetch();
-        
-        return $episodes === false ? null : $episodes; 
-    }
-
-    public function findAll()
-    {
-        $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication ');
-
-        return $req->fetchAll();
-    }
+    // test 2
     
+    
+    // test 1
     // public function find($id)
     // {
     //     if( !is_int($id)) trigger_error('Appel non conforme');
@@ -89,21 +77,22 @@ class ChapitreManager
     //     }
     // }
 
-    // public function findChapitres() : array// retour = tableau    ?array = findChapitre va renvoyer null ou un tableau
-    // {
-    //     $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication DESC ');
+    // Original
+    public function findChapitres() : array// retour = tableau    ?array = findChapitre va renvoyer null ou un tableau
+    {
+        $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication DESC ');
 
-    //     return $req->fetchAll();
-    // }
+        return $req->fetchAll();
+    }
 
-    // public function findChapitre(int $idChapitre) : ?array
-    // {
-    //     $req = $this->db->prepare('SELECT id_chapitre, titre, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
-    //     $req->execute(['idchapitre'=>$idChapitre]);
-    //     $episodes = $req->fetch();
+    public function findChapitre(int $idChapitre) : ?array
+    {
+        $req = $this->db->prepare('SELECT id_chapitre, titre, image, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
+        $req->execute(['idchapitre'=>$idChapitre]);
+        $episodes = $req->fetch();
         
-    //     return $episodes === false ? null : $episodes; 
-    // }
+        return $episodes === false ? null : $episodes; 
+    }
 
     
 
