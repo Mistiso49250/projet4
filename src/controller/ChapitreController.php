@@ -21,14 +21,13 @@ class ChapitreController
         $this->view = new View('../templates/frontoffice/');
     }
 
-    // test 2
-    public function chapitre(int $idChapitre)
+    public function chapitre(int $idChapitre) : void
     {
         $episode = $this->chapitreManager->findChapitre($idChapitre);
         $this->view->render('chapitre', ['episode'=>$episode]);
     }
 
-    public function listeChapitre()
+    public function listeChapitre() : void
     {
         $list = $this->chapitreManager->findChapitres();
         // var_dump($list, 'toto', $list[0], count($list)); die();

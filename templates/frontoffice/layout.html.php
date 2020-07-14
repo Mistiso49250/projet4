@@ -26,8 +26,8 @@
                     <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
                     <ul>
                         <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
-                        <?php foreach($data as $episode) : ?>
-                        <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">chapitre<?= $episode['titre'] ?></a>
+                        <?php foreach($data as $episode): ?>
+                        <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>"><?= $episode['titre'] ?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
