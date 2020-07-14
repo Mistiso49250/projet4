@@ -8,6 +8,21 @@ html, body{
     padding: 0;
 }
 
+.containerBootstrap {
+    padding: 50px 15px 0 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+[class*="col-"] {
+    line-height: 40px;
+    text-align: center;
+}
+
+.pagination li{
+    padding: 1%;
+}
+
 img{
     max-width: 100%;
     height: auto;
@@ -272,6 +287,8 @@ section{
 /* Tous les chapitres */
 
 .chapitreTitle{
+    margin-top: 20px;
+    text-align: center;
     top: 68%;
     font-weight: bold;
     font-size: 1.2em;
@@ -321,7 +338,7 @@ section{
     width: 90%;
 }
 
-.lireChapitre{
+/* .lireChapitre{
     background-color: #47689d;
     border-color: #47689d;
     border-radius: 2%;
@@ -336,6 +353,12 @@ section{
 
 .lireChapitre a{
     color: azure;
+} */
+.btn-info {
+    color: #fff;
+    background-color: #4789C3;
+    border-color: #4789C3;
+    margin-bottom: 15%;
 }
 
 /* Chapitres */
@@ -446,6 +469,8 @@ textarea{
 /* Tablettes */
 
 @media only screen and (min-width: 601px) {
+    
+
     header{
         height: 42em;
     }

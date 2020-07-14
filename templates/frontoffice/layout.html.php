@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/front/style.css">
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Jean FORTEROCHE</title>
 </head>
@@ -27,8 +27,7 @@
                     <ul>
                         <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
                         <?php foreach($data as $episode) : ?>
-                        <li><a
-                                href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">chapitre<?= $episode['titre'] ?></a>
+                        <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">chapitre<?= $episode['titre'] ?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>

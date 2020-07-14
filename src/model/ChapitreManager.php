@@ -80,7 +80,7 @@ class ChapitreManager
     // Original
     public function findChapitres() : array// retour = tableau    ?array = findChapitre va renvoyer null ou un tableau
     {
-        $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication DESC ');
+        $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication');
 
         return $req->fetchAll();
     }
