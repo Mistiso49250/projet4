@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Oc\Model;
 
+use Exception;
 use Oc\Tools\DbConnect;
 
 class CommentaireManager
@@ -15,20 +16,19 @@ class CommentaireManager
         $this->db = (new DbConnect())->connectToDb();
     }
 
-    public function findComments(int $idCommentaire) : ?array
+    public function findComments(int $idChapitre) : ?array
     {
-        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
-        $req->execute(['idchapitre'=>$idCommentaire]);
+        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
+        $req->execute(['idchapitre'=>$idChapitre]);
         $comments = $req->fetchAll();
 
         return $comments === false ? null : $comments;
     }
 
-    public function articleComment(int $idCommentaire, $pseudo, $contenu) : ?array
+    public function articleComment(int $idChapitre, $pseudo, $contenu) : ?array
     {
-        $comments = $this->db->prepare('INSERT into commentaires(id_commentaire, pseudo, contenu, date_commentaire) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute([$idCommentaire, $pseudo, $contenu]);
-
+        $comments = $this->db->prepare('INSERT into commentaire(id_commentaire, pseudo, contenu, date_commentaire) VALUES(?, ?, ?, NOW())');
+        $affectedLines = $comments->execute([$idChapitre, $pseudo, $contenu]);
 
         return $affectedLines === false ? null : $affectedLines; 
     }

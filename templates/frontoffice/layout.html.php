@@ -24,13 +24,6 @@
                 <ul class="menu">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
-                    <ul>
-                        <li><a href="index.php?action=listchapitre">Tous les chapitres</a></li>
-                        <?php foreach($data as $episode): ?>
-                        <li><a href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>"><?= $episode['titre'] ?></a>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
                     <li><a href="index.php?action=admin">Admin</a></li>
                 </ul>
             </section>

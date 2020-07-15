@@ -15,6 +15,7 @@ $whoops->register();
 
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
+if(isset($_GET['action']))
     
 switch ($action) {
     case 'listchapitre':
@@ -24,6 +25,7 @@ switch ($action) {
     case 'chapitre':
         $controller = new ChapitreController();
         $controller->chapitre((int)$_GET['id']);
+        $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
     break;
     case 'login':
         $controller = new HomePageController();

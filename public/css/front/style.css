@@ -19,6 +19,8 @@ html, body{
     text-align: center;
 }
 
+.form-inline { margin-top: 20px}
+
 .pagination li{
     padding: 1%;
 }
