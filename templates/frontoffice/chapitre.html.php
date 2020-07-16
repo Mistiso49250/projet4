@@ -13,7 +13,10 @@
     </div>
 </div>
 <div class="form-group">
-    <button type="submit" class="pull-right btn btn-info"><a href="index.php?action=listchapitre">Retour à la liste des chaptires</a></button>
+    <button type="submit" class=""><a href="index.php?action=listchapitre">Retour à la liste des chaptires</a></button>
+</div>
+<div class="form-group">
+    <button type="submit" class="pull-right btn btn-info"><a href="index.php?action=">Signaler</a></button>
 </div>
 
 <h2>Commentaires: </h2>

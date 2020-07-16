@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div class="siteContainer">
+    <div class="siteEncadrement">
         <div class="sitePusher">
             <section class="burger">
                 <a href="#" class="burgerIcon" id="burgerIcon"></a>
@@ -29,7 +29,7 @@
             </section>
 
             <div class="siteContent">
-                <div class="container">
+                <div class="siteContenu">
                     <?= $content ?>
                 </div>
             </div>
@@ -38,6 +38,7 @@
         </div>
     </div>
 
+    <script src="js\front\main.js"></script>
 </body>
 
 </html>
