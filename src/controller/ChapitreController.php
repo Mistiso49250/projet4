@@ -65,5 +65,17 @@ class ChapitreController
             header('Location: index.php?action=commentaire&id=' . $id);
         }
     }
+
+    public function deleteComment($id, $commentaireManager)
+    {
+        $delete = $this->commentaireManager->updateComment($id, $commentaireManager);
+        if($delete === false){
+            die('Impossible de modifier le commentaire');
+        }
+        else{
+            echo 'commentaire: ' . $_POST['comment'];
+            header('Location: index.php?action=commentaire&id=' . $id);
+        }
+    }
 }
 

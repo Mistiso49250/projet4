@@ -25,7 +25,7 @@ switch ($action) {
     case 'chapitre':
         $controller = new ChapitreController();
         $controller->chapitre((int)$_GET['id']);
-        $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
+        // $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
     break;
     case 'login':
         $controller = new HomePageController();

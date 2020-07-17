@@ -35,4 +35,6 @@ class AdminManager
         }
         return $user;
     }
+
+    
 }

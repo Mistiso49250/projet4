@@ -11,6 +11,7 @@ class AdminController
     private $view;
     private $adminManager;
     
+    
 
     public function __construct()
     {
@@ -33,4 +34,6 @@ class AdminController
         }
         $this->view->render('admin', null);
     }
+
+    
 }

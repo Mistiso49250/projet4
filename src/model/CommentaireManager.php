@@ -44,10 +44,18 @@ class CommentaireManager
 
     public function updateComment(int $idCommentaire, $contenu) : ?array
     {
-        $req = $this->db->prepare('UPDATE commentaires set contenu = ?, date_commentaire = now() where id_chapitre = :idchapitre');
+        $req = $this->db->prepare('UPDATE commentaire set contenu = ?, date_commentaire = now() where id_chapitre = :idchapitre');
         $newComment = $req->execute([$idCommentaire, $contenu]);
 
         return $newComment === false ? null : $newComment;
+    }
+
+    public function delete(int $idCommentaire, $contenu)
+    {
+        $req = $this->db->prepare('DELETE from commentaire set contenu = ?, where id_chapitre = :idchapitre');
+        $resetComment = $req->execute([$idCommentaire, $contenu]);
+
+        return $resetComment === false ? null : $resetComment;
     }
 
 }

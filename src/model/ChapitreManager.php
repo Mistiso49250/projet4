@@ -32,4 +32,12 @@ class ChapitreManager
         return $episodes === false ? null : $episodes; 
     }
 
+    public function updateChapitre(int $idChaptire, $contenu) : ?array
+    {
+        $req = $this->db->prepare('UPDATE chaptire set contenu_chapitre = ?, date_publication = now() where id_chapitre = :idchapitre');
+        $newchaptire = $req->execute([$idChaptire, $contenu]);
+
+        return $newchaptire === false ? null : $newchaptire;
+    }
+
 }

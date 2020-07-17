@@ -18,6 +18,13 @@
 
     <!-- tinymce -->
     <script src="https://cdn.tiny.cloud/1/sgucpkg0rglmeqtnxrrh880aputls1kntjwzgi5htko37n9y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+    });
+  </script>
 
     <title>Administration</title>
 </head>
@@ -47,12 +54,14 @@
                     <li><a href="#">Modifier un chapitre</a></li>
                     <li><a href="#">Modérer les Commentaires</a></li>
                     <li><a href='index.php?action=logout'>Se déconnecter</a></li>
+                    <li><a href="#">Commentaires signalé</a></li>
                 </ul>
             </div>
         </div>
         <?= $content ?>
     </div>
 
+    <script src="js\back\tinymce\tinymce.min.js"></script>
 </body>
 
 </html>
