@@ -29,6 +29,15 @@ body{
     margin-right: 20px;
 }
 
+.btn {
+    border-radius: 1rem;
+    transition: color 0.3s;
+}
+
+.btn btn-info:hover{
+    color: #d8554d;
+}
+
 
 
 

@@ -39,22 +39,28 @@
             </div>
         </div>
     </div>
-
+    
     <div class="form-group">
         <button type="submit" class="pull-right btn btn-info">Envoyer</button>
+        <?php foreach($data as $episode): ?>
+        <input type="hidden" name='id_chapitre' value="echo $episode['id_chapitre']; ">
+        <?php endforeach; ?>
     </div>
 </form>
 
+
 <div>
-    <?php foreach($data['commentaires'] as $commentaire): ?>
+<?php foreach($data['commentaires'] as $commentaire): ?>
     <p><strong><?=htmlspecialchars($commentaire['pseudo'])?></strong> le <?=$commentaire['date_commentaire_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></p>
     <?php endforeach; ?>
 </div>
+
+
 <div class="row">
     <div class="col-lg-3">
         <div class="form-group">
-            <button type="submit" class="pull-right btn btn-info"><a href="index.php?action=">Signaler</a></button>
+            <button type="submit" class="btn btn-info"><a href="index.php?action=adminManager=t=1&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Signaler</a></button>
         </div>
     </div>
 </div>

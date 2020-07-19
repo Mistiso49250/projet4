@@ -50,11 +50,12 @@
                     <h1 class="navbar-brand">Administration</h1>
                 </div>
                 <ul class="nav nav-bar">
-                    <li class="active"><a href="#">Nouveau chapitre</a></li>
-                    <li><a href="#">Modifier un chapitre</a></li>
-                    <li><a href="#">Modérer les Commentaires</a></li>
+                    <li class="active"><a href="#ecrire">Nouveau chapitre</a></li>
+                    <li><a href="#modifier">Modifier un chapitre</a></li>
+                    <!-- ?php foreach ($data as $dislike): ? -->
+                    <li><a href="#moderer">Modérer les Commentaires<br><p class="btn btn-danger btn-md"><!-- ?= $dislike ? --></p></a></li>
+                    <!-- ?php endforeach; ? -->
                     <li><a href='index.php?action=logout'>Se déconnecter</a></li>
-                    <li><a href="#">Commentaires signalé</a></li>
                 </ul>
             </div>
         </div>

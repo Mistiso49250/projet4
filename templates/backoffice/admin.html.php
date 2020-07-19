@@ -37,7 +37,7 @@
 
 
 <form class="col-lg-12" method="POST">
-        <h2>Ecrire un chapitre</h2>
+        <h2 id="ecrire">Ecrire un chapitre</h2>
     <div class="form-group">
         <label for="texte">Titre: </label>
         <input id="text" type="text" name="titre" class="form-control" maxlength="255">
@@ -53,7 +53,7 @@
 </form>
 
 <form action="index.php?action=updateChapitre&amp;id_chapitre=" class="col-lg-12" method="POST">
-        <h2>Modifier un chapitre</h2>
+        <h2 id="modifier">Modifier un chapitre</h2>
     <div class="form-group">
         <label for="texte">Titre: </label>
         <input id="text" type="text" name="titre" class="form-control" maxlength="255">
@@ -70,7 +70,7 @@
 
 <div class="listComments">
     <div class="col-lg-12">
-        <h2>Liste des commentaires</h2>
+        <h2 moderer>Liste des commentaires</h2>
         <div class="action">
             <a href="index.php?action=getComment&amp;orderBy=date_commentaire"></a>
         </div>
