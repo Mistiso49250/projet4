@@ -5,6 +5,7 @@ namespace Oc\Controller;
 
 use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
+use Oc\Model\ReportManager;
 use Oc\View\View;
 
 
@@ -12,12 +13,14 @@ class ChapitreController
 {
     private $chapitreManager;
     private $commentaireManager;
+    private $reportManager;
     private $view;
     
     public function __construct() 
     {
         $this->chapitreManager = new ChapitreManager();
         $this->commentaireManager = new CommentaireManager();
+        $this->reportManager = new ReportManager();
         $this->view = new View('../templates/frontoffice/');
     }
 
@@ -35,47 +38,6 @@ class ChapitreController
     }
 
 
-    // Commentaires
     
-    public function addComment(int $idChapitre, $pseudo, $contenu)
-    {
-        $affectedLines = $this->commentaireManager->articleComment($idChapitre, $pseudo, $contenu);
-        if ($affectedLines === false){
-            die('Impossible d\'ajouter le commentaire !');
-        }
-        else{
-            header('Location: index.php?action=chapitre&id' . $idChapitre);
-        }
-    }
-
-    public function viewComment($id, $commentaireManager)
-    {
-        $viewComment = $this->commentaireManager->updateComment($id, $commentaireManager);
-        $this->view->render('viewComment', $viewComment);
-    }
-
-    public function editComment($id, $commentaireManager)
-    {
-        $edit = $this->commentaireManager->updateComment($id, $commentaireManager);
-        if($edit === false){
-            die('Impossible de modifier le commentaire');
-        }
-        else{
-            echo 'commentaire: ' . $_POST['comment'];
-            header('Location: index.php?action=commentaire&id=' . $id);
-        }
-    }
-
-    public function deleteComment($id, $commentaireManager)
-    {
-        $delete = $this->commentaireManager->updateComment($id, $commentaireManager);
-        if($delete === false){
-            die('Impossible de modifier le commentaire');
-        }
-        else{
-            echo 'commentaire: ' . $_POST['comment'];
-            header('Location: index.php?action=commentaire&id=' . $id);
-        }
-    }
 }
 

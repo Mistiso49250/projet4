@@ -16,18 +16,18 @@
                 </thead>
 
                 <tbody>
-                    <!-- foreach ($data as $episode): ?> -->
+                    <?php foreach ($data as $episode): ?>
                     <tr>
-                        <td> $episode['titre']</td>
-                        <td> $episode['contenu_chapitre']</td>
-                        <td> $episode['date_publication_fr'] </td>
+                        <td><?=htmlspecialchars($episode['titre'])?></td>
+                        <td><?=htmlspecialchars($episode['contenu_chapitre'])?></td>
+                        <td><?=htmlspecialchars($episode['date_publication'])?></td>
                         <td>
                             <a href="index.php?action=?>" class="btn btn-success">Editer</a>
                             <a onclick="return confirm('Voulez vous vraiment surimer ce contenu ?'); "
                                 href="index.php?action=?>" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
-                    <!-- endforeach; -->
+                   <?php endforeach;?>
                 </tbody>
             </table>
         </section>
@@ -36,7 +36,7 @@
 </div><br>
 
 
-<form class="col-lg-12" method="POST">
+<form action="index.php?action=creatChaptire" class="col-lg-12" method="POST">
         <h2 id="ecrire">Ecrire un chapitre</h2>
     <div class="form-group">
         <label for="texte">Titre: </label>
@@ -52,7 +52,7 @@
     </div>
 </form>
 
-<form action="index.php?action=updateChapitre&amp;id_chapitre=" class="col-lg-12" method="POST">
+<form action="index.php?action=updateChapitre&id_chapitre=" class="col-lg-12" method="POST">
         <h2 id="modifier">Modifier un chapitre</h2>
     <div class="form-group">
         <label for="texte">Titre: </label>
@@ -72,7 +72,7 @@
     <div class="col-lg-12">
         <h2 moderer>Liste des commentaires</h2>
         <div class="action">
-            <a href="index.php?action=getComment&amp;orderBy=date_commentaire"></a>
+            <a href="index.php?action=getComment&orderBy=date_commentaire"></a>
         </div>
         <section class="table-responsive">
             <table class="table table-bordered">
@@ -87,26 +87,24 @@
                 </thead>
 
                 <tbody>
-                    <!-- foreach($data['commentaires'] as $commentaire): -->
+                    <?php foreach($data['commentaires'] as $commentaire): ?>
                     <tr>
-                        <td>htmlspecialchars($commentaire['pseudo'])</td>
-                        <td>nl2br(htmlspecialchars(($commentaire['contenu'])))</td>
-                        <td>$commentaire['date_commentaire']</td>
-                        <td>$commentaire['id_chapitre']</td>
+                        <td><?=htmlspecialchars($commentaire['pseudo'])?></td>
+                        <td><?=nl2br(htmlspecialchars(($commentaire['contenu'])))?></td>
+                        <td><?=$commentaire['date_commentaire']?></td>
+                        <td><?=$commentaire['id_chapitre']?></td>
+                    <?php endforeach; ?>
                         <td>
                             <div class="row">
                                 <div class="col-lg-2">
                                     <div class="btn-group">
-                                        <a class="btn btn-warning" href="index.php?action=editComment&amp;id_commentaire"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a class="btn btn-warning" href="index.php?action=editComment&id_commentaire"><span class="glyphicon glyphicon-pencil"></span></a>
                                         <a onclick="return confirm('Voulez vous vraiment surimer ce contenu ?'); "
-                                href="index.php?action=deleteComment&amp;id_commentaire" class="btn btn-danger" href="index.php?action=editComment&amp;id_commentaire"><span class="glyphicon glyphicon-remove"></span></a>
+                                href="index.php?action=deleteComment&id_commentaire" class="btn btn-danger" href="index.php?action=editComment&id_commentaire"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 </div>
-                            </div>
-
-                            
+                            </div> 
                     </tr>
-                    <!-- endforeach; -->
                 </tbody>
             </table>
         </section>

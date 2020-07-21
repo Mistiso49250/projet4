@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Oc\Model;
 
-use Exception;
 use Oc\Tools\DbConnect;
 
 class CommentaireManager
@@ -25,14 +24,16 @@ class CommentaireManager
         return $comments === false ? null : $comments;
     }
 
-    public function articleComment(int $idChapitre, $pseudo, $contenu) : ?array
+    public function articleComment(int $idChapitre, $pseudo, $contenu) : bool
     {
-        $comments = $this->db->prepare('INSERT into commentaire(id_commentaire, pseudo, contenu, date_commentaire) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute([$idChapitre, $pseudo, $contenu]);
+        $idChapitre = 3;
+        $comments = $this->db->prepare('INSERT into commentaire (id_commentaire, pseudo, contenu, date_commentaire) VALUES(:idChapitre, ?, ?, NOW())');
+       
+        return $comments->execute(['idChapitre'=>$idChapitre, $pseudo, $contenu]);
 
-        return $affectedLines === false ? null : $affectedLines; 
     }
 
+    //  header route erreur
     public function getComment(int $idCommentaire) : ?array
     {
         $req = $this->db->prepare('SELECT id_commentaire, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre order by desc');
@@ -50,7 +51,7 @@ class CommentaireManager
         return $newComment === false ? null : $newComment;
     }
 
-    public function delete(int $idCommentaire, $contenu)
+    public function deleteComment(int $idCommentaire, $contenu)
     {
         $req = $this->db->prepare('DELETE from commentaire set contenu = ?, where id_chapitre = :idchapitre');
         $resetComment = $req->execute([$idCommentaire, $contenu]);

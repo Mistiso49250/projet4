@@ -18,7 +18,7 @@
 
 
 <h2>Commentaires: </h2>
-<form action="index.php.action=addComment&amp;id=<?=$data['episode']['id_chapitre']?>" method="POST"
+<form action="index.php?action=addComment&id=<?=$data['episode']['id_chapitre']?>" method="POST"
     class="form-horizontal col-lg-6">
     <div class="form-group">
         <legend>Laisser un commentaire</legend>

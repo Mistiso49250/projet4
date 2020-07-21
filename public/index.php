@@ -6,6 +6,7 @@ require '../vendor/autoload.php';
 use Oc\Controller\HomePageController;
 use Oc\Controller\ChapitreController;
 use Oc\Controller\AdminController;
+use Oc\Controller\CommentaireController;
 
 session_start();
 
@@ -15,8 +16,7 @@ $whoops->register();
 
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
-if(isset($_GET['action']))
-    
+
 switch ($action) {
     case 'listchapitre':
         $controller = new ChapitreController();
@@ -25,7 +25,6 @@ switch ($action) {
     case 'chapitre':
         $controller = new ChapitreController();
         $controller->chapitre((int)$_GET['id']);
-        // $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
     break;
     case 'login':
         $controller = new HomePageController();
@@ -33,15 +32,25 @@ switch ($action) {
     break;
     case 'admin':
         $controller = new AdminController();
-        $controller->admin();
+        $controller->admin((int)$_GET['id']);
     break;
     case 'logout':
         $controller = new AdminController();
         $controller->logout();
     break;
+    case 'addComment':
+        $controller = new CommentaireController();
+        $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
+    break;
+    case 'deleteComment':
+        $controller = new CommentaireController();
+        $controller->deleteComment($id, $commentaireManager);
+    break;
+    case 'editComment':
+        $controller = new CommentaireController();
+        $controller->editComment($id, $commentaireManager);
+    break;
     default:
         $controller = new HomePageController();
         $controller->homePage();
 }
-
-    
