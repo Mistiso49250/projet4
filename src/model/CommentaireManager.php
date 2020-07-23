@@ -24,12 +24,11 @@ class CommentaireManager
         return $comments === false ? null : $comments;
     }
 
-    public function articleComment(int $idChapitre, $pseudo, $contenu) : bool
+    public function articleComment(int $idChapitre, string $pseudo, string $contenu) : bool
     {
-        $idChapitre = 3;
-        $comments = $this->db->prepare('INSERT into commentaire (id_commentaire, pseudo, contenu, date_commentaire) VALUES(:idChapitre, ?, ?, NOW())');
+        $comments = $this->db->prepare('INSERT into commentaire (id_chapitre, pseudo, contenu, date_commentaire) VALUES(:idChapitre, :pseudo, :contenu, NOW())');
        
-        return $comments->execute(['idChapitre'=>$idChapitre, $pseudo, $contenu]);
+        return $comments->execute(['idChapitre'=>$idChapitre, 'pseudo'=>$pseudo, 'contenu'=>$contenu]);
 
     }
 

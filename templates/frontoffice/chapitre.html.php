@@ -16,6 +16,13 @@
     <button type="submit" class=""><a href="index.php?action=listchapitre">Retour à la liste des chaptires</a></button>
 </div>
 
+<?php if(Session::getInstance()->hasFlashes()): ?>
+    <?php foreach(Session::getInstance()->getFlashes() as $type => $message): ?>
+        <div class="alert alert-<?=$type;?>">
+            <?=$message;?>
+        </div>
+    <?php endforeach;?>
+<?php endif;?>
 
 <h2>Commentaires: </h2>
 <form action="index.php?action=addComment&id=<?=$data['episode']['id_chapitre']?>" method="POST"

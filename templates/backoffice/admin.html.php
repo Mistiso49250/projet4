@@ -98,9 +98,9 @@
                             <div class="row">
                                 <div class="col-lg-2">
                                     <div class="btn-group">
-                                        <a class="btn btn-warning" href="index.php?action=editComment&id_commentaire"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a onclick="return confirm('Voulez vous vraiment surimer ce contenu ?'); "
-                                href="index.php?action=deleteComment&id_commentaire" class="btn btn-danger" href="index.php?action=editComment&id_commentaire"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a class="btn btn-warning" href="index.php?action=editComment&id_commentaire"><span class="glyphicon glyphicon-pencil"></span>modérer</a>
+                                        <a onclick="return confirm('Voulez vous vraiment suprimer ce contenu ?'); "
+                                href="index.php?action=deleteComment&id_commentaire" class="btn btn-danger" href="index.php?action=editComment&id_commentaire"><span class="glyphicon glyphicon-remove"></span>supprimer</a>
                                     </div>
                                 </div>
                             </div> 

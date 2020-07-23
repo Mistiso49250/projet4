@@ -23,14 +23,18 @@
         </div>
         <?php endforeach; ?>
     </section>
-
-    <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
+<div class="d-flex justify-content-between my4">
+    <?php if($currentPage > 1): ?>
+        <?php 
+        $link = "index.php?page=$";
+        if($currentPage > 2) $link .= '?page=' . ($currentPage - 1);
+        ?>
+        <a href="<?= $link?>" class="btn btn-primary">&laquo; Page précédente</a>
+    <?php endif; ?>
+    <?php if($currentPage < $pages): ?>
+        <a href="index.php?page=$ ?page=<?=$currentPage + 1 ?>" class="btn btn-primary ml-auto">Page suivante &laquo;</a>
+    <?php endif; ?>
+</div>
 </div>
 
 

@@ -18,7 +18,7 @@ class ChapitreManager
 
     public function findChapitres() : array
     {
-        $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication');
+        $req = $this->db->query('SELECT * FROM chapitre ORDER BY date_publication limit 0,6');
 
         return $req->fetchAll();
     }
@@ -32,12 +32,20 @@ class ChapitreManager
         return $episodes === false ? null : $episodes; 
     }
 
+    public function creatChapitre()
+    {
+        $req = $this->db->prepare('INSERT into chapitre (titre, contenu, date_publication) VALUES (?, ?, NOW())');
+        $newChaptire = $req->execute([$_POST('titre'), $_POST('contenu')]);
+
+        return $newChaptire;
+    }
+
     public function updateChapitre(int $idChaptire, $contenu) : ?array
     {
         $req = $this->db->prepare('UPDATE chaptire set contenu_chapitre = ?, date_publication = now() where id_chapitre = :idchapitre');
-        $newchaptire = $req->execute([$idChaptire, $contenu]);
+        $updatechaptire = $req->execute([$idChaptire, $contenu]);
 
-        return $newchaptire === false ? null : $newchaptire;
+        return $updatechaptire === false ? null : $updatechaptire;
     }
 
 }
