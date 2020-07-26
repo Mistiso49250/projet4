@@ -34,10 +34,30 @@ class ChapitreController
         $this->view->render('chapitre', ['episode'=>$episode, 'commentaires'=>$commentaires ]);
     }
 
-    public function listeChapitre() : void
+    public function listeChapitre() 
     {
         $list = $this->chapitreManager->findChapitres();
-        $this->view->render('listechapitres', $list);
+        $count = new PaginationManager;
+        $postsPerPage = 6;
+
+        $page = ($_GET['page'] ?? 1);
+        if(!filter_var($page, FILTER_VALIDATE_INT)){
+            throw new Exception('Numéro de page invalide');
+        }
+
+        $currentPage = (int)$page;
+        if ($currentPage <= 0){
+            throw new Exception('Numéro de page invalide');
+        }
+        
+        $nbPage = ceil(intval($count)/intval($postsPerPage));
+        if ($currentPage > $nbPage){
+            throw new Exception('Cette page n\'existe pas');
+        }
+        return $nbPage;
+        var_dump($nbPage);die();
+
+        $this->view->render('listechapitres', ['list'=>$list, 'currentPage'=>$currentPage, 'nbPage'=>$nbPage]);
     }
 
     // public function currentPage()
@@ -58,28 +78,23 @@ class ChapitreController
     //     return $nbPage;
     // }
 
-    
-    public function pages()
+    public function newChapitre($titre, $contenu, $extrait)
     {
-        $count = new paginationManager;
-        $postsPerPage = 6;
+        $newPost = $this->chapitreManager->creatChapitre($titre, $contenu, $extrait);
 
-        $page = ($_GET['page'] ?? 1);
-        if(!filter_var($page, FILTER_VALIDATE_INT)){
-            throw new Exception('Numéro de page invalide');
-        }
+        $this->view->render('newChapitre',['newPost' => $newPost]);
+    }
 
-        $currentPage = (int)$page;
-        if ($currentPage <= 0){
-            throw new Exception('Numéro de page invalide');
-        }
-        
-        $nbPage = ceil($count/$postsPerPage);
-        if ($currentPage > $nbPage){
-            throw new Exception('Cette page n\'existe pas');
-        }
+    public function updateChapitre(int $idChapitre, $contenu)
+    {
+        $update = $this->chapitreManager->updateChapitre($idChapitre, $contenu);
 
-        return $nbPage;
+        $this->view->render('update', ['idChapitre'=>$idChapitre, 'contenu'=>$contenu], $update);
+    }
+
+    public function deleteChapitre(int $idChapitre)
+    {
+        $deleteChapitre = $this->chapitreManager->deleteChapitre();
     }
 
 }

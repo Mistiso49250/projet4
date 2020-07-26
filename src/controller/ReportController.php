@@ -29,6 +29,7 @@ class ReportController
     public function ignoreReportComment(int $idComment)
     {
         $ignoreReport = $this->reportManager->ignoreReport($idComment);
+        return $ignoreReport;
 
     }
 

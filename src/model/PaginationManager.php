@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace Oc\Model;
 
-use Exception;
 use Oc\Tools\DbConnect;
-use PDO;
+
 
 class PaginationManager
 {

@@ -32,11 +32,19 @@ switch ($action) {
     break;
     case 'admin':
         $controller = new AdminController();
-        $controller->admin((int)$_GET['id']);
+        $controller->admin();
     break;
     case 'logout':
         $controller = new AdminController();
         $controller->logout();
+    break;
+    case 'creatChaptire':
+        $controller = new ChapitreController();
+        $controller->newChapitre($titre, $contenu, $extrait);
+    break;
+    case 'updateChaptire':
+        $controller = new ChapitreController();
+        $controller->updateChapitre($idChapitre, $contenu);
     break;
     case 'addComment':
         $controller = new CommentaireController();

@@ -32,20 +32,26 @@ class ChapitreManager
         return $episodes === false ? null : $episodes; 
     }
 
-    public function creatChapitre()
+    public function creatChapitre($titre, $contenu, $extrait)
     {
         $req = $this->db->prepare('INSERT into chapitre (titre, contenu, date_publication) VALUES (?, ?, NOW())');
-        $newChaptire = $req->execute([$_POST('titre'), $_POST('contenu')]);
+        $newChaptire = $req->execute(['titre'=>$titre, 'contenu'=>$contenu, 'extrait'=>$extrait]);
 
         return $newChaptire;
     }
 
-    public function updateChapitre(int $idChaptire, $contenu) : ?array
+    public function updateChapitre(int $idChapitre, $contenu) : ?array
     {
-        $req = $this->db->prepare('UPDATE chaptire set contenu_chapitre = ?, date_publication = now() where id_chapitre = :idchapitre');
-        $updatechaptire = $req->execute([$idChaptire, $contenu]);
+        $req = $this->db->prepare('UPDATE chapitre set contenu_chapitre = ?, date_publication = now() where id_chapitre = :idchapitre');
+        $updatechapitre = $req->execute([$idChapitre, $contenu]);
 
-        return $updatechaptire === false ? null : $updatechaptire;
+        return $updatechapitre === false ? null : $updatechapitre;
     }
 
+    public function deleteChapitre(int $idChapitre)
+    {
+        $req = $this->db->prepare('DELETE FROM chapitre WHERE id = ?');
+
+        return $req->execute(['idChapitre'=>$idChapitre]);
+    }
 }

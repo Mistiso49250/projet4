@@ -36,7 +36,7 @@
 </div><br>
 
 
-<form action="index.php?action=creatChaptire" class="col-lg-12" method="POST">
+<form action="index.php?action=newChaptire" class="col-lg-12" method="POST">
         <h2 id="ecrire">Ecrire un chapitre</h2>
     <div class="form-group">
         <label for="texte">Titre: </label>
@@ -44,8 +44,7 @@
     </div>
     <div class="form-group">
         <label for="textarea">Contenu: </label>
-        <input id="textarea" type="textarea" name="contenu" class="form-control">
-    </div>
+        <textarea name="contenu" id="textarea" cols="30" rows="10"></textarea>    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-success">Publier</button>
         <button type="submit" class="btn btn-danger">Réinitialiser</button>
@@ -60,8 +59,7 @@
     </div>
     <div class="form-group">
         <label for="textarea">Contenu: </label>
-        <input id="textarea" type="textarea" name="contenu" class="form-control">
-    </div>
+        <textarea name="contenu" id="textarea" cols="30" rows="10"></textarea>    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-success">Publier</button>
         <a href="index.php?action=admin" type="submit" class="btn btn-danger">Annuler</a>
@@ -87,13 +85,8 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach($data['commentaires'] as $commentaire): ?>
                     <tr>
-                        <td><?=htmlspecialchars($commentaire['pseudo'])?></td>
-                        <td><?=nl2br(htmlspecialchars(($commentaire['contenu'])))?></td>
-                        <td><?=$commentaire['date_commentaire']?></td>
-                        <td><?=$commentaire['id_chapitre']?></td>
-                    <?php endforeach; ?>
+                        
                         <td>
                             <div class="row">
                                 <div class="col-lg-2">
