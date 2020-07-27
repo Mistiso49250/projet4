@@ -38,24 +38,27 @@ switch ($action) {
         $controller = new AdminController();
         $controller->logout();
     break;
-    case 'creatChaptire':
-        $controller = new ChapitreController();
-        $controller->newChapitre($titre, $contenu, $extrait);
+    case 'newChapitre':
+        $controller = new AdminController();
+        $controller->newChapitre($_POST);
     break;
-    case 'updateChaptire':
-        $controller = new ChapitreController();
+    case 'updateChapitre':
+        $controller = new AdminController();
         $controller->updateChapitre($idChapitre, $contenu);
     break;
+    case 'moderateComment':
+        $controller = new AdminController();
+        $controller->updateComment($id, $commentaireManager);
     case 'addComment':
         $controller = new CommentaireController();
         $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
     break;
     case 'deleteComment':
-        $controller = new CommentaireController();
+        $controller = new AdminController();
         $controller->deleteComment($id, $commentaireManager);
     break;
     case 'editComment':
-        $controller = new CommentaireController();
+        $controller = new AdminController();
         $controller->editComment($id, $commentaireManager);
     break;
     default:

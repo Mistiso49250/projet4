@@ -4,7 +4,7 @@ namespace Oc\Tools;
 
 class Session{
 
-    static $instance;
+    private $instance;
 
     static function getInstance()
     {
@@ -12,11 +12,6 @@ class Session{
             self::$instance = new Session();
         }
         return self::$instance;
-    }
-
-    public function __construct()
-    {
-        // session_start();
     }
 
     public function setFlash($key, $message){

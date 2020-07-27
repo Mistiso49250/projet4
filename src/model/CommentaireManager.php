@@ -32,7 +32,7 @@ class CommentaireManager
 
     }
 
-    //  header route erreur
+    
     public function getComment(int $idCommentaire) : ?array
     {
         $req = $this->db->prepare('SELECT id_commentaire, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre order by desc');

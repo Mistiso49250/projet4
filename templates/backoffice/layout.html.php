@@ -57,15 +57,7 @@
     </div>
 
     <script src="js\back\tinymce\tinymce.min.js"></script>
-    <script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-      toolbar_mode: 'floating',
-
-      file_browser_callback : 'myFileBrowser'
-    });
-  </script>
+   
 </body>
 
 </html>

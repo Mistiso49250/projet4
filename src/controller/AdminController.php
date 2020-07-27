@@ -42,4 +42,58 @@ class AdminController
         }
         $this->view->render('admin', $list, /*$commentaires,*/ null);
     }
+
+    public function newChapitre($post)
+    {
+        if(isset($post['titre']) ){
+            $newPost = $this->chapitreManager->creatChapitre($post['titre'], $post['contenu'], $post['extrait']);
+
+            header('Location: index.php?action=admin');
+            exit;
+        }
+        
+        $this->view->render('newChapitre', null);
+        
+    }
+
+    public function updateChapitre(int $idChapitre, $contenu)
+    {
+        $update = $this->chapitreManager->updateChapitre($idChapitre, $contenu);
+
+        $this->view->render('update', ['idChapitre'=>$idChapitre, 'contenu'=>$contenu], $update);
+    }
+
+    public function deleteChapitre(int $idChapitre)
+    {
+        
+    }
+
+    public function updateComment()  
+    {
+        
+    }
+
+    public function deleteComment($id, $commentaireManager)
+    {
+        $delete = $this->commentaireManager->deleteComment($id, $commentaireManager);
+        if($delete === false){
+            die('Impossible de modifier le commentaire');
+        }
+        else{
+            echo 'commentaire: ' . $_POST['comment'];
+            header('Location: index.php?action=commentaire&id=' . $id);
+        }
+    }
+
+    public function editComment($id, $commentaireManager)
+    {
+        $edit = $this->commentaireManager->updateComment($id, $commentaireManager);
+        if($edit === false){
+            die('Impossible de modifier le commentaire');
+        }
+        else{
+            echo 'commentaire: ' . $_POST['comment'];
+            header('Location: index.php?action=commentaire&id=' . $id);
+        }
+    }
 }

@@ -15,7 +15,7 @@
                 <img src="images/<?=$episode['image']?>" alt="" class="img-rounded">
             </a>
             <h3 class="chapitreTitle"><?=htmlspecialchars($episode['titre'])?></h3>
-            <p><?=nl2br(htmlspecialchars($episode['contenu_chapitre']))?></p>
+            <p><?=nl2br(htmlspecialchars($episode['extrait']))?></p>
             <!-- <div class="lireChapitre"> -->
             <a class="btn btn-info"
                 href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">Lire le

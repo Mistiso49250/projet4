@@ -34,7 +34,7 @@ class ChapitreManager
 
     public function creatChapitre($titre, $contenu, $extrait)
     {
-        $req = $this->db->prepare('INSERT into chapitre (titre, contenu, date_publication) VALUES (?, ?, NOW())');
+        $req = $this->db->prepare('INSERT into chapitre (titre, extrait, contenu_chaptire, date_publication) VALUES (?, ?, NOW())');
         $newChaptire = $req->execute(['titre'=>$titre, 'contenu'=>$contenu, 'extrait'=>$extrait]);
 
         return $newChaptire;
