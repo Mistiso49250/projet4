@@ -41,13 +41,13 @@
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <h1 class="navbar-brand">Administration</h1>
+                    <h1 class="navbar-brand"><a href="index.php?action=admin">Administration</a></h1>
                 </div>
                 <ul class="nav nav-bar">
-                    <li class="active"><a href="#ecrire">Nouveau chapitre</a></li>
-                    <li><a href="#modifier">Modifier un chapitre</a></li>
+                    <li class="active"><a href="index.php?action=newChapitre">Nouveau chapitre</a></li>
+                    <li><a href="index.php?action=updateChapitre">Modifier un chapitre</a></li>
                     <!-- ?php foreach ($data as $dislike): ? -->
-                    <li><a href="#moderer">Modérer les Commentaires<br><p class="btn btn-danger btn-md"><!-- ?= $dislike ? --></p></a></li>
+                    <li><a href="index.php?action=moderateChapitre">Modérer les Commentaires<br><p class="btn btn-danger btn-md"><!-- ?= $dislike ? --></p></a></li>
                     <!-- ?php endforeach; ? -->
                     <li><a href='index.php?action=logout'>Se déconnecter</a></li>
                 </ul>

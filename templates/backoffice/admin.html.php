@@ -19,10 +19,10 @@
                     <?php foreach ($data as $episode): ?>
                     <tr>
                         <td><?=htmlspecialchars($episode['titre'])?></td>
-                        <td><?=htmlspecialchars($episode['contenu_chapitre'])?></td>
+                        <td><?=htmlspecialchars($episode['extrait'])?></td>
                         <td><?=htmlspecialchars($episode['date_publication'])?></td>
                         <td>
-                            <a href="index.php?action=?>" class="btn btn-success">Editer</a>
+                            <a href="index.php?action=updateChapitre>" class="btn btn-success">Editer</a>
                             <a onclick="return confirm('Voulez vous vraiment surimer ce contenu ?'); "
                                 href="index.php?action=?>" class="btn btn-danger">Supprimer</a>
                         </td>

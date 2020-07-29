@@ -56,8 +56,21 @@ class ChapitreController
         }
         return $nbPage;
 
+        
+        if($currentPage > 1){
+            $link = "index.php?page=listeChapitre";
+        }
+        if($currentPage > 2) {
+            $link .= '?page=' . ($currentPage - 1);
+        }
+        if($currentPage < $page)
+        {
+            
+        }
+       
         $this->view->render('listechapitres', ['list'=>$list, 'currentPage'=>$currentPage, 'nbPage'=>$nbPage]);
     }
+
 
 }
 

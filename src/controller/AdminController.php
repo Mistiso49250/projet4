@@ -46,7 +46,7 @@ class AdminController
     public function newChapitre($post)
     {
         if(isset($post['titre']) ){
-            $newPost = $this->chapitreManager->creatChapitre($post['titre'], $post['contenu'], $post['extrait']);
+            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu'], $post['extrait']);
 
             header('Location: index.php?action=admin');
             exit;
@@ -56,11 +56,14 @@ class AdminController
         
     }
 
-    public function updateChapitre(int $idChapitre, $contenu)
+    public function updateChapitre($idChapitre, $titre, $extrait, $contenu)
     {
-        $update = $this->chapitreManager->updateChapitre($idChapitre, $contenu);
+        var_dump('toto'); die();
+        $update = $this->adminManager->updateChapitre($titre, $extrait, $contenu, $idChapitre);
 
-        $this->view->render('update', ['idChapitre'=>$idChapitre, 'contenu'=>$contenu], $update);
+        header('Location: index.php?action=admin');
+
+        $this->view->render('updateChaptire', ['update'=>$update, 'titre'=>$titre, 'extrait'=>$extrait, 'contenu'=>$contenu]);
     }
 
     public function deleteChapitre(int $idChapitre)
@@ -73,27 +76,27 @@ class AdminController
         
     }
 
-    public function deleteComment($id, $commentaireManager)
+    public function deleteComment($id_commentaire, $commentaireManager)
     {
-        $delete = $this->commentaireManager->deleteComment($id, $commentaireManager);
+        $delete = $this->commentaireManager->deleteComment($id_commentaire, $commentaireManager);
         if($delete === false){
             die('Impossible de modifier le commentaire');
         }
         else{
             echo 'commentaire: ' . $_POST['comment'];
-            header('Location: index.php?action=commentaire&id=' . $id);
+            header('Location: index.php?action=commentaire&id=' . $id_commentaire);
         }
     }
 
-    public function editComment($id, $commentaireManager)
+    public function editComment($id_commentaire, $commentaireManager)
     {
-        $edit = $this->commentaireManager->updateComment($id, $commentaireManager);
+        $edit = $this->commentaireManager->updateComment($id_commentaire, $commentaireManager);
         if($edit === false){
             die('Impossible de modifier le commentaire');
         }
         else{
             echo 'commentaire: ' . $_POST['comment'];
-            header('Location: index.php?action=commentaire&id=' . $id);
+            header('Location: index.php?action=commentaire&id=' . $id_commentaire);
         }
     }
 }
