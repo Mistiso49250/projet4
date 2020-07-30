@@ -36,10 +36,10 @@ class AdminManager
         return $user;
     }
 
-    public function creatChapitre($titre, $contenu, $extrait)
+    public function creatChapitre($titre, $contenu, $extrait, $date)
     {
-        $req = $this->db->prepare('INSERT into chapitre (titre, extrait, contenu_chapitre, date_publication) VALUES (?, ?, NOW())');
-        $newChapitre = $req->execute(['titre'=>$titre, 'contenu'=>$contenu, 'extrait'=>$extrait]);
+        $req = $this->db->prepare('INSERT into chapitre (titre, extrait, contenu_chapitre, date_publication ) VALUES (?, ?, ?, ? NOW())');
+        $newChapitre = $req->execute(['titre'=>$titre, 'contenu_chapitre'=>$contenu, 'extrait'=>$extrait, 'date'=>$date]);
 
         return $newChapitre;
     }

@@ -46,7 +46,7 @@ class AdminController
     public function newChapitre($post)
     {
         if(isset($post['titre']) ){
-            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu'], $post['extrait']);
+            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['date']);
 
             header('Location: index.php?action=admin');
             exit;

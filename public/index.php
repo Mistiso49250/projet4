@@ -44,7 +44,7 @@ switch ($action) {
     break;
     case 'updateChapitre':
         $controller = new AdminController();
-        $controller->updateChapitre($idChapitre, $titre, $extrait, $contenu);
+        $controller->updateChapitre((int)$_GET['id'], $titre, $extrait, $contenu);
     break;
     case 'moderateComment':
         $controller = new AdminController();
