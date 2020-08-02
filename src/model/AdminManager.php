@@ -54,7 +54,7 @@ class AdminManager
 
     public function deleteChapitre(int $idChapitre)
     {
-        $req = $this->db->prepare('DELETE FROM chapitre WHERE id = ?');
+        $req = $this->db->prepare('DELETE from chapitre where id = ?');
 
         return $req->execute(['idChapitre'=>$idChapitre]);
     }

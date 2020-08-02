@@ -16,7 +16,7 @@ class PaginationManager
     }
 
     public function count(int $idChapitre) {
-        $req = $this->db->query('SELECT COUNT(id) FROM chapitre');
+        $req = $this->db->query('SELECT COUNT(id) from chapitre');
         $req->execute(['idChapitre'=>$idChapitre]);
         $nbPosts = $req->fetch();
 

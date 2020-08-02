@@ -37,7 +37,7 @@ class ChapitreController
     public function listeChapitre() 
     {
         $list = $this->chapitreManager->findChapitres();
-        $count = new PaginationManager;
+        $count = new PaginationManager();
         $postsPerPage = 6;
 
         $page = ($_GET['page'] ?? 1);

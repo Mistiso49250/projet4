@@ -68,12 +68,11 @@ class AdminController
 
     public function deleteChapitre(int $idChapitre)
     {
-        
-    }
+        $delete = $this->adminManager->deleteChapitre($idChapitre);
 
-    public function updateComment()  
-    {
-        
+        header('Location: index.php?action=admin');
+
+        $this->view->render('deleteChapitre', ['delete'=>$delete]);
     }
 
     public function deleteComment($id_commentaire, $commentaireManager)
