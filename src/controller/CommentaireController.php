@@ -17,6 +17,7 @@ class CommentaireController
         $this->session = new Session();
     }
     
+    // pour ajouter un commentaire
     public function addComment(int $idChapitre, $pseudo, $contenu)
     {
         $affectedLines = $this->commentaireManager->articleComment($idChapitre, $pseudo, $contenu);

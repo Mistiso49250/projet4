@@ -14,6 +14,7 @@ class ReportController
         $this->reportManager = new ReportManager();
     }
 
+    // signaler un commentaire
     public function CommentReport(int $idComment)
     {
         $idComment = $_GET['id_commentaire'];
@@ -26,6 +27,7 @@ class ReportController
         }
     }
 
+    // pour ignorer un commentaire signalé
     public function ignoreReportComment(int $idComment)
     {
         $ignoreReport = $this->reportManager->ignoreReport($idComment);
@@ -40,4 +42,6 @@ class ReportController
         $dislike = $dislike->rowCount();
         return $dislike === false ? null : $dislike;
     }
+
+    
 }

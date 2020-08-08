@@ -9,7 +9,7 @@
 
 <div class="containerBootstrap">
     <section class="row">
-        <?php foreach($data as $episode): ?>
+        <?php foreach($data['list'] as $episode): ?>
         <div class="col-md-4 col-lg-4">
             <a href='#' class="thumbnail">
                 <img src="images/<?=$episode['image']?>" alt="" class="img-rounded">
@@ -26,8 +26,8 @@
     </section>
     
     <div class="d-flex justify-content-between my4">
-        <a href="<?= $link?>" class="btn btn-primary">&laquo; Page précédente</a>
-        <a href="index.php?page=listeChapitre=?page=<?=$currentPage + 1 ?>" class="btn btn-primary ml-auto">Page
+        <a href="" class="btn btn-primary">&laquo; Page précédente</a>
+        <a href="index.php?action=listeChapitre&page=1" class="btn btn-primary ml-auto">Page
             suivante &raquo;</a>
     </div>
 </div>

@@ -6,6 +6,7 @@ namespace Oc\Controller;
 use Oc\Model\AdminManager;
 use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
+use Oc\Model\ReportManager;
 use Oc\View\View;
 
 class AdminController
@@ -14,6 +15,7 @@ class AdminController
     private $adminManager;
     private $chapitreManager;
     private $commentaireManager;
+    private $reportManager;
 
 
 
@@ -22,7 +24,8 @@ class AdminController
         $this->view = new View('../templates/backoffice/');        
         $this->adminManager = new AdminManager(); 
         $this->chapitreManager = new ChapitreManager();   
-        $this->commentaireManager = new CommentaireManager();     
+        $this->commentaireManager = new CommentaireManager();
+        $this->reportManager = new ReportManager();     
     }
 
     public function logout()
@@ -33,7 +36,7 @@ class AdminController
     
     public function Admin(/*int $idChapitre*/)
     {
-        $list = $this->chapitreManager->findChapitres();
+        $list = $this->chapitreManager->findChapitres(0);
         // $commentaires = $this->commentaireManager->findComments($idChapitre);
         if(!isset($_SESSION['auth'])){
             header('Location: index.php?action=login');
@@ -43,6 +46,7 @@ class AdminController
         $this->view->render('admin', $list, /*$commentaires,*/ null);
     }
 
+    //créer un chapitre
     public function newChapitre($post)
     {
         if(isset($post['titre']) ){
@@ -56,6 +60,7 @@ class AdminController
         
     }
 
+    //modifier un chapitre
     public function updateChapitre($idChapitre, $titre, $extrait, $contenu)
     {
         var_dump('toto'); die();
@@ -66,18 +71,22 @@ class AdminController
         $this->view->render('updateChaptire', ['update'=>$update, 'titre'=>$titre, 'extrait'=>$extrait, 'contenu'=>$contenu]);
     }
 
+    //supprimer un chapitre et ses commentaires
     public function deleteChapitre(int $idChapitre)
     {
         $delete = $this->adminManager->deleteChapitre($idChapitre);
+        $deleteComment = $this->reportManager->deleteComment($idChapitre);
+        if($delete = false )
 
         header('Location: index.php?action=admin');
 
         $this->view->render('deleteChapitre', ['delete'=>$delete]);
     }
 
+    // supprimer un commentaire signalé
     public function deleteComment($id_commentaire, $commentaireManager)
     {
-        $delete = $this->commentaireManager->deleteComment($id_commentaire, $commentaireManager);
+        $delete = $this->commentaireManager->deleteCommentReport($id_commentaire, $commentaireManager);
         if($delete === false){
             die('Impossible de modifier le commentaire');
         }

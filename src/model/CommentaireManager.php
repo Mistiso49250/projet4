@@ -15,6 +15,7 @@ class CommentaireManager
         $this->db = (new DbConnect())->connectToDb();
     }
 
+    //récupère les commentaires
     public function findComments(int $idChapitre) : ?array
     {
         $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
@@ -24,6 +25,7 @@ class CommentaireManager
         return $comments === false ? null : $comments;
     }
 
+    //récupère les commentaires d'un chapitre
     public function articleComment(int $idChapitre, string $pseudo, string $contenu) : bool
     {
         $comments = $this->db->prepare('INSERT into commentaire (id_chapitre, pseudo, contenu, date_commentaire) VALUES(:idChapitre, :pseudo, :contenu, NOW())');
@@ -33,14 +35,14 @@ class CommentaireManager
     }
 
     
-    public function getComment(int $idCommentaire) : ?array
-    {
-        $req = $this->db->prepare('SELECT id_commentaire, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre order by desc');
-        $req->execute(['idchapitre'=>$idCommentaire]);
-        $comments = $req->fetchAll();
+    // public function getComment(int $idCommentaire) : ?array
+    // {
+    //     $req = $this->db->prepare('SELECT id_commentaire, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre order by desc');
+    //     $req->execute(['idchapitre'=>$idCommentaire]);
+    //     $comments = $req->fetchAll();
 
-        return $comments === false ? null : $comments;
-    }
+    //     return $comments === false ? null : $comments;
+    // }
 
     public function updateComment(int $idCommentaire, $contenu) : ?array
     {
@@ -50,7 +52,8 @@ class CommentaireManager
         return $newComment === false ? null : $newComment;
     }
 
-    public function deleteComment(int $idCommentaire, $contenu)
+    // supprimer un commentaire signalé
+    public function deleteCommentReport(int $idCommentaire, $contenu)
     {
         $req = $this->db->prepare('DELETE from commentaire set contenu = ?, where id_chapitre = :idchapitre');
         $resetComment = $req->execute([$idCommentaire, $contenu]);

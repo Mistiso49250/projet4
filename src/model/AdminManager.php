@@ -36,6 +36,7 @@ class AdminManager
         return $user;
     }
 
+    //créer un chapitre
     public function creatChapitre($titre, $contenu, $extrait, $date)
     {
         $req = $this->db->prepare('INSERT into chapitre (titre, extrait, contenu_chapitre, date_publication ) VALUES (?, ?, ?, ? NOW())');
@@ -44,6 +45,7 @@ class AdminManager
         return $newChapitre;
     }
 
+    //modifier un chapitre
     public function updateChapitre(int $idChapitre, $titre, $extrait, $contenu) : ?array
     {
         $req = $this->db->prepare('UPDATE chapitre set titre = ?, extrait = ?, contenu_chapitre = ?, date_publication = now() where id_chapitre = :idchapitre');
@@ -52,6 +54,7 @@ class AdminManager
         return $updatechapitre === false ? null : $updatechapitre;
     }
 
+    //supprimer un chapitre
     public function deleteChapitre(int $idChapitre)
     {
         $req = $this->db->prepare('DELETE from chapitre where id = ?');

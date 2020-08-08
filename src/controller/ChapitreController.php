@@ -6,7 +6,6 @@ namespace Oc\Controller;
 use Exception;
 use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
-use Oc\Model\PaginationManager;
 use Oc\Model\ReportManager;
 use Oc\View\View;
 
@@ -27,6 +26,7 @@ class ChapitreController
 
     }
 
+    //affiche les informations d'un chapitre
     public function chapitre(int $idChapitre) : void
     {
         $episode = $this->chapitreManager->findChapitre($idChapitre);
@@ -34,28 +34,31 @@ class ChapitreController
         $this->view->render('chapitre', ['episode'=>$episode, 'commentaires'=>$commentaires ]);
     }
 
-    public function listeChapitre() 
+    //affiche la liste des chapitres et pagination
+    public function listeChapitre(int $currentPage = 1) /*premiere page = 0 */
     {
-        $list = $this->chapitreManager->findChapitres();
-        $count = new PaginationManager();
+
+       $offset = $currentPage * 6;
+        
+        $list = $this->chapitreManager->findChapitres($offset);
+        // var_dump($list);die();
+
+        //determine le nombre d'items par page
         $postsPerPage = 6;
 
+        //déterminer le numéro de page à partir de $_GET
         $page = ($_GET['page'] ?? 1);
         if(!filter_var($page, FILTER_VALIDATE_INT)){
             throw new Exception('Numéro de page invalide');
-        }
-
-        $currentPage = (int)$page;
-        if ($currentPage <= 0){
+        }if ($currentPage <= 0){
             throw new Exception('Numéro de page invalide');
+        }else {
+            $nbPage = (int)ceil($currentPage / $postsPerPage);
+            if ($currentPage > $nbPage){
+                throw new Exception('Cette page n\'existe pas');
+            }
         }
         
-        $nbPage = ceil(intval($count)/intval($postsPerPage));
-        if ($currentPage > $nbPage){
-            throw new Exception('Cette page n\'existe pas');
-        }
-        return $nbPage;
-
         
         if($currentPage > 1){
             $link = "index.php?page=listeChapitre";
@@ -68,7 +71,7 @@ class ChapitreController
             
         }
        
-        $this->view->render('listechapitres', ['list'=>$list, 'currentPage'=>$currentPage, 'nbPage'=>$nbPage]);
+        $this->view->render('listechapitres', ['list'=>$list, /*'pageSuivante' pagePrecedente */'currentPage'=>$currentPage, 'nbPage'=>0]);
     }
 
 

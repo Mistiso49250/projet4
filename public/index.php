@@ -57,10 +57,6 @@ switch ($action) {
         $controller = new AdminController();
         $controller->deleteComment($id, $commentaireManager);
     break;
-    case 'editComment':
-        $controller = new AdminController();
-        $controller->editComment($id, $commentaireManager);
-    break;
     default:
         $controller = new HomePageController();
         $controller->homePage();
