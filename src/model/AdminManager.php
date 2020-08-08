@@ -45,6 +45,14 @@ class AdminManager
         return $newChapitre;
     }
 
+    // page : modifier un billet
+    function getPostUpdate(int $idChapitre) {
+        $req = $this->db->prepare('SELECT id_chapitre, titre, extrait, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr FROM chapitre WHERE id_chapitre = :idchapitre');
+        $req->execute(['idChapitre'=>$idChapitre]);
+
+        return $req->fetch();
+    }
+
     //modifier un chapitre
     public function updateChapitre(int $idChapitre, $titre, $extrait, $contenu) : ?array
     {

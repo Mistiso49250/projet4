@@ -42,9 +42,12 @@ switch ($action) {
         $controller = new AdminController();
         $controller->newChapitre($_POST);
     break;
+    case 'getPostUpdate':
+        $controller = new AdminController();
+        $controller->getChapitre((int)$_GET['id']);
     case 'updateChapitre':
         $controller = new AdminController();
-        $controller->updateChapitre((int)$_GET['id'], $titre, $extrait, $contenu);
+        $controller->updateChapitre($_POST);
     break;
     case 'moderateComment':
         $controller = new AdminController();
