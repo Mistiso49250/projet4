@@ -34,9 +34,9 @@ class AdminController
     }
 
     
-    public function Admin(/*int $idChapitre*/)
+    public function Admin($offset, $nbPerPage)
     {
-        $list = $this->chapitreManager->findChapitres(0);
+        $list = $this->chapitreManager->findChapitres($offset, $nbPerPage);
         // $commentaires = $this->commentaireManager->findComments($idChapitre);
         if(!isset($_SESSION['auth'])){
             header('Location: index.php?action=login');

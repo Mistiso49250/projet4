@@ -5,8 +5,6 @@
 </div>
 
 
-
-
 <div class="containerBootstrap">
     <section class="row">
         <?php foreach($data['list'] as $episode): ?>
@@ -26,8 +24,20 @@
     </section>
     
     <div class="d-flex justify-content-between my4">
-        <a href="" class="btn btn-primary">&laquo; Page précédente</a>
-        <a href="index.php?action=listeChapitre&page=1" class="btn btn-primary ml-auto">Page
+        <?php 
+        if($pagePrecedente !==0): ?>
+        {
+            <a href="index.php?action=listeChapitre&page=<?= $pagePrecedente ?>" class="btn btn-info">&laquo; Page précédente</a>
+        }
+        <?php endif ?>
+        <?php
+        if($pageSuivante !== 0): ?>
+        {
+            <a href="index.php?action=listeChapitre&page=<?= $pageSuivante?>" class="btn btn-info ml-auto">Page
             suivante &raquo;</a>
+        }
+        <?php endif ?>
     </div>
+    
 </div>
+

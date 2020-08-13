@@ -32,7 +32,7 @@ switch ($action) {
     break;
     case 'admin':
         $controller = new AdminController();
-        $controller->admin();
+        $controller->admin($offset, $nbPerPage);
     break;
     case 'logout':
         $controller = new AdminController();
