@@ -16,7 +16,7 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($data as $episode): ?>
+                    <?php foreach ($data['list'] as $episode): ?>
                     <tr>
                         <td><?=htmlspecialchars($episode['titre'])?></td>
                         <td><?=htmlspecialchars($episode['extrait'])?></td>

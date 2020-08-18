@@ -34,7 +34,7 @@ class AdminController
     }
 
     
-    public function Admin($offset, $nbPerPage)
+    public function Admin()
     {
         $list = $this->chapitreManager->findChapitres($offset, $nbPerPage);
         // $commentaires = $this->commentaireManager->findComments($idChapitre);
@@ -43,15 +43,15 @@ class AdminController
 
             exit();
         }
-        $this->view->render('admin', $list, /*$commentaires,*/ null);
+    $this->view->render('admin',[ 'list'=>$list, '$offset'=>$offset, 'nbPerPage'=>$nbPerPage, /*$commentaires,*/]/* null*/);
     }
 
     //créer un chapitre
     public function newChapitre($post)
     {
         if(isset($post['titre']) ){
-            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['date']);
-
+            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['image']);
+            $newImage = $this->adminManager->addImage();
             header('Location: index.php?action=admin');
             exit;
         }

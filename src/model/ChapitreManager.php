@@ -26,6 +26,7 @@ class ChapitreManager
 
         return $req->fetchAll();
     }
+    
 
     //récupère les informations d'un chapitre
     public function findChapitre(int $idChapitre) : ?array

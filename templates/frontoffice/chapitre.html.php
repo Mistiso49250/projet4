@@ -16,8 +16,8 @@
     <button type="submit" class=""><a href="index.php?action=listchapitre">Retour à la liste des chaptires</a></button>
 </div>
 
-<?php if(Session::getInstance()->hasFlashes()): ?>
-    <?php foreach(Session::getInstance()->getFlashes() as $type => $message): ?>
+<?php if(($data['session'])->hasFlashes()): ?>
+    <?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
         <div class="alert alert-<?=$type;?>">
             <?=$message;?>
         </div>
@@ -49,6 +49,7 @@
     
     <div class="form-group">
         <button type="submit" class="pull-right btn btn-info">Envoyer</button>
+        <?php $_SESSION['flash']['succes'] = 'Votre commentaire à bien été publié.'; ?>
         <?php foreach($data as $episode): ?>
         <input type="hidden" name='id_chapitre' value="echo $episode['id_chapitre']; ">
         <?php endforeach; ?>

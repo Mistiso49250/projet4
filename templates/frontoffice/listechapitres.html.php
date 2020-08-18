@@ -25,17 +25,13 @@
     
     <div class="d-flex justify-content-between my4">
         <?php 
-        if($pagePrecedente !==0): ?>
-        {
-            <a href="index.php?action=listeChapitre&page=<?= $pagePrecedente ?>" class="btn btn-info">&laquo; Page précédente</a>
-        }
+        if($data['pagePrecedente'] !==0): ?>
+            <a href="index.php?action=listchapitre&page=<?= $data['pagePrecedente'] ?>" class="btn btn-info">&laquo; Page précédente</a>
         <?php endif ?>
         <?php
-        if($pageSuivante !== 0): ?>
-        {
-            <a href="index.php?action=listeChapitre&page=<?= $pageSuivante?>" class="btn btn-info ml-auto">Page
+        if($data['pageSuivante'] !== 0): ?>
+            <a href="index.php?action=listchapitre&page=<?= $data['pageSuivante']?>" class="btn btn-info ml-auto">Page
             suivante &raquo;</a>
-        }
         <?php endif ?>
     </div>
     

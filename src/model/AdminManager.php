@@ -37,12 +37,21 @@ class AdminManager
     }
 
     //créer un chapitre
-    public function creatChapitre($titre, $contenu, $extrait, $date)
+    public function creatChapitre($titre, $contenu, $extrait, $image)
     {
-        $req = $this->db->prepare('INSERT into chapitre (titre, extrait, contenu_chapitre, date_publication ) VALUES (?, ?, ?, ? NOW())');
-        $newChapitre = $req->execute(['titre'=>$titre, 'contenu_chapitre'=>$contenu, 'extrait'=>$extrait, 'date'=>$date]);
+        $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, image, date_publication ) VALUES (?, ?, ?, ? NOW())');
+        $newChapitre = $req->execute(['titre'=>$titre, 'contenu_chapitre'=>$contenu, 'extrait'=>$extrait, 'image'=>$image]);
 
         return $newChapitre;
+    }
+
+    //ajouter une image
+    public function addImage()
+    {
+        $req = $this->db->prepare('INSERT into images image');
+        $req->execute();
+
+        return $req->fetch();
     }
 
     // page : modifier un billet

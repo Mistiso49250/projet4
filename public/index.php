@@ -8,7 +8,6 @@ use Oc\Controller\ChapitreController;
 use Oc\Controller\AdminController;
 use Oc\Controller\CommentaireController;
 
-session_start();
 
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -32,7 +31,7 @@ switch ($action) {
     break;
     case 'admin':
         $controller = new AdminController();
-        $controller->admin($offset, $nbPerPage);
+        $controller->admin();
     break;
     case 'logout':
         $controller = new AdminController();

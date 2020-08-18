@@ -6,6 +6,14 @@ class Session{
 
     private $instance;
 
+    public function __construct()
+    {
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        $this->session = $_SESSION;
+    }
+
     static function getInstance()
     {
         if(self::$instance){

@@ -8,6 +8,7 @@ use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
 use Oc\Model\ReportManager;
 use Oc\View\View;
+use Oc\Tools\Session;
 
 
 class ChapitreController 
@@ -16,6 +17,7 @@ class ChapitreController
     private $commentaireManager;
     private $reportManager;
     private $view;
+    private $Session;
     
     public function __construct() 
     {
@@ -23,6 +25,7 @@ class ChapitreController
         $this->commentaireManager = new CommentaireManager();
         $this->reportManager = new ReportManager();
         $this->view = new View('../templates/frontoffice/');
+        $this->session = new Session;
 
     }
 
@@ -31,6 +34,8 @@ class ChapitreController
     {
         $episode = $this->chapitreManager->findChapitre($idChapitre);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
+        $session = $this->session->getInstance();
+        $data['session'] = $session;
         $this->view->render('chapitre', ['episode'=>$episode, 'commentaires'=>$commentaires ]);
     }
 
@@ -39,6 +44,9 @@ class ChapitreController
     {
         $pagePrecedente = 0;
         $pageSuivante = 0;
+        // $pagePrecedente = $pagePrecedente - 1 => $pagePrecedente--;
+        // $pageSuivante = $pageSuivante + 1 => $pageSuivante++;
+
         $currentPage = (int)($_GET['page'] ?? 1);
 
         //determine le nombre d'items par page
@@ -65,23 +73,18 @@ class ChapitreController
         }
 
         //calculer la page précédente, si current page = 1 pas de page prec : =0
-        if($currentPage = 1){
+        if($currentPage === 1){ 
             $pagePrecedente = 0;
         }else {
-            ($pagePrecedente = $pagePrecedente - 1);
+            $pagePrecedente = $currentPage - 1;
         }
 
         //calculer la page suivante
-        if($currentPage <= 1){
+        if($currentPage === $nbTotalPages){
             $pageSuivante = 0;
         }else {
-            ($pageSuivante = $pageSuivante + 1);
+            $pageSuivante = $currentPage + 1;
         }
-
-
-        // var_dump($countChapitre); die();
-        
-
 
         $list = $this->chapitreManager->findChapitres($offset, $postsPerPage);
         // var_dump($currentPage, $offset); 
@@ -89,11 +92,8 @@ class ChapitreController
         // print_r($list);
         // echo '</pre>';
         // die();
-
-
        
         $this->view->render('listechapitres', ['list'=>$list, 'pageSuivante'=>$pageSuivante, 'pagePrecedente'=>$pagePrecedente, 'currentPage'=>$currentPage]);
-        // $this->view->render('listechapitres', ['list'=>$list, 'pageSuivante'=>'toto', 'pagePrecedente'=>'$pagePrecedente', 'currentPage'=>$currentPage, 'nbPage'=>0]);
     }
 
 

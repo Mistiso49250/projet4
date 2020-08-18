@@ -6,7 +6,7 @@
             <input id="text" type="text" name="titre" class="form-control" maxlength="255">
         </div>
         <div class="form-group">
-            <input type="date" name="creation_date" class="form-control" required >
+            <input type="date" name="date_publication" class="form-control" required >
         </div>
         <div class="form-group">
             <label for="textarea">Extrait:</label>
@@ -14,7 +14,8 @@
         </div>
         <div class="form-group">
             <label for="textarea">Contenu: </label>
-            <textarea name="contenu_chapitre" id="textarea" cols="30" rows="10"></textarea>    </div>
+            <textarea name="contenu_chapitre" id="textarea" cols="30" rows="10"></textarea>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success">Publier</button>
             <button type="submit" class="btn btn-danger">Réinitialiser</button>
