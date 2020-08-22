@@ -26,6 +26,15 @@ class ChapitreManager
 
         return $req->fetchAll();
     }
+
+    //récupère les chapitres pour la partie admin
+    public function adminListChapitres()
+    {
+        $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY date_publication');
+        $req->execute();
+
+        return $req->fetchAll();
+    }
     
 
     //récupère les informations d'un chapitre

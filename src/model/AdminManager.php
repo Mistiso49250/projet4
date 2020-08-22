@@ -57,16 +57,16 @@ class AdminManager
     // page : modifier un billet
     function getPostUpdate(int $idChapitre) {
         $req = $this->db->prepare('SELECT id_chapitre, titre, extrait, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr FROM chapitre WHERE id_chapitre = :idchapitre');
-        $req->execute(['idChapitre'=>$idChapitre]);
+        $req->execute(['id_chapitre'=>$idChapitre]);
 
         return $req->fetch();
     }
 
     //modifier un chapitre
-    public function updateChapitre(int $idChapitre, $titre, $extrait, $contenu) : ?array
+    public function updateChapitre($titre, $extrait, $contenu) : ?array
     {
         $req = $this->db->prepare('UPDATE chapitre set titre = ?, extrait = ?, contenu_chapitre = ?, date_publication = now() where id_chapitre = :idchapitre');
-        $updatechapitre = $req->execute(['idChapitre'=>$idChapitre, 'titre'=>$titre, 'contenu'=>$contenu, 'extrait'=>$extrait]);
+        $updatechapitre = $req->execute(['titre'=>$titre, 'contenu_chapitre'=>$contenu, 'extrait'=>$extrait]);
 
         return $updatechapitre === false ? null : $updatechapitre;
     }
@@ -76,7 +76,7 @@ class AdminManager
     {
         $req = $this->db->prepare('DELETE from chapitre where id = ?');
 
-        return $req->execute(['idChapitre'=>$idChapitre]);
+        return $req->execute(['id_chapitre'=>$idChapitre]);
     }
 
 }

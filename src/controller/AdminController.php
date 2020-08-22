@@ -30,20 +30,31 @@ class AdminController
 
     public function logout()
     {
+        session_destroy();
+        header('Location: index.php');
         exit();
     }
 
-    
-    public function Admin()
+    public function login()
     {
-        $list = $this->chapitreManager->findChapitres($offset, $nbPerPage);
-        // $commentaires = $this->commentaireManager->findComments($idChapitre);
         if(!isset($_SESSION['auth'])){
             header('Location: index.php?action=login');
 
             exit();
         }
-    $this->view->render('admin',[ 'list'=>$list, '$offset'=>$offset, 'nbPerPage'=>$nbPerPage, /*$commentaires,*/]/* null*/);
+        $this->view->render('login', null);
+    }
+    
+    public function Admin()
+    {
+        $currentPage = (int)($_GET['page'] ?? 1);
+        $postsPerPage = 7;
+        $offset = $postsPerPage * ($currentPage - 1);
+
+        $list = $this->chapitreManager->adminListChapitres();
+        // $commentaires = $this->commentaireManager->findComments($idChapitre);
+       
+        $this->view->render('admin', ['list'=>$list], /*$commentaires,*/ null);
     }
 
     //créer un chapitre
@@ -64,12 +75,14 @@ class AdminController
     public function getChapitre()
     {
         $post = $this->adminManager->getPostUpdate($_GET['id']);
-        header('Location: index.php?action=updateChapitre');
+       // header('Location: index.php?action=updateChapitre');
+        $update = $this->updateChapitre($post); 
     }
 
     public function updateChapitre($post)
     {
         // var_dump('toto'); die();
+        
         $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['date']);
 
         header('Location: index.php?action=admin');
