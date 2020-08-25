@@ -6,9 +6,6 @@
             <input id="text" type="text" name="titre" class="form-control" maxlength="255">
         </div>
         <div class="form-group">
-            <input type="date" name="date_publication" class="form-control" required >
-        </div>
-        <div class="form-group">
             <label for="textarea">Extrait:</label>
             <textarea name="extrait" id="textarea" cols="30" rows="10"></textarea>
         </div>

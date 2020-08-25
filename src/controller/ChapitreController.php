@@ -25,7 +25,7 @@ class ChapitreController
         $this->commentaireManager = new CommentaireManager();
         $this->reportManager = new ReportManager();
         $this->view = new View('../templates/frontoffice/');
-        $this->session = new Session;
+        $this->session = new Session();
 
     }
 
@@ -34,9 +34,7 @@ class ChapitreController
     {
         $episode = $this->chapitreManager->findChapitre($idChapitre);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $session = $this->session->getInstance();
-        $data['session'] = $session;
-        $this->view->render('chapitre', ['episode'=>$episode, 'commentaires'=>$commentaires ]);
+        $this->view->render('chapitre', ['episode'=>$episode, 'commentaires'=>$commentaires, 'session'=> $this->session]);
     }
 
     //affiche la liste des chapitres et pagination

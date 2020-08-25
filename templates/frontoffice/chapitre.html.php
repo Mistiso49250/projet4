@@ -68,7 +68,7 @@
 <div class="row">
     <div class="col-lg-3">
         <div class="form-group">
-            <button type="submit" class="btn btn-info"><a href="index.php?action=adminManager=t=1&id=<?=htmlspecialchars($data['episode']['id_chapitre'])?>">Signaler</a></button>
+            <button type="submit" class="btn btn-info"><a href="index.php?action=CommentReport&id_commentaire=<?=$data['episode']['id_chapitre']?>">Signaler</a></button>
         </div>
     </div>
 </div>

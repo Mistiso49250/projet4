@@ -14,14 +14,6 @@ class Session{
         $this->session = $_SESSION;
     }
 
-    static function getInstance()
-    {
-        if(self::$instance){
-            self::$instance = new Session();
-        }
-        return self::$instance;
-    }
-
     public function setFlash($key, $message){
         $_SESSION['flash'][$key] = $message;
     }

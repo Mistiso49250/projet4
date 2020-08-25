@@ -24,6 +24,7 @@ class ReportController
             die('Impossible de signaler le commentaire');
         }else{
             header('Location: index.php?action=chapitre&id_chapitre' . $_GET['id']);
+            exit();
         }
     }
 

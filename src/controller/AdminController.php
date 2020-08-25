@@ -72,22 +72,26 @@ class AdminController
     }
 
     //modifier un chapitre
-    public function getChapitre()
+    public function getChapitre($idChapitre)
     {
-        $post = $this->adminManager->getPostUpdate($_GET['id']);
-       // header('Location: index.php?action=updateChapitre');
-        $update = $this->updateChapitre($post); 
+        $post = $this->adminManager->getPostUpdate($idChapitre);
+        // var_dump($post); 
+        // echo '<pre>';
+        // print_r($post);
+        // echo '</pre>';
+        // die();
+
+        $this->view->render('updateChapitre',['post'=>$post], null);
     }
 
-    public function updateChapitre($post)
+    public function updateChapitre($post, $idChapitre)
     {
-        // var_dump('toto'); die();
-        
-        $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['date']);
+        $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
 
         header('Location: index.php?action=admin');
+        exit();
 
-        $this->view->render('updateChaptire', null);
+        // $this->view->render('updateChaptire', null);
     }
 
     //supprimer un chapitre et ses commentaires
@@ -95,7 +99,6 @@ class AdminController
     {
         $delete = $this->adminManager->deleteChapitre($idChapitre);
         $deleteComment = $this->reportManager->deleteComment($idChapitre);
-        if($delete = false )
 
         header('Location: index.php?action=admin');
 
