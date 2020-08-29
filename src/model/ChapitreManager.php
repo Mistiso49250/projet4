@@ -16,7 +16,7 @@ class ChapitreManager
       
     }
 
-    //récupère les chapitres
+    //récupère les chapitres pour pagination
     public function findChapitres(int $offset, int $nbPerPage) : array
     {
         $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY date_publication limit :offset, :limitation');
@@ -45,6 +45,16 @@ class ChapitreManager
         $episodes = $req->fetch();
         
         return $episodes === false ? null : $episodes; 
+    }
+
+    public function chapitrePagin(int $offset, int $nbPerPage)
+    {
+        $req = $this->db->prepare('SELECT id_chapitre, titre, image, contenu_chapitre, FROM chapitre ORDER BY date_publication limit :offset, :limitation');
+        $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
+        $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $req->execute();
+
+        return $req->fetchAll();
     }
 
     public function countChapitre()

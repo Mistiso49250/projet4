@@ -87,11 +87,10 @@ class AdminController
     public function updateChapitre($post, $idChapitre)
     {
         $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
-
+        $_SESSION['flash']['succes'] = 'Le chapitre à bien été modifié.';
         header('Location: index.php?action=admin');
         exit();
 
-        // $this->view->render('updateChaptire', null);
     }
 
     //supprimer un chapitre et ses commentaires
@@ -106,7 +105,7 @@ class AdminController
     }
 
     // supprimer un commentaire signalé
-    public function deleteComment($id_commentaire, $commentaireManager)
+    public function deleteComment(int $id_commentaire, $commentaireManager)
     {
         $delete = $this->commentaireManager->deleteCommentReport($id_commentaire, $commentaireManager);
         if($delete === false){

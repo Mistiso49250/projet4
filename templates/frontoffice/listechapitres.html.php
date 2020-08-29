@@ -12,11 +12,11 @@
             <a href='#' class="thumbnail">
                 <img src="images/<?=$episode['image']?>" alt="" class="img-rounded">
             </a>
-            <h3 class="chapitreTitle"><?=htmlspecialchars($episode['titre'])?></h3>
-            <p><?=nl2br(htmlspecialchars($episode['extrait']))?></p>
+            <h3 class="chapitreTitle"><?=$episode['titre']?></h3>
+            <p><?=$episode['extrait']?></p>
             <!-- <div class="lireChapitre"> -->
             <a class="btn btn-info"
-                href="index.php?action=chapitre&id=<?=htmlspecialchars($episode['id_chapitre'])?>">Lire le
+                href="index.php?action=chapitre&id=<?=$episode['id_chapitre']?>">Lire le
                 chapitre</a>
             <!-- </div> -->
         </div>

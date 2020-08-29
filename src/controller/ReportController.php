@@ -15,13 +15,13 @@ class ReportController
     }
 
     // signaler un commentaire
-    public function CommentReport(int $idComment)
+    public function commentReport(int $idComment)
     {
-        $idComment = $_GET['id_commentaire'];
+        $idComment = (int)$_GET['id_commentaire'];
         $reported = $this->reportManager->reportComment($idComment);
 
         if($reported === false){
-            die('Impossible de signaler le commentaire');
+            $_SESSION['flash']['danger'] = 'Impossible de signaler le commentaire.';
         }else{
             header('Location: index.php?action=chapitre&id_chapitre' . $_GET['id']);
             exit();

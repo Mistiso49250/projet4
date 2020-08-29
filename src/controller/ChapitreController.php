@@ -6,7 +6,6 @@ namespace Oc\Controller;
 
 use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
-use Oc\Model\ReportManager;
 use Oc\View\View;
 use Oc\Tools\Session;
 
@@ -15,7 +14,6 @@ class ChapitreController
 {
     private $chapitreManager;
     private $commentaireManager;
-    private $reportManager;
     private $view;
     private $Session;
     
@@ -23,7 +21,6 @@ class ChapitreController
     {
         $this->chapitreManager = new ChapitreManager();
         $this->commentaireManager = new CommentaireManager();
-        $this->reportManager = new ReportManager();
         $this->view = new View('../templates/frontoffice/');
         $this->session = new Session();
 
@@ -31,10 +28,49 @@ class ChapitreController
 
     //affiche les informations d'un chapitre
     public function chapitre(int $idChapitre) : void
-    {
+    {   
         $episode = $this->chapitreManager->findChapitre($idChapitre);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $this->view->render('chapitre', ['episode'=>$episode, 'commentaires'=>$commentaires, 'session'=> $this->session]);
+        $this->view->render('chapitre', [ 'episode'=>$episode, 'commentaires'=>$commentaires, 'session'=> $this->session]);
+    }
+
+    public function chapitrePagination(int $currentPage = 1)
+    {
+        $chapitrePrecedent = 0;
+        $chapitreSuivant = 0;
+        $currentPage = (int)($_GET['page'] ?? 1);
+
+        //determine le nombre d'items par page
+        $postsPerPage = 1;
+        $offset = $postsPerPage * ($currentPage - 1);
+
+        $countChapitre = $this->chapitreManager->countChapitre();
+
+        $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
+
+        if ($currentPage < 1){
+            $currentPage = 1;
+        }elseif ($currentPage > $nbTotalPages){
+            $currentPage = $nbTotalPages;
+        }
+
+        //calculer la page précédente, si current page = 1 pas de page prec : =0
+        if($currentPage === 1){ 
+            $chapitrePrecedent = 0;
+        }else {
+            $chapitrePrecedent = $currentPage - 1;
+        }
+
+        //calculer la page suivante
+        if($currentPage === $nbTotalPages){
+            $chapitreSuivant = 0;
+        }else {
+            $chapitreSuivant = $currentPage + 1;
+        }
+
+        $chapitrePagin = $this->chapitreManager->chapitrePagin($offset, $postsPerPage);
+
+        $this->view->render('chapitrePagination',['chapitrePagin'=>$chapitrePagin, 'chapitreSuivant'=>$chapitreSuivant, 'chapitrePrecedent'=>$chapitrePrecedent, 'currentPage'=>$currentPage]);
     }
 
     //affiche la liste des chapitres et pagination

@@ -21,7 +21,7 @@ class ReportManager
         $req->execute(['idComment'=>$idComment]);
         $reportComment = $req->fetchAll();
 
-        return $reportComment === false ? null : $reportComment;
+        return $reportComment;
     }
 
     // faire une jointure des tables pour pouvoir afficher les informations dans l'administration

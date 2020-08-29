@@ -7,7 +7,7 @@ use Oc\Controller\HomePageController;
 use Oc\Controller\ChapitreController;
 use Oc\Controller\AdminController;
 use Oc\Controller\CommentaireController;
-
+use Oc\Controller\ReportController;
 
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -24,6 +24,14 @@ switch ($action) {
     case 'chapitre':
         $controller = new ChapitreController();
         $controller->chapitre((int)$_GET['id']);
+    break;
+    case 'chapitrePagin':
+        $controller = new ChapitreController();
+        $controller->chapitrePagination();
+    break;
+    case 'commentReport':
+        $controller = new ReportController();
+        $controller->commentReport((int)$_GET['id_commentaire']);
     break;
     case 'login':
         $controller = new HomePageController();
@@ -54,11 +62,11 @@ switch ($action) {
         $controller->editComment($id, $commentaireManager);
     case 'addComment':
         $controller = new CommentaireController();
-        $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
+        $controller->addComment((int)$_GET['id_chapitre'], $_POST['pseudo'], $_POST['contenu']);
     break;
     case 'deleteComment':
         $controller = new AdminController();
-        $controller->deleteComment($id, $commentaireManager);
+        $controller->deleteComment((int)$_GET['id'], $commentaireManager);
     break;
     default:
         $controller = new HomePageController();
