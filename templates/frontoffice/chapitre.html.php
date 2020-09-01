@@ -4,7 +4,7 @@
     </div>
 </div>
 
-
+<!-- affiche le contenu du chapitre -->
 <div class="contentChapitre">
     <div class="chapitre">
         <img src="images/<?= $data['episode']['image']?>" alt="">
@@ -12,11 +12,23 @@
         <?=$data['episode']['contenu_chapitre']?>
     </div>
 </div>
+
 <div class="form-group">
     <a href="index.php?action=listchapitre" type="submit" class="btn btn-success">Retour à la liste des chaptires</a>
 </div>
+<!-- pagination -->
+<div class="d-flex justify-content-between my4">
+    <?php 
+        if($data['chapitrePrecedent'] !==0): ?>
+    <a href="index.php?action=chapitre&page=<?= $data['chapitrePrecedent'] ?>" class="btn btn-info">&laquo; Chapitre précédent</a>
+    <?php endif ?>
+    <?php
+        if($data['chapitreSuivant'] !== 0): ?>
+    <a href="index.php?action=chapitre&page=<?= $data['chapitreSuivant']?>" class="btn btn-info ml-auto">Chapitre suivant &raquo;</a>
+    <?php endif ?>
+</div>
 
-
+<!-- gestion des notifications -->
 <?php if(($data['session'])->hasFlashes()): ?>
 <?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
 <div class="alert alert-<?=$type;?>">
@@ -25,8 +37,9 @@
 <?php endforeach;?>
 <?php endif;?>
 
+<!-- formulaire ajout commentaire -->
 <h2>Commentaires: </h2>
-<form action="index.php?action=addComment&id_chapitre=<?=$data['episode']['id_chapitre']?>" method="POST"
+<form action="index.php?action=addComment&id=<?=$data['episode']['id_chapitre']?>" method="POST"
     class="form-horizontal col-lg-6">
     <div class="form-group">
         <legend>Laisser un commentaire</legend>
@@ -54,7 +67,7 @@
     </div>
 </form>
 
-
+<!-- commentaire et signalement -->
 <div>
     <?php foreach($data['commentaires'] as $commentaire): ?>
     <p><strong><?=htmlspecialchars($commentaire['pseudo'])?></strong> le <?=$commentaire['date_commentaire_fr'] ?></p>
@@ -63,8 +76,8 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
-                <button type="submit" class="btn btn-info"><a
-                href="index.php?action=commentReport&id_commentaire=<?=$commentaire['id_commentaire']?>">Signaler</a></button>
+                <button type="submit" class="btn btn-info"><a onclick="return confirm('Voulez vous vraiment signaler ce commentaire ?'); "
+                    href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
             </div>
         </div>
     </div>

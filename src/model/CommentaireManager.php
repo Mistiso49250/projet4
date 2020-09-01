@@ -30,35 +30,30 @@ class CommentaireManager
     {
         $comments = $this->db->prepare('INSERT into commentaire (id_chapitre, pseudo, contenu, date_commentaire) VALUES(:idChapitre, :pseudo, :contenu, NOW())');
        
-        return $comments->execute(['idChapitre'=>$idChapitre, 'pseudo'=>$pseudo, 'contenu'=>$contenu]);
+        return $comments->execute([
+            'idChapitre'=>$idChapitre, 
+            'pseudo'=>$pseudo, 
+            'contenu'=>$contenu]);
 
     }
 
     
-    // public function getComment(int $idCommentaire) : ?array
-    // {
-    //     $req = $this->db->prepare('SELECT id_commentaire, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE id_chapitre = :idchapitre order by desc');
-    //     $req->execute(['idchapitre'=>$idCommentaire]);
-    //     $comments = $req->fetchAll();
-
-    //     return $comments === false ? null : $comments;
-    // }
 
     public function updateComment(int $idCommentaire, $contenu) : ?array
     {
         $req = $this->db->prepare('UPDATE commentaire set contenu = ?, date_commentaire = now() where id_chapitre = :idchapitre');
-        $newComment = $req->execute([$idCommentaire, $contenu]);
+        $newComment = $req->execute([
+            'id_commentaire'=>$idCommentaire, 
+            'contenu'=>$contenu]);
 
         return $newComment === false ? null : $newComment;
     }
 
-    // supprimer un commentaire signalé
-    public function deleteCommentReport(int $idCommentaire, $contenu)
+    //supprimer un commentaire
+    public function deleteComment(int $idCommentaire)
     {
-        $req = $this->db->prepare('DELETE from commentaire set contenu = ?, where id_chapitre = :idchapitre');
-        $resetComment = $req->execute([$idCommentaire, $contenu]);
-
-        return $resetComment === false ? null : $resetComment;
+        $req = $this->db->prepare('DELETE from commentaire where id_commentaire = :idcommentaire');
+        $req->execute(['id_commentaire'=>$idCommentaire]);
     }
 
 }

@@ -97,7 +97,7 @@ class AdminController
     public function deleteChapitre(int $idChapitre)
     {
         $delete = $this->adminManager->deleteChapitre($idChapitre);
-        $deleteComment = $this->reportManager->deleteComment($idChapitre);
+        $deleteComment = $this->commentaireManager->deleteComment($idChapitre);
 
         header('Location: index.php?action=admin');
 
@@ -107,7 +107,7 @@ class AdminController
     // supprimer un commentaire signalé
     public function deleteComment(int $id_commentaire, $commentaireManager)
     {
-        $delete = $this->commentaireManager->deleteCommentReport($id_commentaire, $commentaireManager);
+        $delete = $this->reportManager->deleteCommentReport($id_commentaire, $commentaireManager);
         if($delete === false){
             die('Impossible de modifier le commentaire');
         }

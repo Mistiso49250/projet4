@@ -40,7 +40,11 @@ class AdminManager
     public function creatChapitre($titre, $contenu, $extrait, $image)
     {
         $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, image, date_publication ) VALUES (?, ?, ?, ? NOW())');
-        $newChapitre = $req->execute(['titre'=>$titre, 'contenu_chapitre'=>$contenu, 'extrait'=>$extrait, 'image'=>$image]);
+        $newChapitre = $req->execute([
+            'titre'=>$titre, 
+            'contenu_chapitre'=>$contenu, 
+            'extrait'=>$extrait, 
+            'image'=>$image]);
 
         return $newChapitre;
     }
@@ -65,8 +69,12 @@ class AdminManager
     //modifier un chapitre
     public function updateChapitre($titre, $extrait, $contenu, $idChapitre) : bool
     {
-        $req = $this->db->prepare('UPDATE chapitre set titre = :titre, contenu_chapitre = :contenu_chapitre, extrait = :extrait, date_publication = now() where id_chapitre = :idchapitre');
-        $updatechapitre = $req->execute(['titre'=>$titre, 'contenu_chapitre'=>$contenu, 'extrait'=>$extrait, 'idchapitre'=>$idChapitre]);
+        $req = $this->db->prepare('UPDATE chapitre set titre = :titre, contenu_chapitre = :contenu_chapitre, extrait = :extrait, where id_chapitre = :idchapitre');
+        $updatechapitre = $req->execute([
+            'titre'=>$titre, 
+            'contenu_chapitre'=>$contenu, 
+            'extrait'=>$extrait, 
+            'idchapitre'=>$idChapitre]);
 
         return $updatechapitre;
     }

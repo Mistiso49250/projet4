@@ -25,13 +25,9 @@ switch ($action) {
         $controller = new ChapitreController();
         $controller->chapitre((int)$_GET['id']);
     break;
-    case 'chapitrePagin':
-        $controller = new ChapitreController();
-        $controller->chapitrePagination();
-    break;
     case 'commentReport':
         $controller = new ReportController();
-        $controller->commentReport((int)$_GET['id_commentaire']);
+        $controller->commentReport((int)$_GET['id'], (int)$_GET['chapitre_id']);
     break;
     case 'login':
         $controller = new HomePageController();
@@ -60,9 +56,10 @@ switch ($action) {
     case 'moderateComment':
         $controller = new AdminController();
         $controller->editComment($id, $commentaireManager);
+    break;
     case 'addComment':
         $controller = new CommentaireController();
-        $controller->addComment((int)$_GET['id_chapitre'], $_POST['pseudo'], $_POST['contenu']);
+        $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
     break;
     case 'deleteComment':
         $controller = new AdminController();

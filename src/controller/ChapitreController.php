@@ -15,7 +15,7 @@ class ChapitreController
     private $chapitreManager;
     private $commentaireManager;
     private $view;
-    private $Session;
+    private $session;
     
     public function __construct() 
     {
@@ -26,16 +26,12 @@ class ChapitreController
 
     }
 
-    //affiche les informations d'un chapitre
-    public function chapitre(int $idChapitre) : void
+    //affiche les informations d'un chapitre & pagination
+    public function chapitre(int $idChapitre, int $currentPage = 1) : void
     {   
-        $episode = $this->chapitreManager->findChapitre($idChapitre);
-        $commentaires = $this->commentaireManager->findComments($idChapitre);
-        $this->view->render('chapitre', [ 'episode'=>$episode, 'commentaires'=>$commentaires, 'session'=> $this->session]);
-    }
 
-    public function chapitrePagination(int $currentPage = 1)
-    {
+        // faire des regle de gestion pour le choix des chaptires dans la pagination
+        
         $chapitrePrecedent = 0;
         $chapitreSuivant = 0;
         $currentPage = (int)($_GET['page'] ?? 1);
@@ -54,7 +50,7 @@ class ChapitreController
             $currentPage = $nbTotalPages;
         }
 
-        //calculer la page précédente, si current page = 1 pas de page prec : =0
+        //calculer la page précédente, si current page = 1 pas de page prec : = 0
         if($currentPage === 1){ 
             $chapitrePrecedent = 0;
         }else {
@@ -70,7 +66,17 @@ class ChapitreController
 
         $chapitrePagin = $this->chapitreManager->chapitrePagin($offset, $postsPerPage);
 
-        $this->view->render('chapitrePagination',['chapitrePagin'=>$chapitrePagin, 'chapitreSuivant'=>$chapitreSuivant, 'chapitrePrecedent'=>$chapitrePrecedent, 'currentPage'=>$currentPage]);
+
+        $episode = $this->chapitreManager->findChapitre($idChapitre);
+        $commentaires = $this->commentaireManager->findComments($idChapitre);
+        $this->view->render('chapitre', [
+            'episode'=>$episode, 
+            'commentaires'=>$commentaires, 
+            'session'=> $this->session,
+            'chapitrePagin'=>$chapitrePagin,
+            'chapitreSuivant'=>$chapitreSuivant, 
+            'chapitrePrecedent'=>$chapitrePrecedent, 
+            'currentPage'=>$currentPage]);
     }
 
     //affiche la liste des chapitres et pagination
@@ -127,7 +133,11 @@ class ChapitreController
         // echo '</pre>';
         // die();
        
-        $this->view->render('listechapitres', ['list'=>$list, 'pageSuivante'=>$pageSuivante, 'pagePrecedente'=>$pagePrecedente, 'currentPage'=>$currentPage]);
+        $this->view->render('listechapitres', [
+            'list'=>$list, 
+            'pageSuivante'=>$pageSuivante, 
+            'pagePrecedente'=>$pagePrecedente, 
+            'currentPage'=>$currentPage]);
     }
 
 
