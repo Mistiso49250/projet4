@@ -20,11 +20,11 @@
 <div class="d-flex justify-content-between my4">
     <?php 
         if($data['chapitrePrecedent'] !==0): ?>
-    <a href="index.php?action=chapitre&page=<?= $data['chapitrePrecedent'] ?>" class="btn btn-info">&laquo; Chapitre précédent</a>
+    <a href="index.php?action=chapitre&id=<?= $data['chapitrePrecedent'] ?>" class="btn btn-info">&laquo; Chapitre précédent</a>
     <?php endif ?>
     <?php
         if($data['chapitreSuivant'] !== 0): ?>
-    <a href="index.php?action=chapitre&page=<?= $data['chapitreSuivant']?>" class="btn btn-info ml-auto">Chapitre suivant &raquo;</a>
+    <a href="index.php?action=chapitre&id=<?= $data['chapitreSuivant']?>" class="btn btn-info ml-auto">Chapitre suivant &raquo;</a>
     <?php endif ?>
 </div>
 
@@ -70,6 +70,7 @@
 <!-- commentaire et signalement -->
 <div>
     <?php foreach($data['commentaires'] as $commentaire): ?>
+       
     <p><strong><?=htmlspecialchars($commentaire['pseudo'])?></strong> le <?=$commentaire['date_commentaire_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></p>
 

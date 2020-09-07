@@ -47,16 +47,40 @@ class ChapitreManager
         return $episodes === false ? null : $episodes; 
     }
 
-    public function chapitrePagin(int $offset, int $nbPerPage)
-    {
-        $req = $this->db->prepare('SELECT id_chapitre, titre, image, contenu_chapitre, FROM chapitre ORDER BY date_publication limit :offset, :limitation');
-        $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
-        $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
-        $req->execute();
+    // public function chapitrePagin(int $offset, int $nbPerPage)
+    // {
+    //     $req = $this->db->prepare('SELECT id_chapitre, titre, image, contenu_chapitre, FROM chapitre ORDER BY date_publication limit :offset, :limitation');
+    //     $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
+    //     $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
+    //     $req->execute();
 
-        return $req->fetchAll();
+    //     return $req->fetchAll();
+    // }
+
+    //pagination chapitre
+    //précedent
+    public function getMaxId(int $idChapitre)
+    {
+        $req = $this->db->prepare('SELECT id_chapitre FROM chapitre WHERE numchapitre =
+        (SELECT max(numchapitre) from chapitre where numchapitre < 2');
+        $req->execute(['idchapitre'=>$idChapitre]);
+        $episodes = $req->fetch();
+
+        return $episodes;
     }
 
+    //suivant
+    public function getMinId(int $idChapitre)
+    {
+        $req = $this->db->prepare('SELECT id_chapitre FROM chapitre WHERE numchapitre =
+        (SELECT min(numchapitre) from chapitre where numchapitre > 2');
+        $req->execute(['idchapitre'=>$idChapitre]);
+        $episodes = $req->fetch();
+
+        return $episodes;
+    }
+
+    //calcul le nombre de chapitre
     public function countChapitre()
     {
         $req = $this->db->prepare('SELECT count(*) as total from chapitre');

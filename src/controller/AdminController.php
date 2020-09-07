@@ -104,6 +104,12 @@ class AdminController
         $this->view->render('deleteChapitre', ['delete'=>$delete]);
     }
 
+    //page moderer commentaire
+    public function moderateComment()
+    {
+        $this->view->render('moderateComment', null);
+    }
+
     // supprimer un commentaire signalé
     public function deleteComment(int $id_commentaire, $commentaireManager)
     {

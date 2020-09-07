@@ -16,6 +16,8 @@ class ChapitreController
     private $commentaireManager;
     private $view;
     private $session;
+    private $getMaxId;
+    private $getMinId;
     
     public function __construct() 
     {
@@ -23,49 +25,16 @@ class ChapitreController
         $this->commentaireManager = new CommentaireManager();
         $this->view = new View('../templates/frontoffice/');
         $this->session = new Session();
-
+        $this->getMaxId = new chapitreManager();
+        $this->getMinId = new chapitreManager();
     }
 
     //affiche les informations d'un chapitre & pagination
-    public function chapitre(int $idChapitre, int $currentPage = 1) : void
+    public function chapitre(int $idChapitre) : void
     {   
-
-        // faire des regle de gestion pour le choix des chaptires dans la pagination
-        
-        $chapitrePrecedent = 0;
-        $chapitreSuivant = 0;
-        $currentPage = (int)($_GET['page'] ?? 1);
-
-        //determine le nombre d'items par page
-        $postsPerPage = 1;
-        $offset = $postsPerPage * ($currentPage - 1);
-
-        $countChapitre = $this->chapitreManager->countChapitre();
-
-        $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
-
-        if ($currentPage < 1){
-            $currentPage = 1;
-        }elseif ($currentPage > $nbTotalPages){
-            $currentPage = $nbTotalPages;
-        }
-
-        //calculer la page précédente, si current page = 1 pas de page prec : = 0
-        if($currentPage === 1){ 
-            $chapitrePrecedent = 0;
-        }else {
-            $chapitrePrecedent = $currentPage - 1;
-        }
-
-        //calculer la page suivante
-        if($currentPage === $nbTotalPages){
-            $chapitreSuivant = 0;
-        }else {
-            $chapitreSuivant = $currentPage + 1;
-        }
-
-        $chapitrePagin = $this->chapitreManager->chapitrePagin($offset, $postsPerPage);
-
+        $chapitrePrecedent = $this->getMaxId->getMaxId($idChapitre);
+        var_dump($chapitrePrecedent); die();
+        $chapitreSuivant = $this->getMinId->getMinId($idChapitre);
 
         $episode = $this->chapitreManager->findChapitre($idChapitre);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
@@ -73,10 +42,9 @@ class ChapitreController
             'episode'=>$episode, 
             'commentaires'=>$commentaires, 
             'session'=> $this->session,
-            'chapitrePagin'=>$chapitrePagin,
-            'chapitreSuivant'=>$chapitreSuivant, 
-            'chapitrePrecedent'=>$chapitrePrecedent, 
-            'currentPage'=>$currentPage]);
+            'chapitreSuivant'=>$chapitreSuivant,
+            'chapitrePrecedent'=>$chapitrePrecedent
+        ]);
     }
 
     //affiche la liste des chapitres et pagination

@@ -31,15 +31,22 @@ class ReportManager
         
         return $reportComment;
     }
- 
-    // faire une jointure des tables pour pouvoir afficher les informations dans l'administration
-    public function insertReport()
+
+    //cacher un commentaire signaler
+    public function hiddenComment(int $idCommentaire)
     {
-        $req = $this->db->prepare('SELECT id_chapitre, id_commentaire, pseudo, contenu from commentaire inner join on commentaire.id_chapitre = :idchapitre where commentaire.signaler = "1" ');
-        $req->execute();
- 
-        return $req->fetchAll();
+        $req = $this->db->prepare('UPDATE commetaire set hidden_com = 1, signaler = 0, hidden_date = NOW() WHERE id = :idcommentaire');
+        $req->execute(['idcommentaire'=>$idCommentaire]);
     }
+ 
+    // // faire une jointure des tables pour pouvoir afficher les informations dans l'administration
+    // public function insertReport()
+    // {
+    //     $req = $this->db->prepare('SELECT id_chapitre, id_commentaire, pseudo, contenu from commentaire inner join on commentaire.id_chapitre = :idchapitre where commentaire.signaler = "1" ');
+    //     $req->execute();
+ 
+    //     return $req->fetchAll();
+    // }
 
     // supprimer un commentaire signalé
     public function deleteCommentReport(int $idCommentaire, $contenu)
@@ -52,13 +59,8 @@ class ReportManager
         return $resetComment;
     }
 
-    public function hiddenComment(int $idCommentaire)
-    {
-        $req = $this->db->prepare('UPDATE commetaire set hidden_com = 1, signaler = 0, hidden_by = ?, hidden_date = NOW() WHERE id = :idcommentaire');
-        $req->execute(['idcommentaire'=>$idCommentaire]);
-    }
 
-     // modification de "signaler" de 1 à 0 pour ignorer un commentaire
+    // modification de "signaler" de 1 à 0 pour ignorer un commentaire
     public function ignoreReport(int $idComment)
     {
         $req = $this->db->prepare('UPDATE commentaire set signaler = "0" where id = :idcommentaire');
