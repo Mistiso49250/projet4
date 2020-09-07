@@ -82,9 +82,9 @@ class AdminManager
     //supprimer un chapitre
     public function deleteChapitre(int $idChapitre)
     {
-        $req = $this->db->prepare('DELETE from chapitre where id = ?');
+        $req = $this->db->prepare('DELETE from chapitre where id_chapitre = :idchapitre');
 
-        return $req->execute(['id_chapitre'=>$idChapitre]);
+        return $req->execute(['idchapitre'=>$idChapitre]);
     }
 
 }

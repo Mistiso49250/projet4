@@ -7,6 +7,7 @@ use Oc\Model\AdminManager;
 use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
 use Oc\Model\ReportManager;
+use Oc\Tools\Session;
 use Oc\View\View;
 
 class AdminController
@@ -16,6 +17,7 @@ class AdminController
     private $chapitreManager;
     private $commentaireManager;
     private $reportManager;
+    private $session;
 
 
 
@@ -25,7 +27,8 @@ class AdminController
         $this->adminManager = new AdminManager(); 
         $this->chapitreManager = new ChapitreManager();   
         $this->commentaireManager = new CommentaireManager();
-        $this->reportManager = new ReportManager();     
+        $this->reportManager = new ReportManager();  
+        $this->session = new Session();   
     }
 
     public function logout()
@@ -87,7 +90,16 @@ class AdminController
     public function updateChapitre($post, $idChapitre)
     {
         $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
-        $_SESSION['flash']['succes'] = 'Le chapitre à bien été modifié.';
+        
+        if($update === false){
+            // $this->session->setFlash('danger', 'Impossible de modifié le chapitre !');
+            $_SESSION['flash']['danger'] = 'Impossible de modifié le chapitre !';
+        }
+        else{
+            $this->session->setFlash('success', 'Le chapitre à bien été modifié.');
+            $_SESSION['flash']['success'] = 'Le chapitre à bien été modifié.';
+        }
+        
         header('Location: index.php?action=admin');
         exit();
 
@@ -97,11 +109,20 @@ class AdminController
     public function deleteChapitre(int $idChapitre)
     {
         $delete = $this->adminManager->deleteChapitre($idChapitre);
-        $deleteComment = $this->commentaireManager->deleteComment($idChapitre);
+        $deleteComment = $this->commentaireManager->deleteAllCommentChapter($idChapitre);
+
+        if($delete === false){
+            $deleteComment === false;
+            // $this->session->setFlash('danger', 'Impossible de supprimer le chapitre et ses commentaires !');
+            $_SESSION['flash']['danger'] = 'Impossible de supprimer le chapitre et ses commentaires !';
+        }
+        else{
+            // $this->session->setFlash('success', 'Le chapitre et ses commentaires on bien été supprimé.');
+            $_SESSION['flash']['success'] = 'Le chapitre et ses commentaires on bien été supprimé.';
+        }
 
         header('Location: index.php?action=admin');
-
-        $this->view->render('deleteChapitre', ['delete'=>$delete]);
+        exit();
     }
 
     //page moderer commentaire
@@ -115,23 +136,27 @@ class AdminController
     {
         $delete = $this->reportManager->deleteCommentReport($id_commentaire, $commentaireManager);
         if($delete === false){
-            die('Impossible de modifier le commentaire');
+            // $this->session->setFlash('danger', 'Impossible de supprimer le commentaire !');
+            $_SESSION['flash']['danger'] = 'Impossible de supprimer le commentaire';
         }
         else{
             echo 'commentaire: ' . $_POST['comment'];
-            header('Location: index.php?action=commentaire&id=' . $id_commentaire);
         }
+        header('Location: index.php?action=commentaire&id=' . $id_commentaire);
+        exit();
     }
 
     public function editComment($id_commentaire, $commentaireManager)
     {
         $edit = $this->commentaireManager->updateComment($id_commentaire, $commentaireManager);
         if($edit === false){
-            die('Impossible de modifier le commentaire');
+            // $this->session->setFlash('danger', 'Impossible de modifier le commentaire !');
+            $_SESSION['flash']['danger'] = 'Impossible de modifier le commentaire';
         }
         else{
             echo 'commentaire: ' . $_POST['comment'];
-            header('Location: index.php?action=commentaire&id=' . $id_commentaire);
         }
+        header('Location: index.php?action=commentaire&id=' . $id_commentaire);
+        exit();
     }
 }

@@ -53,6 +53,10 @@ switch ($action) {
         $controller = new AdminController();
         $controller->updateChapitre($_POST, (int)$_GET['id_chapitre']);
     break;
+    case 'deleteChapitre':
+        $controller = new AdminController();
+        $controller->deleteChapitre((int)$_GET['id_chapitre']);
+    break;
     case 'moderateComment':
         $controller = new AdminController();
         $controller->moderateComment();

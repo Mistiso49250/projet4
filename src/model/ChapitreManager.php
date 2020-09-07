@@ -59,25 +59,25 @@ class ChapitreManager
 
     //pagination chapitre
     //précedent
-    public function getMaxId(int $idChapitre)
+    public function getMaxId()
     {
         $req = $this->db->prepare('SELECT id_chapitre FROM chapitre WHERE numchapitre =
         (SELECT max(numchapitre) from chapitre where numchapitre < 2');
-        $req->execute(['idchapitre'=>$idChapitre]);
-        $episodes = $req->fetch();
+        $req->execute();
+        
 
-        return $episodes;
+        return $req->fetch();
     }
 
     //suivant
-    public function getMinId(int $idChapitre)
+    public function getMinId()
     {
         $req = $this->db->prepare('SELECT id_chapitre FROM chapitre WHERE numchapitre =
         (SELECT min(numchapitre) from chapitre where numchapitre > 2');
-        $req->execute(['idchapitre'=>$idChapitre]);
-        $episodes = $req->fetch();
+        $req->execute();
+         
 
-        return $episodes;
+        return $req->fetch();
     }
 
     //calcul le nombre de chapitre

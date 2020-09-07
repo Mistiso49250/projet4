@@ -1,5 +1,6 @@
 <?php ?>
 
+
 <div class="row chapitre">
     <div class="col-lg-12">
         <h2>Liste des chapitres</h2>
@@ -24,7 +25,7 @@
                         <td>
                             <a href="index.php?action=getPostUpdate&id_chapitre=<?=$episode['id_chapitre']?>" class="btn btn-success">Editer</a>
                             <a onclick="return confirm('Voulez vous vraiment surimer ce contenu ?'); "
-                                href="index.php?action=?>" class="btn btn-danger">Supprimer</a>
+                                href="index.php?action=deleteChapitre&id_chapitre=<?=$episode['id_chapitre']?>" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
                    <?php endforeach;?>

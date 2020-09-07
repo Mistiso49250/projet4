@@ -53,7 +53,14 @@ class CommentaireManager
     public function deleteComment(int $idCommentaire)
     {
         $req = $this->db->prepare('DELETE from commentaire where id_commentaire = :idcommentaire');
-        $req->execute(['id_commentaire'=>$idCommentaire]);
+        $req->execute(['idcommentaire'=>$idCommentaire]);
+    }
+
+    //supprimer les commentaires d'un chapitre
+    public function deleteAllCommentChapter(int $idChapitre)
+    {
+        $req = $this->db->prepare('DELETE from commentaire where id_chapitre = :idchapitre');
+        $req->execute(['idchapitre'=>$idChapitre]);
     }
 
 }

@@ -25,7 +25,6 @@ class ReportController
     {
         
         $reported = $this->reportManager->reportComment($idCommentaire);
-        // var_dump($reported); die();
         if($reported === false){
             $_SESSION['flash']['danger'] = 'Impossible de signaler le commentaire.';
         }else{
