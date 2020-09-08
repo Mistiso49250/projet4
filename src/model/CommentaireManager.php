@@ -37,8 +37,6 @@ class CommentaireManager
 
     }
 
-    
-
     public function updateComment(int $idCommentaire, $contenu) : ?array
     {
         $req = $this->db->prepare('UPDATE commentaire set contenu = ?, date_commentaire = now() where id_chapitre = :idchapitre');

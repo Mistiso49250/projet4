@@ -19,12 +19,14 @@
 <!-- pagination -->
 <div class="d-flex justify-content-between my4">
     <?php 
-        if($data['chapitrePrecedent'] !==0): ?>
-    <a href="index.php?action=chapitre&id=<?= $data['chapitrePrecedent'] ?>" class="btn btn-info">&laquo; Chapitre précédent</a>
+        if($data['chapitrePrecedent'] !== null): ?>
+    <a href="index.php?action=chapitre&id=<?= $data['chapitrePrecedent'] ?>" class="btn btn-info">&laquo; Chapitre
+        précédent</a>
     <?php endif ?>
     <?php
-        if($data['chapitreSuivant'] !== 0): ?>
-    <a href="index.php?action=chapitre&id=<?= $data['chapitreSuivant']?>" class="btn btn-info ml-auto">Chapitre suivant &raquo;</a>
+        if($data['chapitreSuivant'] !== null): ?>
+    <a href="index.php?action=chapitre&id=<?= $data['chapitreSuivant']?>" class="btn btn-info ml-auto">Chapitre suivant
+        &raquo;</a>
     <?php endif ?>
 </div>
 
@@ -67,18 +69,52 @@
     </div>
 </form>
 
+
 <!-- commentaire et signalement -->
 <div>
     <?php foreach($data['commentaires'] as $commentaire): ?>
-       
+
     <p><strong><?=htmlspecialchars($commentaire['pseudo'])?></strong> le <?=$commentaire['date_commentaire_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></p>
 
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
-                <button type="submit" class="btn btn-info"><a onclick="return confirm('Voulez vous vraiment signaler ce commentaire ?'); "
-                    href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
+                <button type="submit" class="btn btn-info"><a
+                        onclick="return confirm('Voulez vous vraiment signaler ce commentaire ?'); "
+                        href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
+
+                <!-- Button trigger modal -->
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm">
+                    Launch demo modal
+                </button> -->
+
+                <!-- Central Modal Small -->
+                <!-- <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true"> -->
+
+                    <!-- Change class .modal-sm to change the size of the modal -->
+                    <!-- <div class="modal-dialog modal-sm" role="document"> -->
+
+                        <!-- <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm"
+                                    data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Central Modal Small -->
             </div>
         </div>
     </div>

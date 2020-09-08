@@ -32,11 +32,9 @@ class ChapitreController
     //affiche les informations d'un chapitre & pagination
     public function chapitre(int $idChapitre) : void
     {   
-        $chapitrePrecedent = $this->getMaxId->getMaxId();
-        // var_dump($chapitrePrecedent); die();
-        $chapitreSuivant = $this->getMinId->getMinId();
-
         $episode = $this->chapitreManager->findChapitre($idChapitre);
+        $chapitrePrecedent = $this->getMaxId->getMaxId($episode['numchapitre']);
+        $chapitreSuivant = $this->getMinId->getMinId($episode['numchapitre']);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
         $this->view->render('chapitre', [
             'episode'=>$episode, 

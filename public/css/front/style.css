@@ -345,22 +345,6 @@ section{
     width: 90%;
 }
 
-/* .lireChapitre{
-    background-color: #47689d;
-    border-color: #47689d;
-    border-radius: 2%;
-    padding: 2%;
-    font-size: 13px;
-    line-height: 20px;
-    display: inline-block;
-    margin: 5% 35% 8%;
-
-    cursor: pointer;
-}
-
-.lireChapitre a{
-    color: azure;
-} */
 .btn-info {
     color: #fff;
     background-color: #4789C3;

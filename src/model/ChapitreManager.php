@@ -40,44 +40,34 @@ class ChapitreManager
     //récupère les informations d'un chapitre
     public function findChapitre(int $idChapitre) : ?array
     {
-        $req = $this->db->prepare('SELECT id_chapitre, titre, image, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
+        $req = $this->db->prepare('SELECT id_chapitre, titre, numchapitre, image, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
         $req->execute(['idchapitre'=>$idChapitre]);
         $episodes = $req->fetch();
         
         return $episodes === false ? null : $episodes; 
     }
 
-    // public function chapitrePagin(int $offset, int $nbPerPage)
-    // {
-    //     $req = $this->db->prepare('SELECT id_chapitre, titre, image, contenu_chapitre, FROM chapitre ORDER BY date_publication limit :offset, :limitation');
-    //     $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
-    //     $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
-    //     $req->execute();
-
-    //     return $req->fetchAll();
-    // }
-
     //pagination chapitre
     //précedent
-    public function getMaxId()
+    public function getMaxId($numChapitre)
     {
         $req = $this->db->prepare('SELECT id_chapitre FROM chapitre WHERE numchapitre =
-        (SELECT max(numchapitre) from chapitre where numchapitre < 2');
-        $req->execute();
-        
+        (SELECT max(numchapitre) from chapitre where numchapitre < :numchapitre)');
+        $req->execute(['numchapitre'=>$numChapitre]);
+        $result = $req->fetch();
 
-        return $req->fetch();
+        return $result['id_chapitre'];
     }
 
     //suivant
-    public function getMinId()
+    public function getMinId($numChapitre)
     {
         $req = $this->db->prepare('SELECT id_chapitre FROM chapitre WHERE numchapitre =
-        (SELECT min(numchapitre) from chapitre where numchapitre > 2');
-        $req->execute();
+        (SELECT min(numchapitre) from chapitre where numchapitre > :numchapitre)');
+        $req->execute(['numchapitre'=>$numChapitre]);
+        $result = $req->fetch();
          
-
-        return $req->fetch();
+        return $result['id_chapitre'];
     }
 
     //calcul le nombre de chapitre
