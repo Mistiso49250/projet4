@@ -41,6 +41,10 @@ switch ($action) {
         $controller = new AdminController();
         $controller->logout();
     break;
+    case 'uploadImg':
+        $controller = new ChapitreController();
+        $cotroller->uploadImg();
+    break;
     case 'newChapitre':
         $controller = new AdminController();
         $controller->newChapitre($_POST);
@@ -60,6 +64,7 @@ switch ($action) {
     case 'moderateComment':
         $controller = new AdminController();
         $controller->moderateComment();
+    break;
     // case 'moderateComment':
     //     $controller = new AdminController();
     //     $controller->editComment($id, $commentaireManager);

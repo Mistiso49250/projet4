@@ -36,6 +36,7 @@ class ReportController
         
     }
 
+
     //cacher un commentaire signalé
     public function hiddenComment(int $idCommentaire)
     {
@@ -52,14 +53,6 @@ class ReportController
         return $ignoreReport;
 
     }
-
-    // public function count(int $id)
-    // {
-    //     $dislike = $this->db->prepare('SELECT id from signalement where id_chapitre = ?');
-    //     $dislike->execute(['id' => $id]);
-    //     $dislike = $dislike->rowCount();
-    //     return $dislike === false ? null : $dislike;
-    // }
 
     
 }

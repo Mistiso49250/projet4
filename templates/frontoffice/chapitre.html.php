@@ -84,37 +84,37 @@
                         onclick="return confirm('Voulez vous vraiment signaler ce commentaire ?'); "
                         href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
 
-                <!-- Button trigger modal -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm">
-                    Launch demo modal
-                </button> -->
+                <!-- Button trigger modal-->
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                    data-target="#modalConfirmDelete">signaler</button>
 
-                <!-- Central Modal Small -->
-                <!-- <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true"> -->
-
-                    <!-- Change class .modal-sm to change the size of the modal -->
-                    <!-- <div class="modal-dialog modal-sm" role="document"> -->
-
-                        <!-- <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                <!--Modal: modalConfirmDelete-->
+                <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                        <!--Content-->
+                        <div class="modal-content text-center">
+                            <!--Header-->
+                            <div class="modal-header d-flex justify-content-center">
+                                <p class="heading">Etes-vous sur de vouloir signaler ce commentaire?</p>
                             </div>
+                            <!--Body-->
                             <div class="modal-body">
-                                ...
+
+                                <i class="fas fa-times fa-4x animated rotateIn"></i>
+
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm"
-                                    data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+                            <!--Footer-->
+                            <div class="modal-footer flex-center">
+                                <a href="" class="btn  btn-outline-danger">Oui</a>
+                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Non</a>
                             </div>
                         </div>
+                        <!--/.Content-->
                     </div>
-                </div> -->
-                <!-- Central Modal Small -->
+                </div>
+                <!--Modal: modalConfirmDelete-->
+                
             </div>
         </div>
     </div>

@@ -14,11 +14,12 @@
     <link rel="stylesheet" href="css/back/style.css">
 
     <!-- bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
     <!-- tinymce -->
-    <script src="https://cdn.tiny.cloud/1/sgucpkg0rglmeqtnxrrh880aputls1kntjwzgi5htko37n9y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    
+    <script src="https://cdn.tiny.cloud/1/sgucpkg0rglmeqtnxrrh880aputls1kntjwzgi5htko37n9y/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
 
     <title>Administration</title>
 </head>
@@ -41,22 +42,34 @@
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <h1 class="navbar-brand"><a href="index.php?action=admin">Administration</a></h1>
+                    <h1 class="navbar-brand"><a href="index.php?action=admin" class="badge badge-info">Administration</a></h1>
                 </div>
                 <ul class="nav nav-bar">
-                    <li class="active"><a href="index.php?action=newChapitre">Nouveau chapitre</a></li>
-                    <!-- ?php foreach ($data as $dislike): ? -->
-                    <li><a href="index.php?action=moderateComment">Modérer les Commentaires<br><p class="btn btn-danger btn-md"><!-- ?= $dislike ? --></p></a></li>
-                    <!-- ?php endforeach; ? -->
-                    <li><a href='index.php?action=logout'>Se déconnecter</a></li>
+                    <li class="active"><a href="index.php?action=newChapitre" class="badge badge-info">Nouveau chapitre</a></li>
+                    <li><a href="index.php?action=moderateComment" class="badge badge-warning">Modérer les Commentaires
+                    <span class="badge badge-light"><?= $data['countReportedComments'] ?></span><span class="sr-only">unread messages</span>
+                    </a></li>
+                    <li><a href='index.php?action=logout' class="badge badge-secondary">Se déconnecter</a></li>
                 </ul>
             </div>
         </div>
         <?= $content ?>
     </div>
 
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
     <script src="js\back\tinymce\tinymce.min.js"></script>
-   
+
 </body>
 
 </html>

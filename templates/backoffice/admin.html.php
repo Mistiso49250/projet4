@@ -23,12 +23,51 @@
                         <td><?=htmlspecialchars($episode['extrait'])?></td>
                         <td><?=htmlspecialchars($episode['date_publication'])?></td>
                         <td>
-                            <a href="index.php?action=getPostUpdate&id_chapitre=<?=$episode['id_chapitre']?>" class="btn btn-success">Editer</a>
+                            <a href="index.php?action=getPostUpdate&id_chapitre=<?=$episode['id_chapitre']?>"
+                                class="btn btn-success">Editer</a>
                             <a onclick="return confirm('Voulez vous vraiment surimer ce contenu ?'); "
-                                href="index.php?action=deleteChapitre&id_chapitre=<?=$episode['id_chapitre']?>" class="btn btn-danger">Supprimer</a>
+                                href="index.php?action=deleteChapitre&id_chapitre=<?=$episode['id_chapitre']?>"
+                                class="btn btn-danger">Supprimer</a>
+
+                            <!-- Button trigger modal-->
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#modalConfirmDelete">signaler</button>
+
+                            <!--Modal: modalConfirmDelete-->
+                            <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-notify modal-danger" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content text-center">
+                                        <!--Header-->
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <p class="heading">Etes-vous sur de vouloir supprimer ce commentaire?</p>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" class="white-text">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <!--Body-->
+                                        <div class="modal-body">
+
+                                            <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                                        </div>
+                                        <!--Footer-->
+                                        <div class="modal-footer flex-center">
+                                            <a href="" class="btn  btn-outline-danger">Oui</a>
+                                            <a type="button" class="btn  btn-danger waves-effect"
+                                                data-dismiss="modal">Non</a>
+                                        </div>
+                                    </div>
+                                    <!--/.Content-->
+                                </div>
+                            </div>
+                            <!--Modal: modalConfirmDelete-->
+
                         </td>
                     </tr>
-                   <?php endforeach;?>
+                    <?php endforeach;?>
                 </tbody>
             </table>
         </section>

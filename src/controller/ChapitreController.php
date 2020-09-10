@@ -106,6 +106,5 @@ class ChapitreController
             'currentPage'=>$currentPage]);
     }
 
-
+    
 }
-

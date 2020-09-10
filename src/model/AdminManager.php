@@ -49,14 +49,14 @@ class AdminManager
         return $newChapitre;
     }
 
-    //ajouter une image
-    public function addImage()
-    {
-        $req = $this->db->prepare('INSERT into images image');
-        $req->execute();
+    // //ajouter une image
+    // public function addImage()
+    // {
+    //     $req = $this->db->prepare('INSERT into images image');
+    //     $req->execute();
 
-        return $req->fetch();
-    }
+    //     return $req->fetch();
+    // }
 
     // page : modifier un billet
     function getPostUpdate(int $idChapitre) {
