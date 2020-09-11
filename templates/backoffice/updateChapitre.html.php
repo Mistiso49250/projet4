@@ -1,3 +1,13 @@
+<!-- gestion des notifications -->
+<?php if(($data['session'])->hasFlashes()): ?>
+<?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
+<div class="alert alert-<?=$type;?>">
+    <?=$message;?>
+</div>
+<?php endforeach;?>
+<?php endif;?>
+
+<!-- tableau modification chapitre -->
 <div class="row justify-content-center">
     <form action="index.php?action=updateChapitre&id_chapitre=<?=$data['post']['id_chapitre']?>" class="col-lg-12" method="POST">
             <h2 id="modifier">Modifier un chapitre</h2>

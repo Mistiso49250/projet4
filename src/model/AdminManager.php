@@ -49,15 +49,6 @@ class AdminManager
         return $newChapitre;
     }
 
-    // //ajouter une image
-    // public function addImage()
-    // {
-    //     $req = $this->db->prepare('INSERT into images image');
-    //     $req->execute();
-
-    //     return $req->fetch();
-    // }
-
     // page : modifier un billet
     function getPostUpdate(int $idChapitre) {
         $req = $this->db->prepare('SELECT id_chapitre, titre, extrait, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr FROM chapitre WHERE id_chapitre = :idchapitre');

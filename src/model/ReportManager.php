@@ -33,30 +33,14 @@ class ReportManager
         
         return $reportComment;
     }
-
-    //cacher un commentaire signaler
-    public function hiddenComment(int $idCommentaire)
-    {
-        $req = $this->db->prepare('UPDATE commetaire set hidden_com = 1, signaler = 0, hidden_date = NOW() WHERE id = :idcommentaire');
-        $req->execute(['idcommentaire'=>$idCommentaire]);
-    }
- 
-    // // faire une jointure des tables pour pouvoir afficher les informations dans l'administration
-    // public function insertReport()
-    // {
-    //     $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu from commentaire inner join on commentaire.id_chapitre = :idchapitre where commentaire.signaler = 1 ');
-    //     $req->execute();
- 
-    //     return $req->fetchAll();
-    // }
+    
 
     // supprimer un commentaire signalé
-    public function deleteCommentReport(int $idCommentaire, $contenu)
+    public function deleteCommentReport(int $idCommentaire)
     {
-        $req = $this->db->prepare('DELETE from commentaire set contenu = ?, where id_chapitre = :idchapitre');
+        $req = $this->db->prepare('DELETE from commentaire where id_chapitre = :idchapitre');
         $resetComment = $req->execute([
-            'id_commentaire'=>$idCommentaire, 
-            'contenu'=>$contenu]);
+            'id_commentaire'=>$idCommentaire]);
 
         return $resetComment;
     }

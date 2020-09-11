@@ -26,9 +26,9 @@ class ReportController
         
         $reported = $this->reportManager->reportComment($idCommentaire);
         if($reported === false){
-            $_SESSION['flash']['danger'] = 'Impossible de signaler le commentaire.';
+            $this->session->setFlash('danger', 'Impossible de signaler le commentaire !');
         }else{
-            $_SESSION['flash']['success'] = 'Le commentaire a bien été signalé.';
+            $this->session->setFlash('success', 'Le commentaire a bien été signalé.');
         }
         
         header('Location: index.php?action=chapitre&id=' . $idChapitre);
@@ -36,14 +36,6 @@ class ReportController
         
     }
 
-
-    //cacher un commentaire signalé
-    public function hiddenComment(int $idCommentaire)
-    {
-        $hidden = $this->reportManager->hiddenComment($idCommentaire);
-
-        $this->view->render('hiddenComment', ['hidden'=>$hidden]);
-    }
 
     // pour ignorer un commentaire signalé
     public function ignoreReportComment(int $idComment)

@@ -16,6 +16,7 @@
 <div class="form-group">
     <a href="index.php?action=listchapitre" type="submit" class="btn btn-success">Retour à la liste des chaptires</a>
 </div>
+
 <!-- pagination -->
 <div class="d-flex justify-content-between my4">
     <?php 
@@ -114,7 +115,7 @@
                     </div>
                 </div>
                 <!--Modal: modalConfirmDelete-->
-                
+
             </div>
         </div>
     </div>

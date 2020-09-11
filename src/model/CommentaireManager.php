@@ -25,7 +25,7 @@ class CommentaireManager
         return $comments === false ? null : $comments;
     }
 
-    //récupère les commentaires d'un chapitre
+    //ajoute les commentaires d'un chapitre
     public function articleComment(int $idChapitre, string $pseudo, string $contenu) : bool
     {
         $comments = $this->db->prepare('INSERT into commentaire (id_chapitre, pseudo, contenu, date_commentaire) VALUES(:idChapitre, :pseudo, :contenu, NOW())');

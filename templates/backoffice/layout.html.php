@@ -26,6 +26,44 @@
 
 <body>
 
+    <!--Navbar-->
+    <nav class="navbar navbar-light amber lighten-4 mb-4">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"
+        aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon1"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent20">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+        </li>
+        </ul>
+        <!-- Links -->
+
+    </div>
+    <!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
+
+
+
+
     <div class="container">
         <div class="row-home">
             <div class="col-lg-12">
@@ -36,8 +74,8 @@
         </div>
 
         <?php
-    // Afficher la page
-    ?>
+        // Afficher la page
+        ?>
 
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -69,6 +107,7 @@
     </script>
 
     <script src="js\back\tinymce\tinymce.min.js"></script>
+    <script src="js\back\testMenuBoot.js"></script>
 
 </body>
 

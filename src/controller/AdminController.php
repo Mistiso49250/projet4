@@ -55,14 +55,11 @@ class AdminController
         $offset = $postsPerPage * ($currentPage - 1);
 
         $list = $this->chapitreManager->adminListChapitres();
-        // $commentaires = $this->commentaireManager->findComments($idChapitre);
-
         $countReportedComments = $this->reportManager->getReportedComments();
        
         $this->view->render('admin', [
             'list'=>$list, 
-            'countReportedComments'=>$countReportedComments,
-            /*'commentaires'=>$commentaires,*/],
+            'countReportedComments'=>$countReportedComments],
               null);
     }
 
@@ -141,12 +138,10 @@ class AdminController
         $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
         
         if($update === false){
-            // $this->session->setFlash('danger', 'Impossible de modifié le chapitre !');
-            $_SESSION['flash']['danger'] = 'Impossible de modifié le chapitre !';
+            $this->session->setFlash('danger', 'Impossible de modifié le chapitre !');
         }
         else{
             $this->session->setFlash('success', 'Le chapitre à bien été modifié.');
-            $_SESSION['flash']['success'] = 'Le chapitre à bien été modifié.';
         }
         
         header('Location: index.php?action=admin');
@@ -162,12 +157,10 @@ class AdminController
 
         if($delete === false){
             $deleteComment === false;
-            // $this->session->setFlash('danger', 'Impossible de supprimer le chapitre et ses commentaires !');
-            $_SESSION['flash']['danger'] = 'Impossible de supprimer le chapitre et ses commentaires !';
+            $this->session->setFlash('danger', 'Impossible de supprimer le chapitre et ses commentaires !');
         }
         else{
-            // $this->session->setFlash('success', 'Le chapitre et ses commentaires on bien été supprimé.');
-            $_SESSION['flash']['success'] = 'Le chapitre et ses commentaires on bien été supprimé.';
+            $this->session->setFlash('success', 'Le chapitre et ses commentaires on bien été supprimé.');
         }
 
         header('Location: index.php?action=admin');
@@ -175,18 +168,19 @@ class AdminController
     }
 
     //page moderer commentaire
-    public function moderateComment()
+    public function moderateComment(int $idChapitre)
     {
-        $this->view->render('moderateComment', null);
+        $commentaires = $this->commentaireManager->findComments($idChapitre);
+
+        $this->view->render('moderateComment',['commentaires'=>$commentaires], null);
     }
 
     // supprimer un commentaire signalé
-    public function deleteComment(int $id_commentaire, $commentaireManager)
+    public function deleteComment(int $id_commentaire)
     {
-        $delete = $this->reportManager->deleteCommentReport($id_commentaire, $commentaireManager);
+        $delete = $this->reportManager->deleteCommentReport($id_commentaire);
         if($delete === false){
-            // $this->session->setFlash('danger', 'Impossible de supprimer le commentaire !');
-            $_SESSION['flash']['danger'] = 'Impossible de supprimer le commentaire';
+            $this->session->setFlash('danger', 'Impossible de supprimer le commentaire !');
         }
         else{
             echo 'commentaire: ' . $_POST['comment'];
@@ -199,8 +193,7 @@ class AdminController
     {
         $edit = $this->commentaireManager->updateComment($id_commentaire, $commentaireManager);
         if($edit === false){
-            // $this->session->setFlash('danger', 'Impossible de modifier le commentaire !');
-            $_SESSION['flash']['danger'] = 'Impossible de modifier le commentaire';
+            $this->session->setFlash('danger', 'Impossible de modifier le commentaire !');
         }
         else{
             echo 'commentaire: ' . $_POST['comment'];
