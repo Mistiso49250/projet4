@@ -63,7 +63,7 @@ switch ($action) {
     break;
     case 'moderateComment':
         $controller = new AdminController();
-        $controller->moderateComment((int)$_GET['id']);
+        $controller->moderateComment();
     break;
     // case 'moderateComment':
     //     $controller = new AdminController();

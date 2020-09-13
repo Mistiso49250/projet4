@@ -48,6 +48,11 @@ body{
     color: #d8554d;
 }
 
+.trClass {
+    color: red;
+}
+    
+
 /* modal signaler & supprimer */
 
 .modal-dialog.modal-notify.modal-danger .modal-header {

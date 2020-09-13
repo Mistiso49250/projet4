@@ -24,6 +24,16 @@ class ReportManager
         return (int)$reported['reported'];
     }
 
+    //calcul le nombre de commentaire
+    public function adminCountCommentaire()
+    {
+        $req = $this->db->prepare('SELECT count(*) as total from commentaire');
+        $req->execute();
+        $total = $req->fetch();
+        
+        return (int)$total['total'];
+    }
+
 
     // modification de "signaler" de 0 à 1 pour signaler un commentaire
     public function reportComment(int $idCommentaire)

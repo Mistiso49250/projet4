@@ -168,12 +168,59 @@ class AdminController
     }
 
     //page moderer commentaire
-    public function moderateComment(int $idChapitre)
+    public function moderateComment(int $currentPage = 1)
     {
-        $commentaires = $this->commentaireManager->findComments($idChapitre);
+        $pagePrecedente = 0;
+        $pageSuivante = 0;
+        // $pagePrecedente = $pagePrecedente - 1 => $pagePrecedente--;
+        // $pageSuivante = $pageSuivante + 1 => $pageSuivante++;
 
-        $this->view->render('moderateComment',['commentaires'=>$commentaires], null);
+        $currentPage = (int)($_GET['page'] ?? 1);
+
+        //determine le nombre d'items par page
+        $postsPerPage = 10;
+        $offset = $postsPerPage * ($currentPage - 1);
+
+        $countComment = $this->reportManager->adminCountCommentaire();
+
+        $nbTotalPages = (int)ceil($countComment / $postsPerPage);
+
+        if ($currentPage < 1){
+            $currentPage = 1;
+        }elseif ($currentPage > $nbTotalPages){
+            $currentPage = $nbTotalPages;
+        }
+
+        //calculer la page précédente, si current page = 1 pas de page prec : =0
+        if($currentPage === 1){ 
+            $pagePrecedente = 0;
+        }else {
+            $pagePrecedente = $currentPage - 1;
+        }
+
+        //calculer la page suivante
+        if($currentPage === $nbTotalPages){
+            $pageSuivante = 0;
+        }else {
+            $pageSuivante = $currentPage + 1;
+        }
+
+        $list = $this->commentaireManager->findCommentPagin($offset, $postsPerPage);
+
+        $commentaires = $this->commentaireManager->adminFindComment();
+        $countReportedComments = $this->reportManager->getReportedComments();
+        
+        $this->view->render('moderateComment',[
+            'commentaires'=>$commentaires,
+            'countReportedComments'=>$countReportedComments,
+            'list'=>$list, 
+            'pageSuivante'=>$pageSuivante, 
+            'pagePrecedente'=>$pagePrecedente, 
+            'currentPage'=>$currentPage
+        ], null);
     }
+
+
 
     // supprimer un commentaire signalé
     public function deleteComment(int $id_commentaire)
@@ -183,9 +230,9 @@ class AdminController
             $this->session->setFlash('danger', 'Impossible de supprimer le commentaire !');
         }
         else{
-            echo 'commentaire: ' . $_POST['comment'];
+            $this->session->setFlash('success', 'Le commentaire a bien été supprimer.');
         }
-        header('Location: index.php?action=commentaire&id=' . $id_commentaire);
+        header('Location: index.php?action=moderateComment');
         exit();
     }
 
@@ -196,9 +243,9 @@ class AdminController
             $this->session->setFlash('danger', 'Impossible de modifier le commentaire !');
         }
         else{
-            echo 'commentaire: ' . $_POST['comment'];
+            $this->session->setFlash('success', 'Le commentaire a bien été modifié.');
         }
-        header('Location: index.php?action=commentaire&id=' . $id_commentaire);
+        header('Location: index.php?action=moderateComment');
         exit();
     }
 
