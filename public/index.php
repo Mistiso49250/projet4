@@ -65,10 +65,6 @@ switch ($action) {
         $controller = new AdminController();
         $controller->moderateComment();
     break;
-    // case 'moderateComment':
-    //     $controller = new AdminController();
-    //     $controller->editComment($id, $commentaireManager);
-    // break;
     case 'addComment':
         $controller = new CommentaireController();
         $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);

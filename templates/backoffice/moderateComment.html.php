@@ -18,14 +18,16 @@
 
                 <tbody>
                     <?php foreach($data['commentaires'] as $commentaire): ?>
-                        <?php if($commentaire['signaler'] !== 0){
-                            $tdClass = 'red';
+                        <?php 
+                        $trClass = "";
+                        if((int)$commentaire['signaler'] !== 0){
+                            $trClass = 'red';
                         } ?>
-                        <tr>
-                            <td class="<?php $trClass ?>"><?=htmlspecialchars($commentaire['pseudo'])?></td>
-                            <td class="<?php $trClass ?>"><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></td>
-                            <td class="<?php $trClass ?>"><?=$commentaire['date_commentaire_fr'] ?></td>
-                            <td class="<?php $trClass ?>"><?=$commentaire['id_chapitre'] ?></td>
+                        <tr class="<?= $trClass ?>">
+                            <td><?=htmlspecialchars($commentaire['pseudo'])?></td>
+                            <td><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></td>
+                            <td><?=$commentaire['date_commentaire_fr'] ?></td>
+                            <td><?=$commentaire['id_chapitre'] ?></td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-2">

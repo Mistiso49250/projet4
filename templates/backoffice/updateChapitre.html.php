@@ -1,11 +1,5 @@
 <!-- gestion des notifications -->
-<?php if(($data['session'])->hasFlashes()): ?>
-<?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
-<div class="alert alert-<?=$type;?>">
-    <?=$message;?>
-</div>
-<?php endforeach;?>
-<?php endif;?>
+
 
 <!-- tableau modification chapitre -->
 <div class="row justify-content-center">
