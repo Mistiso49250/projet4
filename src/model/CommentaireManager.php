@@ -18,14 +18,14 @@ class CommentaireManager
     //récupère les commentaires
     public function findComments(int $idChapitre) : ?array
     {
-        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
+        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, signaler, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire WHERE id_chapitre = :idchapitre ORDER BY date_commentaire DESC');
         $req->execute(['idchapitre'=>$idChapitre]);
         $comments = $req->fetchAll();
 
         return $comments === false ? null : $comments;
     }
 
-    //récupère les ccommentaires pour pagination
+    //récupère les commentaires pour pagination
     public function findCommentPagin(int $offset, int $nbPerPage) : array
     {
         $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY date_publication limit :offset, :limitation');
@@ -39,7 +39,7 @@ class CommentaireManager
     //recupère les commentaire pour la partie admin
     public function adminFindComment()
     {
-        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, signaler, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire ORDER BY date_commentaire DESC');
+        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, titre_chapitre, signaler, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire ORDER BY date_commentaire DESC');
         $req->execute();
         $comments = $req->fetchAll();
 
@@ -56,16 +56,6 @@ class CommentaireManager
             'pseudo'=>$pseudo, 
             'contenu'=>$contenu]);
 
-    }
-
-    public function updateComment(int $idCommentaire, $contenu) : ?array
-    {
-        $req = $this->db->prepare('UPDATE commentaire set contenu = ?, date_commentaire = now() where id_chapitre = :idchapitre');
-        $newComment = $req->execute([
-            'id_commentaire'=>$idCommentaire, 
-            'contenu'=>$contenu]);
-
-        return $newComment === false ? null : $newComment;
     }
 
     //supprimer un commentaire

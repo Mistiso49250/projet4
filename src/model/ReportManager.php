@@ -45,22 +45,22 @@ class ReportManager
     }
     
 
-    // supprimer un commentaire signalé
+    // supprimer un commentaire 
     public function deleteCommentReport(int $idCommentaire)
     {
-        $req = $this->db->prepare('DELETE from commentaire where id_chapitre = :idchapitre');
+        $req = $this->db->prepare('DELETE from commentaire where id_commentaire = :idcommentaire');
         $resetComment = $req->execute([
-            'id_commentaire'=>$idCommentaire]);
+            'idcommentaire'=>$idCommentaire]);
 
         return $resetComment;
     }
 
 
     // modification de "signaler" de 1 à 0 pour ignorer un commentaire
-    public function ignoreReport(int $idComment)
+    public function ignoreReport(int $idCommentaire)
     {
-        $req = $this->db->prepare('UPDATE commentaire set signaler = "0" where id = :idcommentaire');
-        $req->execute(['idcommentaire'=>$idComment]);
+        $req = $this->db->prepare('UPDATE commentaire set signaler = 0 where id_commentaire = :idcommentaire');
+        $req->execute(['idcommentaire'=>$idCommentaire]);
 
         return $req;
     }

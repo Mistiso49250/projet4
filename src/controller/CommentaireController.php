@@ -30,9 +30,11 @@ class CommentaireController
         }
         else{
             $this->session->setFlash('success', "Votre message à bien été ajouté");
+            header('Location: index.php?action=chapitre&id' . ['chapitre'=>$idChapitre]);
+            exit();
         }
-        header('Location: index.php?action=chapitre&id' . ['chapitre'=>$idChapitre]);
-        exit();
+        
+       
     }
 
     

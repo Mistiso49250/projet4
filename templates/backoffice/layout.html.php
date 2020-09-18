@@ -26,43 +26,6 @@
 
 <body>
 
-    <!--Navbar-->
-    <nav class="navbar navbar-light amber lighten-4 mb-4">
-
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
-
-    <!-- Collapse button -->
-    <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"
-        aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon1"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent20">
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-        </li>
-        </ul>
-        <!-- Links -->
-
-    </div>
-    <!-- Collapsible content -->
-
-    </nav>
-    <!--/.Navbar-->
-
-
-
 
     <div class="container">
         <div class="row-home">
@@ -80,13 +43,16 @@
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <h1 class="navbar-brand"><a href="index.php?action=admin" class="badge badge-info">Administration</a></h1>
+                    <h1 class="navbar-brand"><a href="index.php?action=admin"
+                            class="badge badge-info">Administration</a></h1>
                 </div>
                 <ul class="nav nav-bar">
-                    <li class="active"><a href="index.php?action=newChapitre" class="badge badge-info">Nouveau chapitre</a></li>
+                    <li class="active"><a href="index.php?action=newChapitre" class="badge badge-info">Nouveau
+                            chapitre</a></li>
                     <li><a href="index.php?action=moderateComment" class="badge badge-warning">Modérer les Commentaires
-                    <span class="badge badge-light"><?= $data['countReportedComments'] ?></span><span class="sr-only">unread messages</span>
-                    </a></li>
+                            <span class="badge badge-light"><?= $data['countReportedComments'] ?></span><span
+                                class="sr-only">unread messages</span>
+                        </a></li>
                     <li><a href='index.php?action=logout' class="badge badge-secondary">Se déconnecter</a></li>
                 </ul>
             </div>

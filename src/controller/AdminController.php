@@ -66,9 +66,10 @@ class AdminController
     //créer un chapitre
     public function newChapitre($post)
     {
+        $countReportedComments = $this->reportManager->getReportedComments();
+
         if(isset($post['titre']) ){
-            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['image']);
-            // $newImage = $this->adminManager->addImage();
+            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait']);
                 // Vérifier si le formulaire a été soumis
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Vérifie si le fichier a été uploadé sans erreur.
@@ -115,8 +116,22 @@ class AdminController
             exit;
         }
         
-        $this->view->render('newChapitre', null);
+        $this->view->render('newChapitre',[
+            'session'=> $this->session,
+            'countReportedComments'=>$countReportedComments,
+        ], null);
         
+    }
+
+    // sauvegarder un chapitre dans la bdd
+    public function save($post)
+    {
+        $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait']);
+
+        $this->view->render('newChapitre',[
+            'session'=> $this->session,
+            'save'=>$save
+        ]);
     }
 
 
@@ -124,28 +139,33 @@ class AdminController
     public function getChapitre($idChapitre)
     {
         $post = $this->adminManager->getPostUpdate($idChapitre);
-        // var_dump($post); 
-        // echo '<pre>';
-        // print_r($post);
-        // echo '</pre>';
-        // die();
+        $countReportedComments = $this->reportManager->getReportedComments();
 
-        $this->view->render('updateChapitre',['post'=>$post], null);
+        $this->view->render('updateChapitre',[
+            'post'=>$post,
+            'session'=> $this->session,
+            'countReportedComments'=>$countReportedComments
+        ], null);
     }
 
     public function updateChapitre($post, $idChapitre)
     {
         $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
-        
+        $countReportedComments = $this->reportManager->getReportedComments();
+
         if($update === false){
             $this->session->setFlash('danger', 'Impossible de modifié le chapitre !');
         }
         else{
             $this->session->setFlash('success', 'Le chapitre à bien été modifié.');
+            header('Location: index.php?action=admin');
+            exit();
         }
         
-        header('Location: index.php?action=admin');
-        exit();
+        $this->view->render('updateChapitre',[
+            'session'=> $this->session,
+            'countReportedComments'=>$countReportedComments
+        ]);
 
     }
 
@@ -161,10 +181,12 @@ class AdminController
         }
         else{
             $this->session->setFlash('success', 'Le chapitre et ses commentaires on bien été supprimé.');
+            header('Location: index.php?action=admin');
+            exit();
         }
-
-        header('Location: index.php?action=admin');
-        exit();
+        $this->view->render('deleteChapitre',[
+            'session'=> $this->session
+        ]);
     }
 
     //page moderer commentaire
@@ -211,6 +233,7 @@ class AdminController
         $countReportedComments = $this->reportManager->getReportedComments();
         
         $this->view->render('moderateComment',[
+            'session'=> $this->session,
             'commentaires'=>$commentaires,
             'countReportedComments'=>$countReportedComments,
             'list'=>$list, 
@@ -222,7 +245,7 @@ class AdminController
 
 
 
-    // supprimer un commentaire signalé
+    // supprimer un commentaire
     public function deleteComment(int $id_commentaire)
     {
         $delete = $this->reportManager->deleteCommentReport($id_commentaire);
@@ -231,22 +254,15 @@ class AdminController
         }
         else{
             $this->session->setFlash('success', 'Le commentaire a bien été supprimer.');
+
+            header('Location: index.php?action=moderateComment');
+            exit();
+            
         }
-        header('Location: index.php?action=moderateComment');
-        exit();
+        $this->view->render('deleteComment',[
+            'session'=> $this->session
+        ]);
     }
 
-    public function editComment($id_commentaire, $commentaireManager)
-    {
-        $edit = $this->commentaireManager->updateComment($id_commentaire, $commentaireManager);
-        if($edit === false){
-            $this->session->setFlash('danger', 'Impossible de modifier le commentaire !');
-        }
-        else{
-            $this->session->setFlash('success', 'Le commentaire a bien été modifié.');
-        }
-        header('Location: index.php?action=moderateComment');
-        exit();
-    }
 
 }

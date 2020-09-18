@@ -41,6 +41,14 @@ class ReportController
     public function ignoreReportComment(int $idComment)
     {
         $ignoreReport = $this->reportManager->ignoreReport($idComment);
+        if($ignoreReport === false){
+            $this->session->setFlash('danger', 'Impossible de valider le commentaire !');
+        }else{
+            $this->session->setFlash('success', 'Le commentaire a bien été validé.');
+        }
+        
+        header('Location: index.php?action=moderateComment');
+        exit();
 
         return $ignoreReport;
 

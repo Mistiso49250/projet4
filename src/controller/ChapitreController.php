@@ -36,6 +36,7 @@ class ChapitreController
         $chapitrePrecedent = $this->getMaxId->getMaxId($episode['numchapitre']);
         $chapitreSuivant = $this->getMinId->getMinId($episode['numchapitre']);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
+        
         $this->view->render('chapitre', [
             'episode'=>$episode, 
             'commentaires'=>$commentaires, 

@@ -47,6 +47,7 @@ class ChapitreManager
         return $episodes === false ? null : $episodes; 
     }
 
+
     //pagination chapitre
     //précedent
     public function getMaxId($numChapitre)
