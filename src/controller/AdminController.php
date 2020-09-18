@@ -218,9 +218,7 @@ class AdminController
             header('Location: index.php?action=admin');
             exit();
         }
-        $this->view->render('deleteChapitre',[
-            'session'=> $this->session
-        ]);
+        
     }
 
     //page moderer commentaire
@@ -293,9 +291,7 @@ class AdminController
             exit();
             
         }
-        $this->view->render('deleteComment',[
-            'session'=> $this->session
-        ]);
+        
     }
     
     

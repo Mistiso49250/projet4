@@ -20,21 +20,22 @@ class CommentaireController
     // pour ajouter un commentaire
     public function addComment(int $idChapitre, $pseudo, $contenu)
     {
-        $affectedLines = $this->commentaireManager->articleComment($idChapitre, $pseudo, $contenu);
-        if ($affectedLines === false){
-            $this->session->setFlash('danger', 'Impossible d\'ajouter le commentaire !');
-            
-        }
-        else if(!empty('pseudo') || !empty('contenu')){
+
+        if(empty($pseudo) || empty($contenu)){
             $this->session->setFlash('danger','Tout les champs ne sont pas remplis');
         }
         else{
-            $this->session->setFlash('success', "Votre message à bien été ajouté");
-            header('Location: index.php?action=chapitre&id' . ['chapitre'=>$idChapitre]);
-            exit();
+            $affectedLines = $this->commentaireManager->articleComment($idChapitre, $pseudo, $contenu);
+
+            if($affectedLines === false){
+                $this->session->setFlash('danger', 'Impossible d\'ajouter le commentaire !');
+            }
+            else{
+                $this->session->setFlash('success', "Votre message à bien été ajouté");
+            }
         }
-        
-       
+        header('Location: index.php?action=chapitre&id=' . $idChapitre);
+        exit();
     }
 
     

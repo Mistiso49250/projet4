@@ -51,6 +51,7 @@ i{
     padding-left: 2%;
 }
 
+/* couleur et suppression bouton signalement commentaire */
 .signalement{
     color: #e13d3d;
 }
@@ -58,6 +59,7 @@ i{
 #signalé{
     display: none;
 }
+/* couleur et suppression bouton signalement commentaire */
 
 .siteEncadrement{
     overflow: hidden;
