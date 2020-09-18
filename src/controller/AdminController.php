@@ -48,17 +48,51 @@ class AdminController
         $this->view->render('login', null);
     }
     
-    public function Admin()
+    public function Admin(int $currentPage = 1)
     {
+        $pagePrecedente = 0;
+        $pageSuivante = 0;
+
         $currentPage = (int)($_GET['page'] ?? 1);
-        $postsPerPage = 7;
+
+        //determine le nombre d'items par page
+        $postsPerPage = 5;
         $offset = $postsPerPage * ($currentPage - 1);
 
-        $list = $this->chapitreManager->adminListChapitres();
+        $countChapitre = $this->chapitreManager->countChapitre();
+
+        $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
+
+       
+        if ($currentPage < 1){
+            $currentPage = 1;
+        }elseif ($currentPage > $nbTotalPages){
+            $currentPage = $nbTotalPages;
+        }
+
+        //calculer la page précédente, si current page = 1 pas de page prec : =0
+        if($currentPage === 1){ 
+            $pagePrecedente = 0;
+        }else {
+            $pagePrecedente = $currentPage - 1;
+        }
+
+        //calculer la page suivante
+        if($currentPage === $nbTotalPages){
+            $pageSuivante = 0;
+        }else {
+            $pageSuivante = $currentPage + 1;
+        }
+
+        $list = $this->chapitreManager->findChapitres($offset, $postsPerPage);
+
         $countReportedComments = $this->reportManager->getReportedComments();
        
         $this->view->render('admin', [
             'list'=>$list, 
+            'pageSuivante'=>$pageSuivante, 
+            'pagePrecedente'=>$pagePrecedente, 
+            'currentPage'=>$currentPage, 
             'countReportedComments'=>$countReportedComments],
               null);
     }
@@ -263,6 +297,8 @@ class AdminController
             'session'=> $this->session
         ]);
     }
-
-
+    
+    
 }
+
+
