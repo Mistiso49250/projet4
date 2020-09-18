@@ -51,7 +51,11 @@ i{
     padding-left: 2%;
 }
 
-.signalé{
+.signalement{
+    color: #e13d3d;
+}
+
+#signalé{
     display: none;
 }
 

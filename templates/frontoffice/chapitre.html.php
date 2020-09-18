@@ -77,7 +77,7 @@
     $submit = "";
     if((int)$commentaire['signaler'] !== 0){
         $submit = "signalé"; ?>
-        <p>Le commentaire à déja été signalé</p>
+        <p class="signalement">Ce commentaire à déjà été signalé</p>
     <?php
     } 
     ?>
@@ -88,7 +88,7 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
-                <button type="submit" class="<?=$submit?> btn btn-info"><a
+                <button type="submit" id="<?=$submit?>" class=" btn btn-info"><a
                         onclick="return confirm('Voulez vous vraiment signaler ce commentaire ?'); "
                         href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
 
