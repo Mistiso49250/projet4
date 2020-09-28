@@ -1,5 +1,12 @@
 <?php ?>
-
+<!-- gestion des notifications -->
+<?php if(($data['session'])->hasFlashes()): ?>
+<?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
+<div class="alert alert-<?=$type;?>">
+    <?=$message;?>
+</div>
+<?php endforeach;?>
+<?php endif;?>
 
 <div class="row chapitre">
     <div class="col-lg-12">
@@ -10,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>Titre</th>
+                        <th>Numéro de chapitre</th>
                         <th>Extraits des chapitres</th>
                         <th>Date de publication</th>
                         <th>Action</th>
@@ -20,6 +28,7 @@
                     <?php foreach ($data['list'] as $episode): ?>
                     <tr>
                         <td><?=htmlspecialchars($episode['titre'])?></td>
+                        <td><?=htmlspecialchars($episode['numchapitre'])?></td>
                         <td><?=htmlspecialchars($episode['extrait'])?></td>
                         <td><?=htmlspecialchars($episode['date_publication'])?></td>
                         <td>
@@ -30,8 +39,8 @@
                                 class="btn btn-danger">Supprimer</a>
 
                             <!-- Button trigger modal-->
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#modalConfirmDelete">signaler</button>
+                            <a href="index.php?action=deleteChapitre&id_chapitre=<?=$episode['id_chapitre']?>"
+                             class="btn btn-danger" data-toggle="modal">signaler</a>
 
                             <!--Modal: modalConfirmDelete-->
                             <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"

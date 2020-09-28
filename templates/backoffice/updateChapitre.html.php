@@ -27,17 +27,21 @@
                 maxlength="255">
         </div>
         <div class="form-group">
-            <label for="textarea">Contenu: </label>
-            <textarea name="contenu_chapitre" id="textarea" value="<?=$data['post']['contenu_chapitre']?>" cols="30"
-                rows="25"></textarea>
+            <label for="number">Numéro de chapitre: </label>
+            <input id="number" type="number" name="numchapitre" class="form-control" value="<?=$data['post']['numchapitre']?>"> 
         </div>
         <div class="form-group">
             <label for="textarea">Extrait:</label>
             <textarea name="extrait" id="textarea" value="<?=$data['post']['extrait']?>" cols="30" rows="10"></textarea>
         </div>
         <div class="form-group">
+            <label for="textarea">Contenu: </label>
+            <textarea name="contenu_chapitre" id="textarea" value="<?=$data['post']['contenu_chapitre']?>" cols="30"
+                rows="25"></textarea>
+        </div>
+        <div class="form-group">
             <button type="submit" class="btn btn-success">Publier</button>
-            <a href="index.php?action=" type="submit" class="btn btn-info">Sauvegarder</a>
+            <button type="submit" formaction="index.php?action=save" class="btn btn-info">Sauvegarder</button>
             <a href="index.php?action=admin" type="submit" class="btn btn-danger">Annuler</a>
         </div>
     </form>

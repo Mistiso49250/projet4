@@ -37,26 +37,49 @@ class AdminManager
     }
 
     //créer un chapitre
-    public function creatChapitre($titre, $contenu, $extrait)
+    public function creatChapitre($titre, $contenu, $extrait, $numchapitre)
     {
-        $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, date_publication, publier = 1 ) VALUES (?, ?, ?, NOW())');
+        $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, publier, numchapitre, date_publication) 
+                                                 VALUES (:titre, :contenu_chapitre, :extrait, 1, :numchapitre, NOW())');
         $newChapitre = $req->execute([
             'titre'=>$titre, 
             'contenu_chapitre'=>$contenu, 
             'extrait'=>$extrait, 
+            'numchapitre'=>$numchapitre
             ]);
 
         return $newChapitre;
     }
 
-    // sauvegarde des chapitre en cours dans la bdd
-    public function save($titre, $contenu, $extrait)
+    //créer un chapitre
+    public function testChapitre()
     {
-        $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, date_publication ) VALUES (?, ?, ?, NOW())');
+        $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, image, publier, numchapitre, date_publication) 
+                                                 VALUES ("' . ($_POST['titre']) . '", "' . ($_POST['contenu_chaptire']) . '", "' . ($_POST['extrait']) . '", "' . ($_FILES['img']['name']) . '",
+                                                   "'. 1 .'" ,"' . ($_POST['numchapitre']) . '", NOW())');
+        $newChapitre = $req->execute();
+        return $newChapitre;
+    }
+
+    //ajouter une image
+    public function addImage()
+    {
+        $req = $this->db->prepare('INSERT into images (image)');
+        $req->execute();
+
+        return $req->fetch();
+    }
+
+    // sauvegarde des chapitre en cours dans la bdd
+    public function save($titre, $contenu, $extrait, $numchapitre)
+    {
+        $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, publier, numchapitre, date_publication ) 
+                                                 VALUES (:titre, :contenu_chapitre, :extrait, 0, :numchapitre,  NOW())');
         $newChapitre = $req->execute([
             'titre'=>$titre, 
             'contenu_chapitre'=>$contenu, 
             'extrait'=>$extrait, 
+            'numchapitre'=>$numchapitre 
             ]);
 
         return $newChapitre;
@@ -64,7 +87,7 @@ class AdminManager
 
     // page : modifier un billet
     function getPostUpdate(int $idChapitre) {
-        $req = $this->db->prepare('SELECT id_chapitre, titre, extrait, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr FROM chapitre WHERE id_chapitre = :idchapitre');
+        $req = $this->db->prepare('SELECT id_chapitre, titre, extrait, contenu_chapitre, numchapitre DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr FROM chapitre WHERE id_chapitre = :idchapitre');
         $req->execute(['idchapitre'=>$idChapitre]);
 
         return $req->fetch();

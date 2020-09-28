@@ -90,6 +90,7 @@ class AdminController
        
         $this->view->render('admin', [
             'list'=>$list, 
+            'session'=> $this->session,
             'pageSuivante'=>$pageSuivante, 
             'pagePrecedente'=>$pagePrecedente, 
             'currentPage'=>$currentPage, 
@@ -101,55 +102,77 @@ class AdminController
     public function newChapitre($post)
     {
         $countReportedComments = $this->reportManager->getReportedComments();
+        $newPost = $this->adminManager->testChapitre($post);
 
-        if(isset($post['titre']) ){
-            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait']);
-                // Vérifier si le formulaire a été soumis
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                // Vérifie si le fichier a été uploadé sans erreur.
-                if(isset($_FILES["photo"]) && $_FILES["photo"]["error"] == 0){
-                    $allowed = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
-                    $filename = $_FILES["photo"]["name"];
-                    $filetype = $_FILES["photo"]["type"];
-                    $filesize = $_FILES["photo"]["size"];
-                    // $_FILES["photo"]["name"] — Cette valeur du tableau spécifie le nom original du fichier, y compris l'extension du fichier.
-                    //                            Il n'inclut pas le chemin d'accès au
-                    // $_FILES["photo"]["type"] — Cette valeur du tableau spécifie le type MIME du fichier.
-                    // $_FILES["photo"]["size"] — Cette valeur du tableau spécifie la taille du fichier, en octets.
-                    // $_FILES["photo"]["tmp_name"] — Cette valeur du tableau spécifie le nom temporaire, y compris le chemin complet qui est
-                    //                              assigné au fichier une fois qu'il a été uploadé sur le serveur.
-                    // $_FILES["photo"]["error"] — Cette valeur du tableau spécifie le code d'erreur ou d'état associé à l'upload du fichier, 
-                    //                              par exemple 0, s'il n'y a pas d'erreur.
+        $upload = $this->adminManager->addImage($post[$_FILES]);
 
-                    // Vérifie l'extension du fichier
-                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                    if(!array_key_exists($ext, $allowed)) die("Erreur : Veuillez sélectionner un format de fichier valide.");
-
-                    // Vérifie la taille du fichier - 5Mo maximum
-                    $maxsize = 5 * 1024 * 1024;
-                    if($filesize > $maxsize) die("Error: La taille du fichier est supérieure à la limite autorisée.");
-
-                    // Vérifie le type MIME du fichier
-                    if(in_array($filetype, $allowed)){
-                        // Vérifie si le fichier existe avant de le télécharger.
-                        if(file_exists("images/" . $_FILES["photo"]["name"])){
-                            echo $_FILES["photo"]["name"] . " existe déjà.";
-                        } else{
-                            move_uploaded_file($_FILES["photo"]["tmp_name"], "images/" . $_FILES["photo"]["name"]);
-                            echo "Votre fichier a été téléchargé avec succès.";
-                        } 
-                    }else{
-                        echo "Error: Il y a eu un problème de téléchargement de votre fichier. Veuillez réessayer."; 
-                    }
-                }else{
-                    echo "Error: " . $_FILES["photo"]["error"];
-                }
+        // type de fichier et taille autorisée
+        $sortie=false;
+        $extensions_ok = array('jpg','jpeg','png');
+        $typeimages_ok = array(2,3);
+        $taille_ko = 3072;
+        $taille_max = $taille_ko*3072;
+        $dest_dossier = 'images/'; //nom du dossier ou les images sont stockées
+        $dest_fichier="";
+        
+        // Si le fichier n'est pas un fichier image
+        if(!$getimagesize = getimagesize($_FILES['img']['tmp_name'])) 
+        {
+            $erreurs[] = "Le fichier n'est pas une image valide.";
+        }
+        // Le fichier n'a pas l'extension autorisée
+        else {
+            if( (!in_array( get_extension($_FILES['img']['name']), $extensions_ok ))or (!in_array($getimagesize[2], $typeimages_ok )))
+            // [2]nombre de caractères qui peuvent être présent dans l'extension du format de l'image
+            {
+                $erreurs[] = 'Veuillez sélectionner un fichier de type Jpeg ou Png !';
             }
 
-            header('Location: index.php?action=admin');
-            exit;
+        else {
+    
+        // vérification poids de l'image
+        if( file_exists($_FILES['img']['tmp_name']) and filesize($_FILES['img']['tmp_name']) > $taille_max)
+        {
+            $erreurs[] = "Votre fichier doit faire moins de $taille_ko Ko !";
+        }
+        // Si le fichier à la bonne extention et le bon poids
+        else {
+        
+            $dest_fichier = basename($_FILES['img']['name']);
+            // caractères autorisée dans le nom
+            $dest_fichier = strtr($dest_fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+            //remplacement de tou ce qui n'est ni chiffre ni lettre par "_"
+            $dest_fichier = preg_replace('/([^.a-z0-9]+)/i', '_', $dest_fichier);
+            //pour ne pas écraser un fichier existant
+            $dossier=$dest_dossier;
+            while(file_exists($dossier . $dest_fichier)) {
+            $dest_fichier = rand().$dest_fichier;
+        }
+        // upload de l'image dans le fichier de destination
+        if(move_uploaded_file($_FILES['img']['tmp_name'], $dossier . $dest_fichier))
+        {
+            $valid[] = "Image uploadé avec succés (<a href='".$dossier . $dest_fichier."'>Voir</a>)";
+        }
+        // erreur d'upload
+        else {
+            $erreurs[] = "Impossible d'uploader le fichier.<br />Veuillez vérifier que le dossier ".$dossier ;
+        }
+        }
+        }
         }
         
+        if(@$erreurs[0]!="")
+        {
+        // print("<div class="erreurFormulaire">
+        // <div class="erreurEntete"> un probleme est survenu lors de l'upload de l'image</div><div class="erreurMessage"> ");
+        
+        for($i=0;$i<5;$i++){
+        if($erreurs[$i]=="")
+        break;
+        else echo "<li>".$erreurs[$i]."</li>"; $sortie=true;}
+        print(" </div></div>");
+        }
+            
         $this->view->render('newChapitre',[
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments,
@@ -157,14 +180,27 @@ class AdminController
         
     }
 
+   
+    
+
     // sauvegarder un chapitre dans la bdd
     public function save($post)
     {
-        $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait']);
+        $countReportedComments = $this->reportManager->getReportedComments();
 
-        $this->view->render('newChapitre',[
+        $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre']);
+        if($save === false){
+            $this->session->setFlash('danger', 'Impossible de sauvegarder le chapitre !');
+        }
+        else{
+            $this->session->setFlash('success', 'Le chapitre à bien été sauvegarder.');
+            header('Location: index.php?action=admin');
+            exit();
+        }
+        $this->view->render('save',[
             'session'=> $this->session,
-            'save'=>$save
+            'countReportedComments'=>$countReportedComments,
+            
         ]);
     }
 
@@ -197,6 +233,8 @@ class AdminController
         }
         
         $this->view->render('updateChapitre',[
+            'post'=>$post,
+            'update'=>$update,
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments
         ]);
@@ -274,7 +312,6 @@ class AdminController
             'currentPage'=>$currentPage
         ], null);
     }
-
 
 
     // supprimer un commentaire

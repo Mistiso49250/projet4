@@ -57,7 +57,7 @@ class ChapitreController
         $currentPage = (int)($_GET['page'] ?? 1);
 
         //determine le nombre d'items par page
-        $postsPerPage = 2;
+        $postsPerPage = 4;
         $offset = $postsPerPage * ($currentPage - 1);
 
         $countChapitre = $this->chapitreManager->countChapitre();

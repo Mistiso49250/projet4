@@ -28,7 +28,7 @@ class CommentaireManager
     //récupère les commentaires pour pagination
     public function findCommentPagin(int $offset, int $nbPerPage) : array
     {
-        $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY date_publication limit :offset, :limitation');
+        $req = $this->db->prepare('SELECT * FROM commentaire ORDER BY date_publication limit :offset, :limitation');
         $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
         $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
         $req->execute();

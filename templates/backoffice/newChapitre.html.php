@@ -14,16 +14,18 @@
         <h2 id="ecrire">Ecrire un chapitre</h2><br>
         <div class="form-group">
             <label for="fileUpload">Séléctionner une image:</label>
-            <input type="file" name="photo" id="fileUpload">
+            <input type="file" name="image" id="fileUpload">
             <!-- L'attribut type = "file" de la balise <input> montre le champ d'entrée comme un contrôle de sélection de fichier, 
             avec un bouton "Parcourir" à côté du contrôle d'entrée -->
-            <input type="submit" name="submit" value="Téléchargement">
-            <p><strong>Note:</strong> Seuls les formats .jpg, .jpeg, .jpeg, .gif, .png sont autorisés jusqu'à une taille
-                maximale de 5 Mo.</p>
+
         </div>
         <div class="form-group">
             <label for="texte">Titre: </label>
             <input id="text" type="text" name="titre" class="form-control" maxlength="255">
+        </div>
+        <div class="form-group">
+            <label for="number">Numéro de chapitre: </label>
+            <input id="number" type="number" name="numchapitre" class="form-control">
         </div>
         <div class="form-group">
             <label for="textarea">Extrait:</label>
@@ -34,9 +36,10 @@
             <textarea name="contenu_chapitre" id="textarea" cols="30" rows="25"></textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success">Publier</button>
+            <button type="submit" name="publier" class="btn btn-success">Publier</button>
             <button type="submit" formaction="index.php?action=save" class="btn btn-info">Sauvegarder</button>
             <a href="index.php?action=admin" type="submit" class="btn btn-danger">Annuler</a>
         </div>
     </form>
 </div>
+
