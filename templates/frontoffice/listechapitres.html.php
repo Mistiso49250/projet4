@@ -5,7 +5,7 @@
 </div>
 
 
-<div class="mt-4">
+<div class="container-fluid mt-4">
     <section class="row justify-content-md-center">
         <?php foreach($data['list'] as $episode): 
              if((int)$episode['publier'] !== 0){ ?>

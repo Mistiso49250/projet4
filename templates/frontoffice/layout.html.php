@@ -49,27 +49,11 @@
     </div>
     <!--Main Navigation-->
 
-    <!-- <div class="siteEncadrement"> -->
-    <!-- <div class="sitePusher">
-            <section class="burger">
-                <a href="#" class="burgerIcon" id="burgerIcon"></a>
-                <ul class="menu">
-                    <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="index.php?action=listchapitre">Un Billet Simple pour l'Alaska</a></li>
-                    <li><a href="index.php?action=admin">Admin</a></li>
-                </ul>
-            </section> -->
-
     <div class="siteContent">
         <div class="siteContenu">
             <?= $content ?>
         </div>
     </div>
-
-    <!-- <div class="siteCache" id="siteCache"></div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

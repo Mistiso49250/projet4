@@ -51,8 +51,6 @@ class ChapitreController
     {
         $pagePrecedente = 0;
         $pageSuivante = 0;
-        // $pagePrecedente = $pagePrecedente - 1 => $pagePrecedente--;
-        // $pageSuivante = $pageSuivante + 1 => $pageSuivante++;
 
         $currentPage = (int)($_GET['page'] ?? 1);
 

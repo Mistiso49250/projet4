@@ -5,26 +5,22 @@
 </div>
 
 <!-- affiche le contenu du chapitre -->
-<div class="row justify-content-md-center mt-4">
+<div class="row justify-content-md-center container-fluid mt-4">
     <div class="col-12-col-7" id="imgChapitre">
-    <img src="images/<?= $data['episode']['image']?>" alt="" class="img-fluid">
+        <img src="images/<?= $data['episode']['image']?>" alt="" class="img-fluid">
         <h3 class="chapitreTitle"><?= $data['episode']['titre']?></h3>
         <?=$data['episode']['contenu_chapitre']?>
     </div>
 </div>
 
-<div class="row justify-content-md-center mt-4">
-    <div class="chapitre">
-        
-    </div>
-</div>
 
 <div class="form-group" id="retourListeChapitre">
-    <a href="index.php?action=listchapitre" type="submit" class="btn btn-success m-3">Retour à la liste des chaptires</a>
+    <a href="index.php?action=listchapitre" type="submit" class="btn btn-success m-3">Retour à la liste des
+        chaptires</a>
 </div>
 
 <!-- pagination -->
-<div class="d-flex justify-content-between my4">
+<div class="d-flex justify-content-between container-fluid my4">
     <?php 
         if($data['chapitrePrecedent'] !== null): ?>
     <a href="index.php?action=chapitre&id=<?= $data['chapitrePrecedent'] ?>" class="btn btn-info m-3"
@@ -50,7 +46,7 @@
 
 <!-- formulaire ajout commentaire -->
 
-<div class="row" id="commentaire">
+<div class="row container-fluid" id="commentaire">
     <div class="col">
         <hr>
         <h3>Commentaires</h3>
@@ -60,7 +56,8 @@
             </div>
             <div class="form-group">
                 <label for="pseudo">Pseudo :</label>
-                <input type="text" class="form-control" id="pseudo" placeholder="votre pseudo" aria-describedby="pseudo" required>
+                <input type="text" class="form-control" id="pseudo" placeholder="votre pseudo" aria-describedby="pseudo"
+                    required>
             </div>
             <div class="form-group">
                 <label for="textarea">Message :</label>
@@ -74,7 +71,7 @@
 
 
 <!-- commentaire et signalement -->
-<div class="comment">
+<div class="comment container-fluid">
     <?php foreach($data['commentaires'] as $commentaire):
     $submit = "";
     if((int)$commentaire['signaler'] !== 0){
@@ -87,7 +84,7 @@
     <p><strong><?=htmlspecialchars($commentaire['pseudo'])?></strong> le <?=$commentaire['date_commentaire_fr'] ?></p>
     <p><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></p>
 
-    <div class="row">
+    <div class="row justify-content-md-center">
         <div class="col-lg-3">
             <div class="form-group">
                 <button type="submit" id="<?=$submit?>" class="pull-right btn btn-info"><a
@@ -95,7 +92,9 @@
                         href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
 
                 <!-- Button trigger modal-->
-                <a href="index.php" class="btn btn-danger" data-toggle="modal">signaler</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#modalConfirmDelete">Launch
+                    modal</button>
 
                 <!--Modal: modalConfirmDelete-->
                 <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"
@@ -105,18 +104,20 @@
                         <div class="modal-content text-center">
                             <!--Header-->
                             <div class="modal-header d-flex justify-content-center">
-                                <p class="heading">Etes-vous sur de vouloir signaler ce commentaire?</p>
+                                <p class="heading">Are you sure?</p>
                             </div>
+
                             <!--Body-->
                             <div class="modal-body">
 
                                 <i class="fas fa-times fa-4x animated rotateIn"></i>
 
                             </div>
+
                             <!--Footer-->
                             <div class="modal-footer flex-center">
-                                <a href="" class="btn  btn-outline-danger">Oui</a>
-                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Non</a>
+                                <a href="" class="btn  btn-outline-danger">Yes</a>
+                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
                             </div>
                         </div>
                         <!--/.Content-->

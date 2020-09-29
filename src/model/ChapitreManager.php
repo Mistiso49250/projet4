@@ -40,12 +40,22 @@ class ChapitreManager
     //récupère les informations d'un chapitre
     public function findChapitre(int $idChapitre) : ?array
     {
-        $req = $this->db->prepare('SELECT id_chapitre, titre, numchapitre, image, contenu_chapitre, DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
+        $req = $this->db->prepare('SELECT id_chapitre, titre, numchapitre, image, contenu_chapitre,  DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
         $req->execute(['idchapitre'=>$idChapitre]);
         $episodes = $req->fetch();
         
         return $episodes === false ? null : $episodes; 
     }
+
+     //récupère les informations d'un chapitre
+     public function findChapitreAdmin(int $idChapitre) : ?array
+     {
+         $req = $this->db->prepare('SELECT id_chapitre, titre, numchapitre, image, contenu_chapitre, publier DATE_FORMAT(date_publication, \'%d/%m/%Y à %Hh%imin%ss\') AS date_publication_fr, image FROM chapitre WHERE id_chapitre = :idchapitre');
+         $req->execute(['idchapitre'=>$idChapitre]);
+         $episodes = $req->fetch();
+         
+         return $episodes === false ? null : $episodes; 
+     }
 
 
     //pagination chapitre

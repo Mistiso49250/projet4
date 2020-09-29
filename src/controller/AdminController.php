@@ -102,77 +102,82 @@ class AdminController
     public function newChapitre($post)
     {
         $countReportedComments = $this->reportManager->getReportedComments();
-        $newPost = $this->adminManager->testChapitre($post);
 
-        $upload = $this->adminManager->addImage($post[$_FILES]);
-
-        // type de fichier et taille autorisée
-        $sortie=false;
-        $extensions_ok = array('jpg','jpeg','png');
-        $typeimages_ok = array(2,3);
-        $taille_ko = 3072;
-        $taille_max = $taille_ko*3072;
-        $dest_dossier = 'images/'; //nom du dossier ou les images sont stockées
-        $dest_fichier="";
-        
-        // Si le fichier n'est pas un fichier image
-        if(!$getimagesize = getimagesize($_FILES['img']['tmp_name'])) 
-        {
-            $erreurs[] = "Le fichier n'est pas une image valide.";
-        }
-        // Le fichier n'a pas l'extension autorisée
-        else {
-            if( (!in_array( get_extension($_FILES['img']['name']), $extensions_ok ))or (!in_array($getimagesize[2], $typeimages_ok )))
-            // [2]nombre de caractères qui peuvent être présent dans l'extension du format de l'image
-            {
-                $erreurs[] = 'Veuillez sélectionner un fichier de type Jpeg ou Png !';
-            }
-
-        else {
+        // Vérifier si le formulaire a été soumis
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+var_dump($_POST, $_FILES); die();
+            $newPost = $this->adminManager->testChapitre($post);
     
-        // vérification poids de l'image
-        if( file_exists($_FILES['img']['tmp_name']) and filesize($_FILES['img']['tmp_name']) > $taille_max)
-        {
-            $erreurs[] = "Votre fichier doit faire moins de $taille_ko Ko !";
-        }
-        // Si le fichier à la bonne extention et le bon poids
-        else {
-        
-            $dest_fichier = basename($_FILES['img']['name']);
-            // caractères autorisée dans le nom
-            $dest_fichier = strtr($dest_fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            //remplacement de tou ce qui n'est ni chiffre ni lettre par "_"
-            $dest_fichier = preg_replace('/([^.a-z0-9]+)/i', '_', $dest_fichier);
-            //pour ne pas écraser un fichier existant
-            $dossier=$dest_dossier;
-            while(file_exists($dossier . $dest_fichier)) {
-            $dest_fichier = rand().$dest_fichier;
-        }
-        // upload de l'image dans le fichier de destination
-        if(move_uploaded_file($_FILES['img']['tmp_name'], $dossier . $dest_fichier))
-        {
-            $valid[] = "Image uploadé avec succés (<a href='".$dossier . $dest_fichier."'>Voir</a>)";
-        }
-        // erreur d'upload
-        else {
-            $erreurs[] = "Impossible d'uploader le fichier.<br />Veuillez vérifier que le dossier ".$dossier ;
-        }
-        }
-        }
-        }
-        
-        if(@$erreurs[0]!="")
-        {
-        // print("<div class="erreurFormulaire">
-        // <div class="erreurEntete"> un probleme est survenu lors de l'upload de l'image</div><div class="erreurMessage"> ");
-        
-        for($i=0;$i<5;$i++){
-        if($erreurs[$i]=="")
-        break;
-        else echo "<li>".$erreurs[$i]."</li>"; $sortie=true;}
-        print(" </div></div>");
-        }
+            $upload = $this->adminManager->addImage($post[$_FILES]);
+    
+            // type de fichier et taille autorisée
+            $sortie=false;
+            $extensions_ok = array('jpg','jpeg','png');
+            $typeimages_ok = array(2,3);
+            $taille_ko = 3072;
+            $taille_max = $taille_ko*3072;
+            $dest_dossier = 'images/'; //nom du dossier ou les images sont stockées
+            $dest_fichier="";
             
+            // Si le fichier n'est pas un fichier image
+            if(!$getimagesize = getimagesize($_FILES['img']['tmp_name'])) 
+            {
+                $erreurs[] = "Le fichier n'est pas une image valide.";
+            }
+            // Le fichier n'a pas l'extension autorisée
+            else {
+                if( (!in_array( get_extension($_FILES['img']['name']), $extensions_ok ))or (!in_array($getimagesize[2], $typeimages_ok )))
+                // [2]nombre de caractères qui peuvent être présent dans l'extension du format de l'image
+                {
+                    $erreurs[] = 'Veuillez sélectionner un fichier de type Jpeg ou Png !';
+                }
+    
+            else {
+        
+            // vérification poids de l'image
+            if( file_exists($_FILES['img']['tmp_name']) and filesize($_FILES['img']['tmp_name']) > $taille_max)
+            {
+                $erreurs[] = "Votre fichier doit faire moins de $taille_ko Ko !";
+            }
+            // Si le fichier à la bonne extention et le bon poids
+            else {
+            
+                $dest_fichier = basename($_FILES['img']['name']);
+                // caractères autorisée dans le nom
+                $dest_fichier = strtr($dest_fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+                //remplacement de tou ce qui n'est ni chiffre ni lettre par "_"
+                $dest_fichier = preg_replace('/([^.a-z0-9]+)/i', '_', $dest_fichier);
+                //pour ne pas écraser un fichier existant
+                $dossier=$dest_dossier;
+                while(file_exists($dossier . $dest_fichier)) {
+                $dest_fichier = rand().$dest_fichier;
+            }
+            // upload de l'image dans le fichier de destination
+            if(move_uploaded_file($_FILES['img']['tmp_name'], $dossier . $dest_fichier))
+            {
+                $valid[] = "Image uploadé avec succés (<a href='".$dossier . $dest_fichier."'>Voir</a>)";
+            }
+            // erreur d'upload
+            else {
+                $erreurs[] = "Impossible d'uploader le fichier.<br />Veuillez vérifier que le dossier ".$dossier ;
+            }
+            }
+            }
+            }
+            
+            if(@$erreurs[0]!="")
+            {
+            // print("<div class="erreurFormulaire">
+            // <div class="erreurEntete"> un probleme est survenu lors de l'upload de l'image</div><div class="erreurMessage"> ");
+            
+            for($i=0;$i<5;$i++){
+            if($erreurs[$i]=="")
+            break;
+            else echo "<li>".$erreurs[$i]."</li>"; $sortie=true;}
+            print(" </div></div>");
+            }
+        }
+
         $this->view->render('newChapitre',[
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments,
@@ -210,9 +215,11 @@ class AdminController
     {
         $post = $this->adminManager->getPostUpdate($idChapitre);
         $countReportedComments = $this->reportManager->getReportedComments();
+        $episode = $this->chapitreManager->findChapitreAdmin($idChapitre);
 
         $this->view->render('updateChapitre',[
             'post'=>$post,
+            'episode'=>$episode,
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments
         ], null);
@@ -220,6 +227,8 @@ class AdminController
 
     public function updateChapitre($post, $idChapitre)
     {
+
+        $episode = $this->chapitreManager->findChapitreAdmin($idChapitre);
         $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
         $countReportedComments = $this->reportManager->getReportedComments();
 
@@ -234,6 +243,7 @@ class AdminController
         
         $this->view->render('updateChapitre',[
             'post'=>$post,
+            'episode'=>$episode, 
             'update'=>$update,
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments
