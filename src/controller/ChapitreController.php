@@ -29,6 +29,8 @@ class ChapitreController
         $this->getMinId = new chapitreManager();
     }
 
+    
+
     //affiche les informations d'un chapitre & pagination
     public function chapitre(int $idChapitre) : void
     {   

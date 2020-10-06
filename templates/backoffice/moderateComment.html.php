@@ -40,27 +40,22 @@
                                     <div class="btn-group">
                                         <a class="btn btn-success" type="submit"
                                             href="index.php?action=ignoreReportComment&id=<?=$commentaire['id_commentaire']?>"></span>Autoriser</a>
-                                        <a class="btn btn-warning" type="submit"
-                                            href="index.php?action=deleteComment&id=<?=$commentaire['id_commentaire']?>"></span>Supp</a>
 
                                         <!-- Button trigger modal-->
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            href="index.php?action=deleteComment&id=<?=$commentaire['id_commentaire']?>">Supprimer</button>
+                                        <button type="button" class="pull-right btn btn-danger" data-toggle="modal"
+                                            data-target="#modalConfirmDelete">Supprimer</button>
 
                                         <!--Modal: modalConfirmDelete-->
                                         <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-notify modal-danger" role="document">
+                                            <div class="modal-dialog modal-sm modal-notify modal-danger"
+                                                role="document">
                                                 <!--Content-->
                                                 <div class="modal-content text-center">
                                                     <!--Header-->
                                                     <div class="modal-header d-flex justify-content-center">
-                                                        <p class="heading">Etes-vous sur de vouloir supprimer ce
-                                                            commentaire?</p>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true" class="white-text">&times;</span>
-                                                        </button>
+                                                        <p class="heading">Êtes-vous sur de vouloirs supprimer ce
+                                                            commentaire ?</p>
                                                     </div>
 
                                                     <!--Body-->
@@ -69,9 +64,10 @@
                                                         <i class="fas fa-times fa-4x animated rotateIn"></i>
 
                                                     </div>
+
                                                     <!--Footer-->
                                                     <div class="modal-footer flex-center">
-                                                        <a href="" class="btn  btn-outline-danger">Oui</a>
+                                                        <a href="index.php?action=deleteComment&id=<?=$commentaire['id_commentaire']?>" class="btn  btn-outline-danger">Oui</a>
                                                         <a type="button" class="btn  btn-danger waves-effect"
                                                             data-dismiss="modal">Non</a>
                                                     </div>
@@ -80,6 +76,7 @@
                                             </div>
                                         </div>
                                         <!--Modal: modalConfirmDelete-->
+
                                     </div>
                                 </div>
                             </div>

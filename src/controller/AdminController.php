@@ -101,88 +101,69 @@ class AdminController
     //créer un chapitre
     public function newChapitre($post)
     {
-        $countReportedComments = $this->reportManager->getReportedComments();
-
+ 
         // Vérifier si le formulaire a été soumis
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-var_dump($_POST, $_FILES); die();
-            $newPost = $this->adminManager->testChapitre($post);
-    
-            $upload = $this->adminManager->addImage($post[$_FILES]);
-    
-            // type de fichier et taille autorisée
-            $sortie=false;
-            $extensions_ok = array('jpg','jpeg','png');
-            $typeimages_ok = array(2,3);
-            $taille_ko = 3072;
-            $taille_max = $taille_ko*3072;
-            $dest_dossier = 'images/'; //nom du dossier ou les images sont stockées
-            $dest_fichier="";
-            
-            // Si le fichier n'est pas un fichier image
-            if(!$getimagesize = getimagesize($_FILES['img']['tmp_name'])) 
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+            $maxSize = 400000;
+            $validExt = array('.jpg', '.jpeg', '.gif', '.png');
+            $fileSize = $_FILES['uploaded_file']['size'];
+            $fileNAme = $_FILES['uploaded_file']['name'];
+            $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
+            $tmpName = $_FILES['uploaded_file']['name'];
+            $uniqueName = md5(uniqid(rand()), true);
+
+            $fileNAme = "images/" . $uniqueName . $fileExt;
+
+            $result = move_uploaded_file($tmpName, $fileNAme);
+ 
+            // Vérifie si le fichier existe avant de le télécharger.
+            if(file_exists("images/" . $fileNAme)){ 
+                $this->session->setFlash('danger', $fileNAme . " existe déjà.");
+            }
+            if($fileSize > $maxSize){
+                $this->session->setFlash('danger', 'le fichier est trop volumieux');
+            } 
+
+            if(in_array($fileSize, $validExt))
             {
-                $erreurs[] = "Le fichier n'est pas une image valide.";
+                $this->session->setFlash('danger', 'le format n\'est pas valide');
             }
-            // Le fichier n'a pas l'extension autorisée
-            else {
-                if( (!in_array( get_extension($_FILES['img']['name']), $extensions_ok ))or (!in_array($getimagesize[2], $typeimages_ok )))
-                // [2]nombre de caractères qui peuvent être présent dans l'extension du format de l'image
-                {
-                    $erreurs[] = 'Veuillez sélectionner un fichier de type Jpeg ou Png !';
-                }
-    
-            else {
-        
-            // vérification poids de l'image
-            if( file_exists($_FILES['img']['tmp_name']) and filesize($_FILES['img']['tmp_name']) > $taille_max)
+
+            if($result)
             {
-                $erreurs[] = "Votre fichier doit faire moins de $taille_ko Ko !";
+                $this->session->setFlash('success', 'upload réussi.');
             }
-            // Si le fichier à la bonne extention et le bon poids
-            else {
-            
-                $dest_fichier = basename($_FILES['img']['name']);
-                // caractères autorisée dans le nom
-                $dest_fichier = strtr($dest_fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-                //remplacement de tou ce qui n'est ni chiffre ni lettre par "_"
-                $dest_fichier = preg_replace('/([^.a-z0-9]+)/i', '_', $dest_fichier);
-                //pour ne pas écraser un fichier existant
-                $dossier=$dest_dossier;
-                while(file_exists($dossier . $dest_fichier)) {
-                $dest_fichier = rand().$dest_fichier;
-            }
-            // upload de l'image dans le fichier de destination
-            if(move_uploaded_file($_FILES['img']['tmp_name'], $dossier . $dest_fichier))
-            {
-                $valid[] = "Image uploadé avec succés (<a href='".$dossier . $dest_fichier."'>Voir</a>)";
-            }
-            // erreur d'upload
-            else {
-                $erreurs[] = "Impossible d'uploader le fichier.<br />Veuillez vérifier que le dossier ".$dossier ;
-            }
-            }
-            }
-            }
-            
-            if(@$erreurs[0]!="")
-            {
-            // print("<div class="erreurFormulaire">
-            // <div class="erreurEntete"> un probleme est survenu lors de l'upload de l'image</div><div class="erreurMessage"> ");
-            
-            for($i=0;$i<5;$i++){
-            if($erreurs[$i]=="")
-            break;
-            else echo "<li>".$erreurs[$i]."</li>"; $sortie=true;}
-            print(" </div></div>");
-            }
+
+            // Vérifier si le formulaire a été soumis
+        if($_SERVER["REQUEST_METHOD"] === "POST"){  
+
+            $filename = null; 
+            // Vérifie si le fichier existe avant de le télécharger.
+            if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
+                $this->session->setFlash('danger', 'Il y a eu un problème de téléchargement de votre fichier. Veuillez réessayer.');
+                $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
+            } 
+            else{
+                move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
+                $filename = $_FILES["uploaded_file"]["name"];
+            } 
+
+               $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $filename);
+                    $this->session->setFlash('success', 'Votre nouveau chapitre a été publié avec succès.');
+                    header('Location: index.php?action=admin');
+                    exit();
+           
+        }
+
         }
 
         $this->view->render('newChapitre',[
             'session'=> $this->session,
-            'countReportedComments'=>$countReportedComments,
+            'countReportedComments'=>$this->reportManager->getReportedComments(),
         ], null);
         
+
     }
 
    
@@ -243,7 +224,7 @@ var_dump($_POST, $_FILES); die();
         
         $this->view->render('updateChapitre',[
             'post'=>$post,
-            'episode'=>$episode, 
+            'episode'=>$episode,
             'update'=>$update,
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments

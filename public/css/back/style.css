@@ -121,7 +121,7 @@ body{
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
-
+/* fin modal */
 
 label {
     display: block;
@@ -135,6 +135,8 @@ input,label {
 #number{
     width: 10%;
 }
+
+
 
 
 

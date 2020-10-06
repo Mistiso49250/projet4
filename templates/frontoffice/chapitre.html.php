@@ -87,14 +87,10 @@
     <div class="row justify-content-md-center">
         <div class="col-lg-3">
             <div class="form-group">
-                <button type="submit" id="<?=$submit?>" class="pull-right btn btn-info"><a
-                        onclick="return confirm('Voulez vous vraiment signaler ce commentaire ?'); "
-                        href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>">Signaler</a></button>
-
+                
                 <!-- Button trigger modal-->
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#modalConfirmDelete">Launch
-                    modal</button>
+                <button type="button" class="pull-right btn btn-danger" id="<?=$submit?>" data-toggle="modal"
+                    data-target="#modalConfirmDelete">Signaler</button>
 
                 <!--Modal: modalConfirmDelete-->
                 <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog"
@@ -104,7 +100,7 @@
                         <div class="modal-content text-center">
                             <!--Header-->
                             <div class="modal-header d-flex justify-content-center">
-                                <p class="heading">Are you sure?</p>
+                                <p class="heading">Êtes-vous sur de vouloirs signalé ce commentaire ?</p>
                             </div>
 
                             <!--Body-->
@@ -116,8 +112,8 @@
 
                             <!--Footer-->
                             <div class="modal-footer flex-center">
-                                <a href="" class="btn  btn-outline-danger">Yes</a>
-                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                                <a href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>" class="btn  btn-outline-danger">Oui</a>
+                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Non</a>
                             </div>
                         </div>
                         <!--/.Content-->

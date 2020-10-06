@@ -40,6 +40,7 @@ class HomePageController
         $this->view->render('login',['messageError'=>$messageError]); 
     }
 
+
     public function homePage()
     {
         $this->view->render('homePage', null);

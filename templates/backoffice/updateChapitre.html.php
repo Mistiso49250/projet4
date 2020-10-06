@@ -13,13 +13,9 @@
         method="POST" enctype="multipart/form-data">
         <h2 id="modifier">Modifier un chapitre</h2>
         <div class="form-group">
-            <label for="fileUpload">Séléctionner une image:</label>
-            <input type="file" name="photo" id="fileUpload">
-            <!-- L'attribut type = "file" de la balise <input> montre le champ d'entrée comme un contrôle de sélection de fichier, 
-            avec un bouton "Parcourir" à côté du contrôle d'entrée -->
-            <input type="submit" name="submit" value="Téléchargement">
-            <p><strong>Note:</strong> Seuls les formats .jpg, .jpeg, .jpeg, .gif, .png sont autorisés jusqu'à une taille
-                maximale de 5 Mo.</p>
+            <label for="file">Séléctionner une image:</label>
+            <input type="file" name="uploaded_file" id="uploaded_file">
+            <button type="submit" name="submit">Enregistrer</button>
         </div>
         <div class="form-group">
             <label for="texte">Titre: </label>
@@ -40,25 +36,20 @@
                 rows="25"><?=$data['post']['contenu_chapitre']?></textarea>
         </div>
 
-        <?php 
-        $submit = "";
-        $updatechapitre = "updateChapitre";
-        if((int)$data['episode']['publier'] !== 0){
-            var_dump($data);
-            $submit = "publier";
-            $updatechapitre = "";
-            ?>
+        <?php
+        if((int)$data['episode']['publier'] !== 0){ ?>
             <div class="form-group">
                 <button type="submit" formaction="index.php?action=updateChapitre&id_chapitre=<?=$data['post']['id_chapitre']?>" 
-                class="btn btn-info" id="<?=$updatechapitre?>">Sauvegarder</button>
+                class="btn btn-info">Sauvegarder</button>
             </div>
         <?php
         } else{
             ?>
         <div class="form-group">
-            <button type="submit" class="btn btn-success" id="<?=$submit?>">Publier</button>
-            <button type="submit" formaction="index.php?action=save" class="btn btn-info" id="<?=$submit?>">Sauvegarder</button>
+            <button type="submit" class="btn btn-success" >Publier</button>
+            <button type="submit" formaction="index.php?action=save" class="btn btn-info">Sauvegarder</button>
             <a href="index.php?action=admin" type="submit" class="btn btn-danger">Annuler</a>
+            
         </div>
         <?php
         }
