@@ -19,7 +19,7 @@ class ChapitreManager
     //récupère les chapitres pour pagination
     public function findChapitres(int $offset, int $nbPerPage) : array
     {
-        $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY date_publication limit :offset, :limitation');
+        $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY numchapitre limit :offset, :limitation');
         $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
         $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
         $req->execute();
@@ -30,7 +30,7 @@ class ChapitreManager
     //récupère les chapitres pour la partie admin
     public function adminListChapitres()
     {
-        $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY date_publication');
+        $req = $this->db->prepare('SELECT * FROM chapitre ORDER BY numchapitre');
         $req->execute();
 
         return $req->fetchAll();

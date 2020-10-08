@@ -64,15 +64,6 @@ class ChapitreController
 
         $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
 
-        //tester si la currentPage est valide
-        // if(!filter_var($currentPage, FILTER_VALIDATE_INT)){
-        //   throw new Exception('Numéro de page invalide');
-        // if ($currentPage > $nbTotalPages){
-        //         throw new Exception('Cette page n\'existe pas');
-        // }
-        // if ($currentPage <= 0){
-        //         throw new Exception('Numéro de page invalide');
-        // }
         if ($currentPage < 1){
             $currentPage = 1;
         }elseif ($currentPage > $nbTotalPages){

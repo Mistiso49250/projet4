@@ -9,7 +9,7 @@
 
 <!-- tableau modification chapitre -->
 <div class="row justify-content-center">
-    <form action="index.php?action=updateChapitre&id_chapitre=<?=$data['post']['id_chapitre']?>" class="col-lg-12"
+    <form action="index.php?action=updateChapitre&id_chapitre=<?=$data['episode']['id_chapitre']?>" class="col-lg-12"
         method="POST" enctype="multipart/form-data">
         <h2 id="modifier">Modifier un chapitre</h2>
         <div class="form-group">
@@ -37,9 +37,9 @@
         </div>
 
         <?php
-        if((int)$data['episode']['publier'] !== 0){ ?>
+        if((int)$data['episode']['publier'] !== 0){?>
             <div class="form-group">
-                <button type="submit" formaction="index.php?action=updateChapitre&id_chapitre=<?=$data['post']['id_chapitre']?>" 
+                <button type="submit" formaction="index.php?action=updateChapitre&id_chapitre=<?=$data['episode']['id_chapitre']?>" 
                 class="btn btn-info">Sauvegarder</button>
             </div>
         <?php

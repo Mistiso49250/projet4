@@ -24,13 +24,14 @@ CREATE TABLE IF NOT EXISTS `chapitre` (
   `contenu_chapitre` text NOT NULL,
   `extrait` text NOT NULL,
   `date_publication` datetime NOT NULL,
-  `image` varchar(50) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL,
   `publier` int(3) NOT NULL,
   PRIMARY KEY (`id_chapitre`),
+  UNIQUE KEY `numchapitre` (`numchapitre`),
   KEY `titre` (`titre`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table projet4.chapitre : ~9 rows (environ)
+-- Listage des données de la table projet4.chapitre : ~8 rows (environ)
 /*!40000 ALTER TABLE `chapitre` DISABLE KEYS */;
 REPLACE INTO `chapitre` (`id_chapitre`, `titre`, `numchapitre`, `contenu_chapitre`, `extrait`, `date_publication`, `image`, `publier`) VALUES
 	(3, 'Prologue', 0, '<p>Wren dépose les deux valises à roulettes près de la poussette et tire une longue bouffée de cigarette.</p>', '<p>Wrend dépose les deux valises à roulettes près de la poussette et tire une longue bouffée de la cigarette négligemment fichée au coin de ses lèvres.</p>\r\n<p>Il souffle la fummée dans l\'air glacé.</p>\r\n<p>     - C\'est tout ? demande-t-il.</p>\r\n<p>     - Il manque le sac de couche.</p>\r\n<p>Je hume l\'odeur musquée de sa cigarette. J\'ai toujours eu l\'odeur du tabac en horreur. C\'est toujours le cas, sauf quand c\'est Wren qui fume.</p>\r\n<p>     - D\'accord, je vais te les chercher, dit-il, lâchant sa cigarette dans la neige avant de l\'écraser avec sa botte.</p>\r\n<p>Il joint ses mains calleuses, souffle dedans et file, épaules rentrées, vers le tarmac où le Cessna qui nous a déposés attend son heure de retour vers Bangor.</p>\r\n<p>Je le rgarde d\'éloigner, impassible, blottie dans la longue doudoune polaire qui me protège du vent glacial, m\'accrochant farouchement à la rancoeur qui me ronge depuis des mois. Si je lâche maintenant, je vais être submergée par la douleur, la déception et l\'inévitable sentiment de perte qui m\'habite et auquel je ne pourrais pas faire face.</p>', '2020-08-27 11:10:23', 'prologue.jpg', 1),
@@ -38,19 +39,16 @@ REPLACE INTO `chapitre` (`id_chapitre`, `titre`, `numchapitre`, `contenu_chapitr
 	(5, 'Chapitre 2 Wren & Calla', 2, '', 'Le métro de Toronto est tellement calme et désert à cette heure de la journée que j’ai pu', '2020-01-14 11:07:00', 'chapitre2.jpg', 1),
 	(6, 'Chapitre 3 Tulukaruq signifie "corneille"', 3, '', 'Aujourd’hui, j’avais tout juste fini de savourer les dernières gouttes de mon latte', '2020-01-14 11:08:43', 'chapitre3.jpg', 1),
 	(7, 'Chapitre 4', 4, '', 'J’étais une employée modèle et cette décision n’était en rien le reflet de mes capacités', '2020-01-14 11:10:11', 'chapitre4.jpg', 1),
-	(8, 'Chapitre 5', 5, '', 'Je savais que cette machine finirait par être installée, que les postes d’analystes', '2020-01-14 11:11:51', 'chapitre5.jpg', 1),
-	(9, 'titre', 6, 'contenu', 'extrait', '2020-09-21 09:33:22', NULL, 1),
-	(22, 'edrftyghuijkl', 4567, '<p>sedrftvgybhunji,k;l</p>', '<p>ertfyguhijko</p>', '2020-09-22 18:05:45', NULL, 1),
-	(23, 'edrftyghuijkl', 4567, '<p>sedrftvgybhunji,k;l</p>', '<p>ertfyguhijko</p>', '2020-09-22 18:06:11', NULL, 1);
+	(8, 'Chapitre 5', 5, '', 'Je savais que cette machine finirait par être installée, que les postes d’analystes', '2020-01-14 11:11:51', 'chapitre5.jpg', 1);
 /*!40000 ALTER TABLE `chapitre` ENABLE KEYS */;
 
 -- Listage de la structure de la table projet4. commentaire
 CREATE TABLE IF NOT EXISTS `commentaire` (
   `id_commentaire` int(11) NOT NULL AUTO_INCREMENT,
-  `id_chapitre` int(11) DEFAULT NULL,
-  `pseudo` varchar(255) DEFAULT NULL,
-  `contenu` text,
-  `titre_chapitre` varchar(255) DEFAULT NULL,
+  `id_chapitre` int(11) NOT NULL,
+  `pseudo` varchar(255) NOT NULL,
+  `contenu` text NOT NULL,
+  `titre_chapitre` varchar(255),
   `date_commentaire` datetime DEFAULT CURRENT_TIMESTAMP,
   `signaler` tinyint(3) unsigned DEFAULT '0',
   `garder` tinyint(4) DEFAULT '0',
@@ -62,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   CONSTRAINT `FK_commentaire_chapitre_2` FOREIGN KEY (`titre_chapitre`) REFERENCES `chapitre` (`titre`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table projet4.commentaire : ~30 rows (environ)
+-- Listage des données de la table projet4.commentaire : ~29 rows (environ)
 /*!40000 ALTER TABLE `commentaire` DISABLE KEYS */;
 REPLACE INTO `commentaire` (`id_commentaire`, `id_chapitre`, `pseudo`, `contenu`, `titre_chapitre`, `date_commentaire`, `signaler`, `garder`, `supprimer`) VALUES
 	(1, 3, 'toto', 'bof', NULL, '2020-07-14 21:16:10', 0, 0, 0),
@@ -90,18 +88,17 @@ REPLACE INTO `commentaire` (`id_commentaire`, `id_chapitre`, `pseudo`, `contenu`
 	(32, 3, 'test', 'test redirection encore', NULL, '2020-09-15 19:20:43', 0, 0, 0),
 	(33, 3, 'test', 'redirection', NULL, '2020-09-18 11:00:35', 0, 0, 0),
 	(34, 3, 'test', 'redirection', NULL, '2020-09-18 11:00:45', 0, 0, 0),
-	(35, 3, 'test', 'var_dump', NULL, '2020-09-18 11:02:27', 1, 0, 0),
+	(35, 3, 'test', 'var_dump', NULL, '2020-09-18 11:02:27', 0, 0, 0),
 	(36, 3, 'test', 'header', NULL, '2020-09-18 13:24:01', 0, 0, 0),
 	(37, 3, 'test', 'sans array', NULL, '2020-09-18 13:26:06', 0, 0, 0),
-	(38, 3, 'test', 'signal', NULL, '2020-09-21 16:36:46', 0, 0, 0);
+	(38, 3, 'test', 'signal', NULL, '2020-09-21 16:36:46', 1, 0, 0);
 /*!40000 ALTER TABLE `commentaire` ENABLE KEYS */;
 
 -- Listage de la structure de la table projet4. images
 CREATE TABLE IF NOT EXISTS `images` (
-  `id_image` int(11) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `id_image` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(500) NOT NULL,
   `id_chapitre` int(11) NOT NULL,
-  `text` text NOT NULL,
   PRIMARY KEY (`id_image`),
   KEY `id_chapitre` (`id_chapitre`),
   CONSTRAINT `FK_images_chapitre` FOREIGN KEY (`id_chapitre`) REFERENCES `chapitre` (`id_chapitre`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -110,22 +107,6 @@ CREATE TABLE IF NOT EXISTS `images` (
 -- Listage des données de la table projet4.images : ~0 rows (environ)
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
-
--- Listage de la structure de la table projet4. signalement
-CREATE TABLE IF NOT EXISTS `signalement` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_chapitre` int(11) DEFAULT NULL,
-  `id_commentaire` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_signalement_chapitre` (`id_chapitre`),
-  KEY `FK_signalement_commentaire` (`id_commentaire`),
-  CONSTRAINT `FK_signalement_chapitre` FOREIGN KEY (`id_chapitre`) REFERENCES `chapitre` (`id_chapitre`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_signalement_commentaire` FOREIGN KEY (`id_commentaire`) REFERENCES `commentaire` (`id_commentaire`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Listage des données de la table projet4.signalement : ~0 rows (environ)
-/*!40000 ALTER TABLE `signalement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signalement` ENABLE KEYS */;
 
 -- Listage de la structure de la table projet4. user
 CREATE TABLE IF NOT EXISTS `user` (

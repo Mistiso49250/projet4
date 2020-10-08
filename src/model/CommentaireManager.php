@@ -37,9 +37,13 @@ class CommentaireManager
     }
 
     //recupère les commentaire pour la partie admin
-    public function adminFindComment()
+    public function adminFindComment(int $offset, int $nbPerPage) : array
     {
-        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, titre_chapitre, signaler, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire ORDER BY date_commentaire DESC');
+        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, titre_chapitre, signaler, 
+                                    DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr 
+                                     FROM commentaire ORDER BY date_commentaire DESC limit :offset, :limitation');
+        $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
+        $req->bindValue(':offset', $offset, \PDO::PARAM_INT);                            
         $req->execute();
         $comments = $req->fetchAll();
 
@@ -49,7 +53,8 @@ class CommentaireManager
     //ajoute les commentaires d'un chapitre
     public function articleComment(int $idChapitre, string $pseudo, string $contenu) : bool
     {
-        $comments = $this->db->prepare('INSERT into commentaire (id_chapitre, pseudo, contenu, date_commentaire) VALUES(:idChapitre, :pseudo, :contenu, NOW())');
+        $comments = $this->db->prepare('INSERT into commentaire (id_chapitre, pseudo, contenu, date_commentaire) 
+                                          VALUES(:idChapitre, :pseudo, :contenu, NOW())');
        
         return $comments->execute([
             'idChapitre'=>$idChapitre, 

@@ -47,7 +47,8 @@
                             class="badge badge-info">Administration</a></h1>
                 </div>
                 <ul class="nav nav-bar">
-                    <li class="active"><a href="index.php?action=newChapitre" class="badge badge-info">Nouveau
+                    <li class="active"><a href="index.php"class="badge badge-success">Retour sur le site</a></li>
+                    <li><a href="index.php?action=newChapitre" class="badge badge-info">Nouveau
                             chapitre</a></li>
                     <li><a href="index.php?action=moderateComment" class="badge badge-warning">Modérer les Commentaires
                             <span class="badge badge-light"><?= $data['countReportedComments'] ?></span><span
