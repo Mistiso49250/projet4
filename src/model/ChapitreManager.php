@@ -35,6 +35,15 @@ class ChapitreManager
 
         return $req->fetchAll();
     }
+
+    // récupère les numéros de chapitre pour la partie admin
+    public function adminNumChapitre()
+    {
+        $req = $this->db->prepare('SELECT numchapitre FROM chapitre ');
+        $req->execute();
+
+        return $req->fetchAll();
+    }
     
 
     //récupère les informations d'un chapitre

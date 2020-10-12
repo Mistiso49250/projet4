@@ -38,15 +38,15 @@ class AdminController
         exit();
     }
 
-    public function login()
-    {
-        if(!isset($_SESSION['auth'])){
-            header('Location: index.php?action=login');
+    // public function login()
+    // {
+    //     if(!isset($_SESSION['auth'])){
+    //         header('Location: index.php?action=login');
 
-            exit();
-        }
-        $this->view->render('login', null);
-    }
+    //         exit();
+    //     }
+    //     $this->view->render('login', null);
+    // }
     
     public function Admin(int $currentPage = 1)
     {
@@ -101,56 +101,30 @@ class AdminController
     //créer un chapitre
     public function newChapitre($post)
     {
- 
-        // // Vérifier si le formulaire a été soumis
-        // if($_SERVER["REQUEST_METHOD"] === "POST"){
-
-        //     $maxSize = 400000;
-        //     $validExt = array('.jpg', '.jpeg', '.gif', '.png');
-        //     $fileSize = $_FILES['uploaded_file']['size'];
-        //     $fileNAme = $_FILES['uploaded_file']['name'];
-        //     $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
-        //     $tmpName = $_FILES['uploaded_file']['name'];
-        //     $uniqueName = md5(uniqid(rand()), true);
-
-        //     $fileNAme = "images/" . $uniqueName . $fileExt;
-
-        //     $result = move_uploaded_file($tmpName, $fileNAme);
- 
-        //     // Vérifie si le fichier existe avant de le télécharger.
-        //     if(file_exists("images/" . $fileNAme)){ 
-        //         $this->session->setFlash('danger', $fileNAme . " existe déjà.");
-        //     }
-        //     if($fileSize > $maxSize){
-        //         $this->session->setFlash('danger', 'le fichier est trop volumieux');
-        //     } 
-
-        //     if(in_array($fileSize, $validExt))
-        //     {
-        //         $this->session->setFlash('danger', 'le format n\'est pas valide');
-        //     }
-
-        //     if($result)
-        //     {
-        //         $this->session->setFlash('success', 'upload réussi.');
-        //     }
-
             // Vérifier si le formulaire a été soumis
         if($_SERVER["REQUEST_METHOD"] === "POST"){  
 
             $filename = null; 
-            $numchapitre = null;
+            $numchapitre = $post['numchapitre'];
+            $bdd = $this->chapitreManager->adminNumChapitre();
+
             // Vérifie si le fichier existe avant de le télécharger.
             if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
                 $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
                 header('Location: index.php?action=newChapitre');
                 exit();
             } 
-            elseif($numchapitre !== 0 ){
-                $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
-                header('Location: index.php?action=newChapitre');
-                exit();
+            elseif(in_array($numchapitre, $bdd ))
+            {
+                    $this->session->setFlash('danger', 'Ce numéro de chapitre est déjà utilisé.');
+                    header('Location: index.php?action=newChapitre');
+                    exit();
             }
+            // elseif($numchapitre !== 0 ){
+            //     $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
+            //     header('Location: index.php?action=newChapitre');
+            //     exit();
+            // }
             else{
                 move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
                 $filename = $_FILES["uploaded_file"]["name"];
@@ -263,12 +237,12 @@ class AdminController
         $currentPage = (int)($_GET['page'] ?? 1);
 
         //determine le nombre d'items par page
-        $postsPerPage = 4;
+        $postsPerPage = 10;
         $offset = $postsPerPage * ($currentPage - 1);
 
-        $countChapitre = $this->chapitreManager->countChapitre();
+        $countComment = $this->commentaireManager->adminCountCommentaire();
 
-        $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
+        $nbTotalPages = (int)ceil($countComment / $postsPerPage);
 
         if ($currentPage < 1){
             $currentPage = 1;

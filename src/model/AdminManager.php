@@ -14,13 +14,13 @@ class AdminManager
         $this->db = (new DbConnect())->connectToDb();        
     }
 
-    public function user() : ?user
-    {
-        $query = $this->db->prepare('SELECT * FROM user WHERE id = :iduser');
-        $query->execute([$id]);
-        $user = $query->fetch();
-        return $user ?: null;
-    }
+    // public function user() : ?user
+    // {
+    //     $query = $this->db->prepare('SELECT * FROM user WHERE id = :iduser');
+    //     $query->execute([$id]);
+    //     $user = $query->fetch();
+    //     return $user ?: null;
+    // }
 
     public function auth(string $name): ?array
     {

@@ -25,17 +25,6 @@ class CommentaireManager
         return $comments === false ? null : $comments;
     }
 
-    //récupère les commentaires pour pagination
-    public function findCommentPagin(int $offset, int $nbPerPage) : array
-    {
-        $req = $this->db->prepare('SELECT * FROM commentaire ORDER BY date_publication limit :offset, :limitation');
-        $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);
-        $req->bindValue(':offset', $offset, \PDO::PARAM_INT);
-        $req->execute();
-
-        return $req->fetchAll();
-    }
-
     //recupère les commentaire pour la partie admin
     public function adminFindComment(int $offset, int $nbPerPage) : array
     {
@@ -48,6 +37,17 @@ class CommentaireManager
         $comments = $req->fetchAll();
 
         return $comments === false ? null : $comments;
+    }
+
+    
+    //calcul le nombre de commentaire
+    public function adminCountCommentaire()
+    {
+        $req = $this->db->prepare('SELECT count(*) as total from commentaire');
+        $req->execute();
+        $total = $req->fetch();
+        
+        return (int)$total['total'];
     }
 
     //ajoute les commentaires d'un chapitre

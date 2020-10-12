@@ -4,7 +4,6 @@ namespace Oc\Tools;
 
 class Session{
 
-    private $instance;
 
     public function __construct()
     {
@@ -12,6 +11,7 @@ class Session{
             session_start();
         }
         $this->session = $_SESSION;
+        
     }
 
     public function setFlash($key, $message){
