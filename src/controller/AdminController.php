@@ -33,7 +33,8 @@ class AdminController
 
     public function logout()
     {
-        session_destroy();
+        $this->session->logout();
+        
         header('Location: index.php');
         exit();
     }
@@ -50,6 +51,7 @@ class AdminController
     
     public function Admin(int $currentPage = 1)
     {
+        // var_dump($_SESSION);
         $pagePrecedente = 0;
         $pageSuivante = 0;
 
@@ -104,27 +106,46 @@ class AdminController
             // Vérifier si le formulaire a été soumis
         if($_SERVER["REQUEST_METHOD"] === "POST"){  
 
-            $filename = null; 
-            $numchapitre = $post['numchapitre'];
-            $bdd = $this->chapitreManager->adminNumChapitre();
+            // $maxSize = 400000;
+            // $validExt = array('.jpg', '.jpeg', '.gif', '.png');
+            // $fileSize = $_FILES['uploaded_file']['size'];
+            // $fileNAme = $_FILES['uploaded_file']['name'];
+            // $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
+            // $tmpName = $_FILES['uploaded_file']['name'];
+            // $uniqueName = $this->adminManager->uniqImg();
+            // $fileNAme = "images/" . $uniqueName . $fileExt;
+            // $result = move_uploaded_file($tmpName, $fileNAme);
+            // // Vérifie si le fichier existe avant de le télécharger.
+            // if(file_exists("images/" . $fileNAme)){ 
+            //     $this->session->setFlash('danger', $fileNAme . " existe déjà.");
+            // }
+            // if($fileSize > $maxSize){
+            //     $this->session->setFlash('danger', 'le fichier est trop volumieux');
+            // } 
+            // if(in_array($fileSize, $validExt))
+            // {
+            //     $this->session->setFlash('danger', 'le format n\'est pas valide');
+            // }
+            // if($result)
+            // {
+            //     $this->session->setFlash('success', 'upload réussi.');
+            // }
 
+            $filename = null; 
+            $numchapitre = $this->chapitreManager->countNumChapitre();
+            
             // Vérifie si le fichier existe avant de le télécharger.
             if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
                 $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
                 header('Location: index.php?action=newChapitre');
                 exit();
             } 
-            elseif(in_array($numchapitre, $bdd ))
-            {
-                    $this->session->setFlash('danger', 'Ce numéro de chapitre est déjà utilisé.');
-                    header('Location: index.php?action=newChapitre');
-                    exit();
+           
+            elseif($numchapitre !== 0 ){
+                $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
+                header('Location: index.php?action=newChapitre');
+                exit();
             }
-            // elseif($numchapitre !== 0 ){
-            //     $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
-            //     header('Location: index.php?action=newChapitre');
-            //     exit();
-            // }
             else{
                 move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
                 $filename = $_FILES["uploaded_file"]["name"];
@@ -301,7 +322,13 @@ class AdminController
         
     }
     
-    
+    // pour numchapitre faire select count* chapitre where numchapitre = :numchapitre
+     //if !== 0 ->deja existant
+
+    // protec formulaire, input caché type hash ->session  nouveau hash a chaque demande
+    // test correspondance à la validation formulaire -> ok, sinon msg error
+
+    // test faille xss front
 }
 
 

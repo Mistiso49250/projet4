@@ -51,6 +51,14 @@ class AdminManager
 
         return $newChapitre;
     }
+
+    public function uniqImg()
+    {
+        $req = $this->db->prepare('INSERT into chapitre (dateImg) values (now())');
+        $req->execute();
+
+        return $req->fetchAll();
+    }
     
 
     // sauvegarde des chapitre en cours dans la bdd

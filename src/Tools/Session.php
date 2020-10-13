@@ -14,6 +14,12 @@ class Session{
         
     }
 
+    public function logout()
+    {
+        $this->session = null;
+        session_destroy();
+    }
+
     public function setFlash($key, $message){
         $_SESSION['flash'][$key] = $message;
     }

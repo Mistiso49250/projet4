@@ -1,4 +1,4 @@
-<?php ?>
+
 <!-- gestion des notifications -->
 <?php if(($data['session'])->hasFlashes()): ?>
 <?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
