@@ -63,6 +63,7 @@
                 <label for="textarea">Message :</label>
                 <textarea id="textarea" rows="5" class="form-control " placeholder="votre message" required></textarea>
             </div>
+            <input type="hidden" name="token" value="">
             <button type="submit" class="pull-right btn btn-info">Envoyer</button>
         </form>
     </div>

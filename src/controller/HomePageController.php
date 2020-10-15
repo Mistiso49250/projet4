@@ -6,18 +6,21 @@ namespace Oc\Controller;
 use Oc\View\View;
 use Oc\Model\AdminManager;
 use Oc\Model\ChapitreManager;
+use Oc\Tools\Session;
 
 
 class HomePageController
 {
     private $view;
     private $adminManager;
+    private $session;
 
     public function __construct()
     {
         $this->view = new View('../templates/frontoffice/');
         $this->adminManager = new AdminManager();
         $this->chapitreManager = new ChapitreManager();
+        $this->session = new Session();  
     }
 
     public function login() 

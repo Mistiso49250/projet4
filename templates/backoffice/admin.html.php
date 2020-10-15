@@ -1,4 +1,3 @@
-
 <!-- gestion des notifications -->
 <?php if(($data['session'])->hasFlashes()): ?>
 <?php foreach(($data['session'])->getFlashes() as $type => $message): ?>
@@ -7,6 +6,12 @@
 </div>
 <?php endforeach;?>
 <?php endif;?>
+<!-- gestion autorisation  -->
+<?php
+if($data['messageError'] !== null){
+    ?><div class="alert alert-danger"><?=$data['messageError']?></div><?php
+}
+?>
 
 <div class="row chapitre">
     <div class="col-lg-12">

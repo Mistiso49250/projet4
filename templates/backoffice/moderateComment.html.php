@@ -1,3 +1,10 @@
+<!-- gestion autorisation  -->
+<?php
+if($data['messageError'] !== null){
+    ?><div class="alert alert-danger"><?=$data['messageError']?></div><?php
+}
+?>
+
 <div class="listComments">
     <div class="col-lg-12">
         <h2 moderer>Liste des commentaires</h2>

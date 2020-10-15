@@ -44,6 +44,10 @@ switch ($action) {
         $controller = new HomePageController();
         $controller->login();
     break;
+    case 'login';
+        $controller = new AdminController();
+        $controller->login();
+    break;
     case 'admin':
         $controller = new AdminController();
         $controller->admin();

@@ -34,63 +34,74 @@ class AdminController
     public function logout()
     {
         $this->session->logout();
-        
         header('Location: index.php');
         exit();
     }
 
-    // public function login()
-    // {
-    //     if(!isset($_SESSION['auth'])){
-    //         header('Location: index.php?action=login');
-
-    //         exit();
-    //     }
-    //     $this->view->render('login', null);
-    // }
+    public function login()
+    {
+        if(!isset($this->session['auth'])){
+            
+            header('Location: index.php?action=login');
+            exit();
+        }
+        else{
+            header('Location: index.php?action=admin');
+            exit();
+        }
+        $this->view->render('login', null);
+    }
     
     public function Admin(int $currentPage = 1)
     {
-        // var_dump($_SESSION);
-        $pagePrecedente = 0;
-        $pageSuivante = 0;
-
-        $currentPage = (int)($_GET['page'] ?? 1);
-
-        //determine le nombre d'items par page
-        $postsPerPage = 5;
-        $offset = $postsPerPage * ($currentPage - 1);
-
-        $countChapitre = $this->chapitreManager->countChapitre();
-
-        $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
-
-       
-        if ($currentPage < 1){
-            $currentPage = 1;
-        }elseif ($currentPage > $nbTotalPages){
-            $currentPage = $nbTotalPages;
+        $messageError = null;
+        if(!isset($_SESSION['auth'])){
+            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            header('Location: index.php?action=login');
+            exit();
         }
-
-        //calculer la page précédente, si current page = 1 pas de page prec : =0
-        if($currentPage === 1){ 
+        else{
             $pagePrecedente = 0;
-        }else {
-            $pagePrecedente = $currentPage - 1;
-        }
-
-        //calculer la page suivante
-        if($currentPage === $nbTotalPages){
             $pageSuivante = 0;
-        }else {
-            $pageSuivante = $currentPage + 1;
+
+            $currentPage = (int)($_GET['page'] ?? 1);
+
+            //determine le nombre d'items par page
+            $postsPerPage = 5;
+            $offset = $postsPerPage * ($currentPage - 1);
+
+            $countChapitre = $this->chapitreManager->countChapitre();
+
+            $nbTotalPages = (int)ceil($countChapitre / $postsPerPage);
+
+        
+            if ($currentPage < 1){
+                $currentPage = 1;
+            }elseif ($currentPage > $nbTotalPages){
+                $currentPage = $nbTotalPages;
+            }
+
+            //calculer la page précédente, si current page = 1 pas de page prec : =0
+            if($currentPage === 1){ 
+                $pagePrecedente = 0;
+            }else {
+                $pagePrecedente = $currentPage - 1;
+            }
+
+            //calculer la page suivante
+            if($currentPage === $nbTotalPages){
+                $pageSuivante = 0;
+            }else {
+                $pageSuivante = $currentPage + 1;
+            }
+
+            $list = $this->chapitreManager->findChapitres($offset, $postsPerPage);
+
+            $countReportedComments = $this->reportManager->getReportedComments();
         }
-
-        $list = $this->chapitreManager->findChapitres($offset, $postsPerPage);
-
-        $countReportedComments = $this->reportManager->getReportedComments();
        
         $this->view->render('admin', [
+            'messageError'=>$messageError,
             'list'=>$list, 
             'session'=> $this->session,
             'pageSuivante'=>$pageSuivante, 
@@ -103,64 +114,74 @@ class AdminController
     //créer un chapitre
     public function newChapitre($post)
     {
-            // Vérifier si le formulaire a été soumis
-        if($_SERVER["REQUEST_METHOD"] === "POST"){  
-
-            // $maxSize = 400000;
-            // $validExt = array('.jpg', '.jpeg', '.gif', '.png');
-            // $fileSize = $_FILES['uploaded_file']['size'];
-            // $fileNAme = $_FILES['uploaded_file']['name'];
-            // $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
-            // $tmpName = $_FILES['uploaded_file']['name'];
-            // $uniqueName = $this->adminManager->uniqImg();
-            // $fileNAme = "images/" . $uniqueName . $fileExt;
-            // $result = move_uploaded_file($tmpName, $fileNAme);
-            // // Vérifie si le fichier existe avant de le télécharger.
-            // if(file_exists("images/" . $fileNAme)){ 
-            //     $this->session->setFlash('danger', $fileNAme . " existe déjà.");
-            // }
-            // if($fileSize > $maxSize){
-            //     $this->session->setFlash('danger', 'le fichier est trop volumieux');
-            // } 
-            // if(in_array($fileSize, $validExt))
-            // {
-            //     $this->session->setFlash('danger', 'le format n\'est pas valide');
-            // }
-            // if($result)
-            // {
-            //     $this->session->setFlash('success', 'upload réussi.');
-            // }
-
-            $filename = null; 
-            $numchapitre = $this->chapitreManager->countNumChapitre();
-            
-            // Vérifie si le fichier existe avant de le télécharger.
-            if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
-                $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
-                header('Location: index.php?action=newChapitre');
-                exit();
-            } 
-           
-            elseif($numchapitre !== 0 ){
-                $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
-                header('Location: index.php?action=newChapitre');
-                exit();
-            }
-            else{
-                move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
-                $filename = $_FILES["uploaded_file"]["name"];
-            } 
-            $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $filename);
-           
-            
-            $this->session->setFlash('success', 'Votre nouveau chapitre a été publié avec succès.');
-            header('Location: index.php?action=admin');
+        $messageError = null;
+        if(!isset($_SESSION['auth'])){
+            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            header('Location: index.php?action=login');
             exit();
-           
         }
+        else{
+            // Vérifier si le formulaire a été soumis
+            if($_SERVER["REQUEST_METHOD"] === "POST"){  
+
+                // $maxSize = 400000;
+                // $validExt = array('.jpg', '.jpeg', '.gif', '.png');
+                // $fileSize = $_FILES['uploaded_file']['size'];
+                // $fileNAme = $_FILES['uploaded_file']['name'];
+                // $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
+                // $tmpName = $_FILES['uploaded_file']['name'];
+                // $uniqueName = $this->adminManager->uniqImg();
+                // $fileNAme = "images/" . $uniqueName . $fileExt;
+                // $result = move_uploaded_file($tmpName, $fileNAme);
+                // // Vérifie si le fichier existe avant de le télécharger.
+                // if(file_exists("images/" . $fileNAme)){ 
+                //     $this->session->setFlash('danger', $fileNAme . " existe déjà.");
+                // }
+                // if($fileSize > $maxSize){
+                //     $this->session->setFlash('danger', 'le fichier est trop volumieux');
+                // } 
+                // if(in_array($fileSize, $validExt))
+                // {
+                //     $this->session->setFlash('danger', 'le format n\'est pas valide');
+                // }
+                // if($result)
+                // {
+                //     $this->session->setFlash('success', 'upload réussi.');
+                // }
+    
+                $filename = null; 
+                $numchapitre = $this->chapitreManager->countNumChapitre();
+                
+                // Vérifie si le fichier existe avant de le télécharger.
+                if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
+                    $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
+                    header('Location: index.php?action=newChapitre');
+                    exit();
+                } 
+               
+                elseif($numchapitre !== 0 ){
+                    $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
+                    header('Location: index.php?action=newChapitre');
+                    exit();
+                }
+                else{
+                    move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
+                    $filename = $_FILES["uploaded_file"]["name"];
+                } 
+                $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $filename);
+               
+                
+                $this->session->setFlash('success', 'Votre nouveau chapitre a été publié avec succès.');
+                header('Location: index.php?action=admin');
+                exit();
+               
+            }
+        }
+            
 
         $this->view->render('newChapitre',[
             'session'=> $this->session,
+            'messageError'=>$messageError,
             'countReportedComments'=>$this->reportManager->getReportedComments(),
         ], null);
         
@@ -194,11 +215,20 @@ class AdminController
     //modifier un chapitre
     public function getChapitre($idChapitre)
     {
-        $post = $this->adminManager->getPostUpdate($idChapitre);
-        $countReportedComments = $this->reportManager->getReportedComments();
-        $episode = $this->chapitreManager->findChapitreAdmin($idChapitre);
+        $messageError = null;
+        if(!isset($_SESSION['auth'])){
+            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            header('Location: index.php?action=login');
+            exit();
+        }
+        else{
+            $post = $this->adminManager->getPostUpdate($idChapitre);
+            $countReportedComments = $this->reportManager->getReportedComments();
+            $episode = $this->chapitreManager->findChapitreAdmin($idChapitre);
+        }
 
         $this->view->render('updateChapitre',[
+            'messageError'=>$messageError,
             'post'=>$post,
             'episode'=>$episode,
             'session'=> $this->session,
@@ -252,40 +282,49 @@ class AdminController
     //page moderer commentaire & pagination
     public function moderateComment(int $currentPage = 1)
     {
-        $pagePrecedente = 0;
-        $pageSuivante = 0;
-
-        $currentPage = (int)($_GET['page'] ?? 1);
-
-        //determine le nombre d'items par page
-        $postsPerPage = 10;
-        $offset = $postsPerPage * ($currentPage - 1);
-
-        $countComment = $this->commentaireManager->adminCountCommentaire();
-
-        $nbTotalPages = (int)ceil($countComment / $postsPerPage);
-
-        if ($currentPage < 1){
-            $currentPage = 1;
-        }elseif ($currentPage > $nbTotalPages){
-            $currentPage = $nbTotalPages;
+        $messageError = null;
+        if(!isset($_SESSION['auth'])){
+            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            header('Location: index.php?action=login');
+            exit();
         }
-
-        //calculer la page précédente, si current page = 1 pas de page prec : =0
-        if($currentPage === 1){ 
+        else{
             $pagePrecedente = 0;
-        }else {
-            $pagePrecedente = $currentPage - 1;
-        }
-
-        //calculer la page suivante
-        if($currentPage === $nbTotalPages){
             $pageSuivante = 0;
-        }else {
-            $pageSuivante = $currentPage + 1;
+    
+            $currentPage = (int)($_GET['page'] ?? 1);
+    
+            //determine le nombre d'items par page
+            $postsPerPage = 10;
+            $offset = $postsPerPage * ($currentPage - 1);
+    
+            $countComment = $this->commentaireManager->adminCountCommentaire();
+    
+            $nbTotalPages = (int)ceil($countComment / $postsPerPage);
+    
+            if ($currentPage < 1){
+                $currentPage = 1;
+            }elseif ($currentPage > $nbTotalPages){
+                $currentPage = $nbTotalPages;
+            }
+    
+            //calculer la page précédente, si current page = 1 pas de page prec : =0
+            if($currentPage === 1){ 
+                $pagePrecedente = 0;
+            }else {
+                $pagePrecedente = $currentPage - 1;
+            }
+    
+            //calculer la page suivante
+            if($currentPage === $nbTotalPages){
+                $pageSuivante = 0;
+            }else {
+                $pageSuivante = $currentPage + 1;
+            }
+    
+            $list = $this->commentaireManager->adminFindComment($offset, $postsPerPage);
         }
-
-        $list = $this->commentaireManager->adminFindComment($offset, $postsPerPage);
+       
         // var_dump($currentPage, $offset); 
         // echo '<pre>';
         // print_r($list);
@@ -295,6 +334,7 @@ class AdminController
         
         $this->view->render('moderateComment',[
             'session'=> $this->session,
+            'messageError'=>$messageError,
             'commentaires'=>$this->commentaireManager->adminFindComment($offset, $postsPerPage),
             'countReportedComments'=>$this->reportManager->getReportedComments(),
             'list'=>$list, 
@@ -322,9 +362,7 @@ class AdminController
         
     }
     
-    // pour numchapitre faire select count* chapitre where numchapitre = :numchapitre
-     //if !== 0 ->deja existant
-
+   
     // protec formulaire, input caché type hash ->session  nouveau hash a chaque demande
     // test correspondance à la validation formulaire -> ok, sinon msg error
 

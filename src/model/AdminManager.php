@@ -36,6 +36,7 @@ class AdminManager
         return $user;
     }
 
+
     //créer un chapitre
     public function creatChapitre($titre, $contenu, $extrait, $numchapitre, $fileNAme)
     {

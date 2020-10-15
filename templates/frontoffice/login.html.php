@@ -10,10 +10,11 @@ if($data['messageError'] !== null){
 }
 ?>
     <!-- Afficher le formulaire de saisie du mot de passe -->
-    <h1 class="titleConnection">Veuillez saisir votre identifiant et le mot de passe pour accéder à la partie administrateur</h1>
+    <h1 class="titleConnection">Veuillez saisir votre identifiant et mot de passe pour accéder à la partie administrateur</h1>
         <form class="formConnection" action="index.php?action=login" method="post">
-            <!-- action chemin redirection et method = methode d'envoie -->
-            <p><input type="text" name="utilisateur" placeholder="Utilisateur" /></p>
-            <p><input type="password" name="password" placeholder="Mot de passe"/></p>
+            <label for="identifiant">Identifiant :</label>
+            <input type="text" name="utilisateur" />
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" name="password" />
             <button class="btn btn-primary">Se connecter</button>
         </form>

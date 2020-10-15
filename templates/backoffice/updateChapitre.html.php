@@ -7,6 +7,13 @@
 <?php endforeach;?>
 <?php endif;?>
 
+<!-- gestion autorisation  -->
+<?php
+if($data['messageError'] !== null){
+    ?><div class="alert alert-danger"><?=$data['messageError']?></div><?php
+}
+?>
+
 <!-- tableau modification chapitre -->
 <div class="row justify-content-center">
     <form action="index.php?action=updateChapitre&id_chapitre=<?=$data['episode']['id_chapitre']?>" class="col-lg-12"
