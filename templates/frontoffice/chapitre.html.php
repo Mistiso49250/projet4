@@ -58,6 +58,8 @@
                 <label for="pseudo">Pseudo :</label>
                 <input type="text" class="form-control" id="pseudo" placeholder="votre pseudo" aria-describedby="pseudo"
                     required>
+                <input type="hidden" name="token" id="token" value="<?php echo $data['token'];?>" />
+                <!-- Le champ caché a pour valeur le jeton -->
             </div>
             <div class="form-group">
                 <label for="textarea">Message :</label>
@@ -67,7 +69,6 @@
             <button type="submit" class="pull-right btn btn-info">Envoyer</button>
         </form>
     </div>
-</div>
 </div>
 
 
@@ -88,7 +89,7 @@
     <div class="row justify-content-md-center">
         <div class="col-lg-3">
             <div class="form-group">
-                
+
                 <!-- Button trigger modal-->
                 <button type="button" class="pull-right btn btn-danger" id="<?=$submit?>" data-toggle="modal"
                     data-target="#modalConfirmDelete">Signaler</button>
@@ -113,7 +114,8 @@
 
                             <!--Footer-->
                             <div class="modal-footer flex-center">
-                                <a href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>" class="btn  btn-outline-danger">Oui</a>
+                                <a href="index.php?action=commentReport&id=<?=$commentaire['id_commentaire']?>&chapitre_id=<?=$commentaire['id_chapitre']?>"
+                                    class="btn  btn-outline-danger">Oui</a>
                                 <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Non</a>
                             </div>
                         </div>
