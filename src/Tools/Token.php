@@ -15,12 +15,11 @@ class Token{
     }
 
     //Cette fonction génère, sauvegarde et retourne un token
-    //Lui passer en paramètre optionnel un nom pour différencier les formulaires
     function genererToken()
     {
         //On génére un jeton totalement unique
         $token = uniqid(rand(), true);
-        //Et on le stocke
+        //Et on le stock
         $this->session->setToken($token);
 
         return $token;
