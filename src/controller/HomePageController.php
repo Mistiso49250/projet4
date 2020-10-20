@@ -31,8 +31,8 @@ class HomePageController
             exit();
         }
         elseif(!empty($_POST)) {
-            $user = $this->adminManager->auth($_POST['utilisateur']);
-            if($user !== null && password_verify($_POST['password'], $user['password'])){
+            $user = $this->adminManager->auth(htmlspecialchars($_POST['utilisateur']));
+            if($user !== null && password_verify(htmlspecialchars($_POST['password']), $user['password'])){
                 $_SESSION['auth'] = true;
                 header('Location: index.php?action=admin');
                 exit();

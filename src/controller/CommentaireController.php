@@ -18,9 +18,10 @@ class CommentaireController
     }
     
     // pour ajouter un commentaire
-    public function addComment(int $idChapitre, $pseudo, $contenu)
+    public function addComment(int $idChapitre, $pseudo, $contenu, $token)
     {
 
+        var_dump($token); die();
         if(empty($pseudo) || empty($contenu)){
             $this->session->setFlash('danger','Tout les champs ne sont pas remplis');
         }

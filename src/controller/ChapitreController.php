@@ -8,7 +8,7 @@ use Oc\Model\ChapitreManager;
 use Oc\Model\CommentaireManager;
 use Oc\View\View;
 use Oc\Tools\Session;
-
+use Oc\Tools\Token;
 
 class ChapitreController 
 {
@@ -38,13 +38,15 @@ class ChapitreController
         $chapitrePrecedent = $this->getMaxId->getMaxId($episode['numchapitre']);
         $chapitreSuivant = $this->getMinId->getMinId($episode['numchapitre']);
         $commentaires = $this->commentaireManager->findComments($idChapitre);
+        $token = new Token($this->session);
         
         $this->view->render('chapitre', [
             'episode'=>$episode, 
             'commentaires'=>$commentaires, 
             'session'=> $this->session,
             'chapitreSuivant'=>$chapitreSuivant,
-            'chapitrePrecedent'=>$chapitrePrecedent
+            'chapitrePrecedent'=>$chapitrePrecedent,
+            'token'=>$token->genererToken()
         ]);
     }
 

@@ -31,7 +31,7 @@ switch ($action) {
         // ajout de commentaire
     case 'addComment':
         $controller = new CommentaireController();
-        $controller->addComment((int)$_GET['id'], $_POST['pseudo'], $_POST['contenu']);
+        $controller->addComment((int)$_GET['id'], htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['contenu']), htmlspecialchars($_POST['token']));
     break;
         // signalement d'un commentaire
     case 'commentReport':
@@ -61,11 +61,11 @@ switch ($action) {
     // avec upload d'images
     case 'newChapitre':
         $controller = new AdminController();
-        $controller->newChapitre($_POST);
+        $controller->newChapitre(htmlspecialchars($_POST));
     break;
     case 'updateChapitre':
         $controller = new AdminController();
-        $controller->updateChapitre($_POST, (int)$_GET['id_chapitre']);
+        $controller->updateChapitre(htmlspecialchars($_POST), (int)$_GET['id_chapitre']);
     break;
     case 'deleteChapitre':
         $controller = new AdminController();
@@ -78,7 +78,7 @@ switch ($action) {
     // sauvegarder un chapitre en brouillon
     case 'save':
         $controller = new AdminController();
-        $controller->save($_POST);
+        $controller->save(htmlspecialchars($_POST));
     break;
     // page modification chapitre
     case 'getPostUpdate':

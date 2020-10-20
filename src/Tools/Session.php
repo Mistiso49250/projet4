@@ -34,4 +34,8 @@ class Session{
         return $flash;
     }
 
+    public function setToken( $hash){
+        $_SESSION['csrfToken'] = $hash;
+    }
+
 }

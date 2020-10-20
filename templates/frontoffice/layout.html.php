@@ -8,6 +8,8 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,700,700i,900,900i" rel="stylesheet">
 
+    <link rel="icon" href="images/favicon.ico" />
+
     <link rel="stylesheet" href="css/front/style.css">
 
     <!-- bootstrap -->

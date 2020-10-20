@@ -44,8 +44,9 @@
 <?php endforeach;?>
 <?php endif;?>
 
-<!-- formulaire ajout commentaire -->
+<!-- protection csrf -->
 
+<!-- formulaire ajout commentaire -->
 <div class="row container-fluid" id="commentaire">
     <div class="col">
         <hr>
@@ -56,16 +57,14 @@
             </div>
             <div class="form-group">
                 <label for="pseudo">Pseudo :</label>
-                <input type="text" class="form-control" id="pseudo" placeholder="votre pseudo" aria-describedby="pseudo"
-                    required>
-                <input type="hidden" name="token" id="token" value="<?php echo $data['token'];?>" />
-                <!-- Le champ caché a pour valeur le jeton -->
+                <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="votre pseudo" aria-describedby="pseudo"
+                    required pattern="^[A-Za-z '-]+$" maxlength="20">
             </div>
             <div class="form-group">
                 <label for="textarea">Message :</label>
-                <textarea id="textarea" rows="5" class="form-control " placeholder="votre message" required></textarea>
+                <textarea id="textarea" name="contenu" rows="5" class="form-control " placeholder="votre message" required pattern="^[A-Za-z '-]+$"></textarea>
             </div>
-            <input type="hidden" name="token" value="">
+            <input type="hidden" name="token" id="token" value="<?=$data['token']?>"/>
             <button type="submit" class="pull-right btn btn-info">Envoyer</button>
         </form>
     </div>
@@ -77,7 +76,7 @@
     <?php foreach($data['commentaires'] as $commentaire):
     $submit = "";
     if((int)$commentaire['signaler'] !== 0){
-        $submit = "signalé"; ?>
+        $submit = "signale"; ?>
     <p class="signalement">Ce commentaire à déjà été signalé</p>
     <?php
     } 
