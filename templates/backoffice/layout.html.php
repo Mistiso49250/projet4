@@ -36,10 +36,6 @@
             </div>
         </div>
 
-        <?php
-        // Afficher la page
-        ?>
-
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -74,7 +70,6 @@
     </script>
 
     <script src="js\back\tinymce\tinymce.min.js"></script>
-    <script src="js\back\testMenuBoot.js"></script>
 
 </body>
 

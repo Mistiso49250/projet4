@@ -9,6 +9,7 @@ use Oc\Model\CommentaireManager;
 use Oc\Model\ReportManager;
 use Oc\Tools\Session;
 use Oc\View\View;
+use Oc\Tools\Token;
 
 class AdminController
 {
@@ -54,6 +55,8 @@ class AdminController
     
     public function Admin(int $currentPage = 1)
     {
+        $token = new Token($this->session);
+        $verifierToken = new Token($this->session); 
         $messageError = null;
         if(!isset($_SESSION['auth'])){
             $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
@@ -102,6 +105,8 @@ class AdminController
        
         $this->view->render('admin', [
             'messageError'=>$messageError,
+            'token'=>$token->genererToken(),
+            'verifierToken' => $verifierToken->verifierToken(),
             'list'=>$list, 
             'session'=> $this->session,
             'pageSuivante'=>$pageSuivante, 
@@ -115,72 +120,80 @@ class AdminController
     public function newChapitre($post)
     {
         $messageError = null;
-        if(!isset($_SESSION['auth'])){
-            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
-            header('Location: index.php?action=login');
-            exit();
-        }
-        else{
-            // Vérifier si le formulaire a été soumis
-            if($_SERVER["REQUEST_METHOD"] === "POST"){  
-
-                // $maxSize = 400000;
-                // $validExt = array('.jpg', '.jpeg', '.gif', '.png');
-                // $fileSize = $_FILES['uploaded_file']['size'];
-                // $fileNAme = $_FILES['uploaded_file']['name'];
-                // $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
-                // $tmpName = $_FILES['uploaded_file']['name'];
-                // $uniqueName = $this->adminManager->uniqImg();
-                // $fileNAme = "images/" . $uniqueName . $fileExt;
-                // $result = move_uploaded_file($tmpName, $fileNAme);
-                // // Vérifie si le fichier existe avant de le télécharger.
-                // if(file_exists("images/" . $fileNAme)){ 
-                //     $this->session->setFlash('danger', $fileNAme . " existe déjà.");
-                // }
-                // if($fileSize > $maxSize){
-                //     $this->session->setFlash('danger', 'le fichier est trop volumieux');
-                // } 
-                // if(in_array($fileSize, $validExt))
-                // {
-                //     $this->session->setFlash('danger', 'le format n\'est pas valide');
-                // }
-                // if($result)
-                // {
-                //     $this->session->setFlash('success', 'upload réussi.');
-                // }
-    
-                $filename = null; 
-                $numchapitre = $this->chapitreManager->countNumChapitre();
-                
-                // Vérifie si le fichier existe avant de le télécharger.
-                if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
-                    $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
-                    header('Location: index.php?action=newChapitre');
-                    exit();
-                } 
-               
-                elseif($numchapitre !== 0 ){
-                    $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
-                    header('Location: index.php?action=newChapitre');
-                    exit();
-                }
-                else{
-                    move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
-                    $filename = $_FILES["uploaded_file"]["name"];
-                } 
-                $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $filename);
-               
-                
-                $this->session->setFlash('success', 'Votre nouveau chapitre a été publié avec succès.');
-                header('Location: index.php?action=admin');
+        $verifierToken = new Token($this->session);
+        if($verifierToken){
+            if(!isset($_SESSION['auth'])){
+                $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+                header('Location: index.php?action=login');
                 exit();
-               
             }
+            else{
+                // Vérifier si le formulaire a été soumis
+                if($_SERVER["REQUEST_METHOD"] === "POST"){  
+    
+                    // $maxSize = 400000;
+                    // $validExt = array('.jpg', '.jpeg', '.gif', '.png');
+                    // $fileSize = $_FILES['uploaded_file']['size'];
+                    // $fileNAme = $_FILES['uploaded_file']['name'];
+                    // $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
+                    // $tmpName = $_FILES['uploaded_file']['name'];
+                    // $uniqueName = $this->adminManager->uniqImg();
+                    // $fileNAme = "images/" . $uniqueName . $fileExt;
+                    // $result = move_uploaded_file($tmpName, $fileNAme);
+                    // // Vérifie si le fichier existe avant de le télécharger.
+                    // if(file_exists("images/" . $fileNAme)){ 
+                    //     $this->session->setFlash('danger', $fileNAme . " existe déjà.");
+                    // }
+                    // if($fileSize > $maxSize){
+                    //     $this->session->setFlash('danger', 'le fichier est trop volumieux');
+                    // } 
+                    // if(in_array($fileSize, $validExt))
+                    // {
+                    //     $this->session->setFlash('danger', 'le format n\'est pas valide');
+                    // }
+                    // if($result)
+                    // {
+                    //     $this->session->setFlash('success', 'upload réussi.');
+                    // }
+        
+                    $filename = null; 
+                    $numchapitre = $this->chapitreManager->countNumChapitre();
+                    
+                    // Vérifie si le fichier existe avant de le télécharger.
+                    if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
+                        $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
+                        header('Location: index.php?action=newChapitre');
+                        exit();
+                    } 
+                   
+                    elseif($numchapitre !== 0 ){
+                        $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
+                        header('Location: index.php?action=newChapitre');
+                        exit();
+                    }
+                    else{
+                        move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
+                        $filename = $_FILES["uploaded_file"]["name"];
+                    } 
+                    $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $filename);
+                   
+                    
+                    $this->session->setFlash('success', 'Votre nouveau chapitre a été publié avec succès.');
+                    header('Location: index.php?action=admin');
+                    exit();
+                   
+                }
+            }   
+        }
+        else
+        {
+            $this->session->setToken('danger', "Une erreur c'est produite");	
         }
             
 
         $this->view->render('newChapitre',[
             'session'=> $this->session,
+            'verifierToken' => $verifierToken->verifierToken(),
             'messageError'=>$messageError,
             'countReportedComments'=>$this->reportManager->getReportedComments(),
         ], null);

@@ -35,11 +35,11 @@ if($data['messageError'] !== null){
         </div>
         <div class="form-group">
             <label for="textarea">Extrait:</label>
-            <textarea name="extrait" id="textarea" cols="30" rows="10"><?=$data['post']['extrait']?></textarea>
+            <textarea name="extrait"  cols="30" rows="10"><?=$data['post']['extrait']?></textarea>
         </div>
         <div class="form-group">
             <label for="textarea">Contenu: </label>
-            <textarea name="contenu_chapitre" id="textarea" cols="30"
+            <textarea name="contenu_chapitre" cols="30"
                 rows="25"><?=$data['post']['contenu_chapitre']?></textarea>
         </div>
 

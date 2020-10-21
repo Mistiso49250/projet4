@@ -87,12 +87,7 @@ class ChapitreController
         }
 
         $list = $this->chapitreManager->findChapitres($offset, $postsPerPage);
-        // var_dump($currentPage, $offset); 
-        // echo '<pre>';
-        // print_r($list);
-        // echo '</pre>';
-        // die();
-       
+      
         $this->view->render('listechapitres', [
             'list'=>$list, 
             'pageSuivante'=>$pageSuivante, 

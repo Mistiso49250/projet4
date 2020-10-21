@@ -15,11 +15,12 @@ class Token{
     }
 
     //Cette fonction génère, sauvegarde et retourne un token
+    //Lui passer en paramètre optionnel un nom pour différencier les formulaires
     function genererToken()
     {
         //On génére un jeton totalement unique
         $token = uniqid(rand(), true);
-        //Et on le stock
+        //Et on le stocke
         $this->session->setToken($token);
 
         return $token;
@@ -29,17 +30,12 @@ class Token{
     //Cette fonction vérifie le token
     //On passe en argument le temps de validité (en secondes)
     //Le nom optionnel si on en a défini un lors de la création du token
-    function verifierToken($timestamp_ancien, $nom = 'forteroche')
+    function verifierToken()
     { //Si le jeton est présent dans la session et dans le formulaire
-        if(isset($_SESSION[$nom.'_token']) && isset($_SESSION[$nom.'_token_time']) && isset($_POST['token'])){
+        if(isset($_POST['token'])){
             //Si le jeton de la session correspond à celui du formulaire
-            if($_SESSION[$nom.'_token'] == $_POST['token']){
-                //On stocke le timestamp qu'il était il y a 3 minutes
-                $timestamp_ancien = time() - (3*60);
-                //Si le jeton n'est pas expiré
-                if($_SESSION[$nom.'_token_time'] >= $timestamp_ancien){
-                    return true;
-                }
+            if($_SESSION['token'] == $_POST['token']){
+                return true;
             }
             return false;
         }

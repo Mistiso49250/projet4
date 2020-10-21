@@ -13,10 +13,8 @@
             <img src="images/<?=$episode['image']?>" alt="" class="img-fluid">
             <h3 class="chapitreTitle"><?=$episode['titre']?></h3>
             <p class="allChapitre"><?=$episode['extrait']?></p>
-            <!-- <div class="lireChapitre"> -->
             <a class="btn btn-info" href="index.php?action=chapitre&id=<?=$episode['id_chapitre']?>">Lire le
                 chapitre</a>
-            <!-- </div> -->
         </div>
         <?php
                 } else{

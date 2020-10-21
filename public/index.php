@@ -61,11 +61,11 @@ switch ($action) {
     // avec upload d'images
     case 'newChapitre':
         $controller = new AdminController();
-        $controller->newChapitre(htmlspecialchars($_POST));
+        $controller->newChapitre($_POST);
     break;
     case 'updateChapitre':
         $controller = new AdminController();
-        $controller->updateChapitre(htmlspecialchars($_POST), (int)$_GET['id_chapitre']);
+        $controller->updateChapitre(($_POST), (int)$_GET['id_chapitre']);
     break;
     case 'deleteChapitre':
         $controller = new AdminController();
@@ -78,7 +78,7 @@ switch ($action) {
     // sauvegarder un chapitre en brouillon
     case 'save':
         $controller = new AdminController();
-        $controller->save(htmlspecialchars($_POST));
+        $controller->save($_POST);
     break;
     // page modification chapitre
     case 'getPostUpdate':
