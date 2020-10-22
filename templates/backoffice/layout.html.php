@@ -17,9 +17,27 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
     <!-- tinymce -->
-    <script src="https://cdn.tiny.cloud/1/sgucpkg0rglmeqtnxrrh880aputls1kntjwzgi5htko37n9y/tinymce/5/tinymce.min.js"
-        referrerpolicy="origin"></script>
-
+    <script src="https://cdn.tiny.cloud/1/sgucpkg0rglmeqtnxrrh880aputls1kntjwzgi5htko37n9y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            language:"fr_FR",
+            entity_encoding : "raw",
+            encoding: "UTF-8",
+            selector: 'textarea',
+            
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'table emoticons template paste help'
+            ],
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'outdent indent | preview fullpage | ' +
+                'forecolor backcolor | help',
+                
+            menubar: 'favs file edit view insert format tools help',
+            content_css: 'css/content.css'
+            });
+    </script>
 
     <title>Administration</title>
 </head>
@@ -69,7 +87,7 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
 
-    <script src="js\back\tinymce\tinymce.min.js"></script>
+    <!-- <script src="js\back\tinymce\tinymce.min.js"></script> -->
 
 </body>
 

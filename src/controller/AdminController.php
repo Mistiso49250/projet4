@@ -121,6 +121,8 @@ class AdminController
     {
         $messageError = null;
         $verifierToken = new Token($this->session);
+        $filename = null; 
+        $numchapitre = $this->chapitreManager->countNumChapitre();
         if($verifierToken){
             if(!isset($_SESSION['auth'])){
                 $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
@@ -156,8 +158,7 @@ class AdminController
                     //     $this->session->setFlash('success', 'upload réussi.');
                     // }
         
-                    $filename = null; 
-                    $numchapitre = $this->chapitreManager->countNumChapitre();
+                   
                     
                     // Vérifie si le fichier existe avant de le télécharger.
                     if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 

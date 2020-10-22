@@ -1,6 +1,7 @@
 <?php
 
 namespace Oc\Tools;
+use Exception;
 
 class DbConnect {
     private $db;
@@ -9,7 +10,7 @@ class DbConnect {
     {
         try
         {
-            $this->db = new \PDO('mysql:host=paleron.o2switch.net:2083;dbname=projet4;charset=utf8', 'dami7711_root', 'Forteroche');
+            $this->db = new \PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '');
             return $this->db;
         }
         catch(Exception $e)

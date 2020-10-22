@@ -5,7 +5,7 @@
 </div>
 
 <!-- affiche le contenu du chapitre -->
-<div class="row justify-content-md-center container-fluid mt-4">
+<div class="row justify-content-md-center container-fluid mt-4" id="rowChapitre">
     <div class="col-12-col-7" id="imgChapitre">
         <img src="images/<?= $data['episode']['image']?>" alt="" class="img-fluid">
         <h3 class="chapitreTitle"><?= $data['episode']['titre']?></h3>
