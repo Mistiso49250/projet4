@@ -7,13 +7,6 @@
 <?php endforeach;?>
 <?php endif;?>
 
-<!-- gestion autorisation  -->
-<?php
-if($data['messageError'] !== null){
-    ?><div class="alert alert-danger"><?=$data['messageError']?></div><?php
-}
-?>
-
 
 <!-- tableaux d'ajout chapitre -->
 <div class="row justify-content-center">

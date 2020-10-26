@@ -1,9 +1,4 @@
-<!-- gestion autorisation  -->
-<?php
-if($data['messageError'] !== null){
-    ?><div class="alert alert-danger"><?=$data['messageError']?></div><?php
-}
-?>
+
 
 <div class="listComments">
     <div class="col-lg-12">
@@ -24,7 +19,6 @@ if($data['messageError'] !== null){
                         <th>Auteur</th>
                         <th>Commentaire</th>
                         <th>Date de publication</th>
-                        <th>Chapitre</th>
                         <th>Modérer</th>
                     </tr>
                 </thead>
@@ -40,7 +34,6 @@ if($data['messageError'] !== null){
                         <td><?=htmlspecialchars($commentaire['pseudo'])?></td>
                         <td><?= nl2br(htmlspecialchars(($commentaire['contenu'])))?></td>
                         <td><?=$commentaire['date_commentaire_fr'] ?></td>
-                        <td><?=$commentaire['titre_chapitre'] ?></td>
                         <td>
                             <div class="row">
                                 <div class="col-lg-2">

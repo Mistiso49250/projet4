@@ -87,14 +87,15 @@ class AdminManager
     }
 
     //modifier un chapitre
-    public function updateChapitre($titre, $contenu, $extrait, $idChapitre) : bool
+    public function updateChapitre($titre, $contenu, $extrait, $numChapitre, $idChapitre) : bool
     {
-        $req = $this->db->prepare('UPDATE chapitre set titre = :titre, contenu_chapitre = :contenu_chapitre, extrait = :extrait, publier = 1
+        $req = $this->db->prepare('UPDATE chapitre set titre = :titre, contenu_chapitre = :contenu_chapitre, extrait = :extrait, numchapitre = :numchapitre, publier = 1
                          where id_chapitre = :idchapitre');
         $updatechapitre = $req->execute([
             'titre'=>$titre, 
             'contenu_chapitre'=>$contenu, 
             'extrait'=>$extrait, 
+            'numchapitre'=>$numChapitre,
             'idchapitre'=>$idChapitre]);
 
         return $updatechapitre;

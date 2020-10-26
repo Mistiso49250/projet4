@@ -34,7 +34,7 @@ class Token{
     { //Si le jeton est présent dans la session et dans le formulaire
         if(isset($_POST['token'])){
             //Si le jeton de la session correspond à celui du formulaire
-            if($_SESSION['token'] == $_POST['token']){
+            if($_SESSION['csrfToken'] == $_POST['token']){
                 return true;
             }
             return false;

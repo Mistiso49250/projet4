@@ -34,8 +34,15 @@ class Session{
         return $flash;
     }
 
-    public function setToken( $hash){
+    public function setToken($hash){
         $_SESSION['csrfToken'] = $hash;
+    }
+
+    public function getToken(){
+        $csrfToken = $_SESSION['csrfToken'];
+        unset($_SESSION['csrfToken']);
+
+        return $csrfToken;
     }
 
 }

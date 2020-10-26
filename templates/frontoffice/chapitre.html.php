@@ -77,7 +77,7 @@
     $submit = "";
     if((int)$commentaire['signaler'] !== 0){
         $submit = "signale"; ?>
-    <p class="signalement">Ce commentaire à déjà été signalé</p>
+    <p class="signalement">Ce commentaire a déjà été signalé</p>
     <?php
     } 
     ?>

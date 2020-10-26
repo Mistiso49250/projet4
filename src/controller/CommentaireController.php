@@ -25,13 +25,11 @@ class CommentaireController
     {
         if($this->verifierToken->verifierToken())
         {
-            var_dump($token); die();
             if(empty($pseudo) || empty($contenu)){
                 $this->session->setFlash('danger','Tout les champs ne sont pas remplis');
             }
             else{
                 $affectedLines = $this->commentaireManager->articleComment($idChapitre, $pseudo, $contenu);
-
                 if($affectedLines === false){
                     $this->session->setFlash('danger', 'Impossible d\'ajouter le commentaire !');
                 }

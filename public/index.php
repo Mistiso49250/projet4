@@ -31,7 +31,7 @@ switch ($action) {
         // ajout de commentaire
     case 'addComment':
         $controller = new CommentaireController();
-        $controller->addComment((int)$_GET['id'], htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['contenu']), htmlspecialchars($_POST['token']));
+        $controller->addComment((int)$_GET['id'], ($_POST['pseudo']), ($_POST['contenu']), ($_POST['token']));
     break;
         // signalement d'un commentaire
     case 'commentReport':

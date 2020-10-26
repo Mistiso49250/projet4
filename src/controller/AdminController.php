@@ -57,9 +57,8 @@ class AdminController
     {
         $token = new Token($this->session);
         $verifierToken = new Token($this->session); 
-        $messageError = null;
         if(!isset($_SESSION['auth'])){
-            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            $this->session->setFlash('danger', "Veuillez vous identifié pour accéder a l\'administration'");
             header('Location: index.php?action=login');
             exit();
         }
@@ -104,7 +103,6 @@ class AdminController
         }
        
         $this->view->render('admin', [
-            'messageError'=>$messageError,
             'token'=>$token->genererToken(),
             'verifierToken' => $verifierToken->verifierToken(),
             'list'=>$list, 
@@ -119,13 +117,12 @@ class AdminController
     //créer un chapitre
     public function newChapitre($post)
     {
-        $messageError = null;
         $verifierToken = new Token($this->session);
         $filename = null; 
         $numchapitre = $this->chapitreManager->countNumChapitre();
         if($verifierToken){
             if(!isset($_SESSION['auth'])){
-                $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+                $this->session->setFlash('danger', "Veuillez vous identifié pour accéder a l\'administration'");
                 header('Location: index.php?action=login');
                 exit();
             }
@@ -195,7 +192,6 @@ class AdminController
         $this->view->render('newChapitre',[
             'session'=> $this->session,
             'verifierToken' => $verifierToken->verifierToken(),
-            'messageError'=>$messageError,
             'countReportedComments'=>$this->reportManager->getReportedComments(),
         ], null);
         
@@ -210,6 +206,7 @@ class AdminController
         $countReportedComments = $this->reportManager->getReportedComments();
 
         $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre']);
+        var_dump($save); die();
         if($save === false){
             $this->session->setFlash('danger', 'Impossible de sauvegarder le chapitre !');
         }
@@ -218,7 +215,7 @@ class AdminController
             header('Location: index.php?action=admin');
             exit();
         }
-        $this->view->render('save',[
+        $this->view->render('newChapitre',[
             'session'=> $this->session,
             'countReportedComments'=>$countReportedComments,
             
@@ -229,9 +226,8 @@ class AdminController
     //modifier un chapitre
     public function getChapitre($idChapitre)
     {
-        $messageError = null;
         if(!isset($_SESSION['auth'])){
-            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            $this->session->setFlash('danger', "Veuillez vous identifié pour accéder a l\'administration'");
             header('Location: index.php?action=login');
             exit();
         }
@@ -242,7 +238,6 @@ class AdminController
         }
 
         $this->view->render('updateChapitre',[
-            'messageError'=>$messageError,
             'post'=>$post,
             'episode'=>$episode,
             'session'=> $this->session,
@@ -254,7 +249,7 @@ class AdminController
     {
 
         $episode = $this->chapitreManager->findChapitreAdmin($idChapitre);
-        $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $idChapitre);
+        $update = $this->adminManager->updateChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $idChapitre);
 
         if($update === false){
             $this->session->setFlash('danger', 'Impossible de modifié le chapitre !');
@@ -296,9 +291,8 @@ class AdminController
     //page moderer commentaire & pagination
     public function moderateComment(int $currentPage = 1)
     {
-        $messageError = null;
         if(!isset($_SESSION['auth'])){
-            $messageError = 'Veuillez vous identifié pour accéder a l\'administration';
+            $this->session->setFlash('danger', "Veuillez vous identifié pour accéder a l\'administration'");
             header('Location: index.php?action=login');
             exit();
         }
@@ -338,17 +332,9 @@ class AdminController
     
             $list = $this->commentaireManager->adminFindComment($offset, $postsPerPage);
         }
-       
-        // var_dump($currentPage, $offset); 
-        // echo '<pre>';
-        // print_r($list);
-        // echo '</pre>';
-        // die();
-
         
         $this->view->render('moderateComment',[
             'session'=> $this->session,
-            'messageError'=>$messageError,
             'commentaires'=>$this->commentaireManager->adminFindComment($offset, $postsPerPage),
             'countReportedComments'=>$this->reportManager->getReportedComments(),
             'list'=>$list, 
@@ -375,12 +361,7 @@ class AdminController
         }
         
     }
-    
-   
-    // protec formulaire, input caché type hash ->session  nouveau hash a chaque demande
-    // test correspondance à la validation formulaire -> ok, sinon msg error
 
-    // test faille xss front
 }
 
 
