@@ -28,7 +28,7 @@ class CommentaireManager
     //recupère les commentaire pour la partie admin
     public function adminFindComment(int $offset, int $nbPerPage) : array
     {
-        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, titre_chapitre, signaler, 
+        $req = $this->db->prepare('SELECT id_commentaire, id_chapitre, pseudo, contenu, signaler, 
                                     DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr 
                                      FROM commentaire ORDER BY date_commentaire DESC limit :offset, :limitation');
         $req->bindValue(':limitation', $nbPerPage, \PDO::PARAM_INT);

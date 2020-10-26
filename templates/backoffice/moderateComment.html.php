@@ -1,5 +1,3 @@
-
-
 <div class="listComments">
     <div class="col-lg-12">
         <h2 moderer>Liste des commentaires</h2>
