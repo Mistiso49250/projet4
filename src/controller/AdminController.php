@@ -118,8 +118,9 @@ class AdminController
     public function newChapitre($post)
     {
         $verifierToken = new Token($this->session);
+        // $numChapitre = null;
         $filename = null; 
-        $numchapitre = $this->chapitreManager->countNumChapitre();
+        $numchapitre = $this->chapitreManager->countNumChapitre($numChapitre);
         if($verifierToken){
             if(!isset($_SESSION['auth'])){
                 $this->session->setFlash('danger', "Veuillez vous identifié pour accéder a l\'administration'");
@@ -129,42 +130,15 @@ class AdminController
             else{
                 // Vérifier si le formulaire a été soumis
                 if($_SERVER["REQUEST_METHOD"] === "POST"){  
-    
-                    // $maxSize = 400000;
-                    // $validExt = array('.jpg', '.jpeg', '.gif', '.png');
-                    // $fileSize = $_FILES['uploaded_file']['size'];
-                    // $fileNAme = $_FILES['uploaded_file']['name'];
-                    // $fileExt = "." .strtolower(substr(strrchr($fileNAme, '.'), 1));
-                    // $tmpName = $_FILES['uploaded_file']['name'];
-                    // $uniqueName = $this->adminManager->uniqImg();
-                    // $fileNAme = "images/" . $uniqueName . $fileExt;
-                    // $result = move_uploaded_file($tmpName, $fileNAme);
-                    // // Vérifie si le fichier existe avant de le télécharger.
-                    // if(file_exists("images/" . $fileNAme)){ 
-                    //     $this->session->setFlash('danger', $fileNAme . " existe déjà.");
-                    // }
-                    // if($fileSize > $maxSize){
-                    //     $this->session->setFlash('danger', 'le fichier est trop volumieux');
-                    // } 
-                    // if(in_array($fileSize, $validExt))
-                    // {
-                    //     $this->session->setFlash('danger', 'le format n\'est pas valide');
-                    // }
-                    // if($result)
-                    // {
-                    //     $this->session->setFlash('success', 'upload réussi.');
-                    // }
-        
-                   
                     
                     // Vérifie si le fichier existe avant de le télécharger.
-                    if(file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
+                    if($_FILES["uploaded_file"]["name"] !=='' && file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
                         $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
                         header('Location: index.php?action=newChapitre');
                         exit();
                     } 
                    
-                    elseif($numchapitre !== 0 ){
+                    elseif($numchapitre !== 0){
                         $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
                         header('Location: index.php?action=newChapitre');
                         exit();
@@ -174,7 +148,6 @@ class AdminController
                         $filename = $_FILES["uploaded_file"]["name"];
                     } 
                     $newPost = $this->adminManager->creatChapitre($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre'], $filename);
-                   
                     
                     $this->session->setFlash('success', 'Votre nouveau chapitre a été publié avec succès.');
                     header('Location: index.php?action=admin');
@@ -203,10 +176,7 @@ class AdminController
     public function save($post)
     {
         
-        $countReportedComments = $this->reportManager->getReportedComments();
-
         $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre']);
-        var_dump($save); die();
         if($save === false){
             $this->session->setFlash('danger', 'Impossible de sauvegarder le chapitre !');
         }
@@ -217,8 +187,7 @@ class AdminController
         }
         $this->view->render('newChapitre',[
             'session'=> $this->session,
-            'countReportedComments'=>$countReportedComments,
-            
+            'countReportedComments'=> $this->reportManager->getReportedComments(),
         ]);
     }
 

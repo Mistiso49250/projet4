@@ -71,9 +71,8 @@ class AdminManager
             'titre'=>$titre, 
             'contenu_chapitre'=>$contenu, 
             'extrait'=>$extrait, 
-            'numchapitre'=>$numchapitre 
+            'numchapitre'=>$numchapitre ,
             ]);
-
         return $newChapitre;
     }
 
