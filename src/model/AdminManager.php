@@ -38,7 +38,7 @@ class AdminManager
 
 
     //créer un chapitre
-    public function creatChapitre($titre, $contenu, $extrait, $numchapitre, $fileNAme)
+    public function creatChapitre($titre, $contenu, $extrait, $numchapitre, $fileName)
     {
         $req = $this->db->prepare('INSERT into chapitre (titre, contenu_chapitre, extrait, image, publier, numchapitre, date_publication) 
                                                  VALUES (:titre, :contenu_chapitre, :extrait, :uploaded_file, 1, :numchapitre, NOW())');
@@ -46,7 +46,7 @@ class AdminManager
             'titre'=>$titre, 
             'contenu_chapitre'=>$contenu, 
             'extrait'=>$extrait, 
-            'uploaded_file'=>$fileNAme,
+            'uploaded_file'=>$fileName,
             'numchapitre'=>$numchapitre
             ]);
 

@@ -36,7 +36,7 @@ class ChapitreManager
         return $req->fetchAll();
     }
 
-    // récupère les numéros de chapitre pour la partie admin
+    // compte les numéros de chapitre pour la partie admin
     public function countNumChapitre($numChapitre)
     {
         $req = $this->db->prepare('SELECT count(*) as nb from chapitre where numchapitre = :numchapitre');

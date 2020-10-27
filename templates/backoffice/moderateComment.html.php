@@ -1,3 +1,12 @@
+<!-- gestion authentification -->
+<?php
+if(!isset($_SESSION['auth'])){
+    $_SESSION['flash']['danger'] = "Veuillez vous identifié pour accéder a l\'administration";
+    header('Location: index.php?action=login');
+    exit();
+}
+?>
+
 <div class="listComments">
     <div class="col-lg-12">
         <h2 moderer>Liste des commentaires</h2>

@@ -7,6 +7,15 @@
 <?php endforeach;?>
 <?php endif;?>
 
+<!-- gestion authentification -->
+<?php
+if(!isset($_SESSION['auth'])){
+    $_SESSION['flash']['danger'] = "Veuillez vous identifié pour accéder a l\'administration";
+    header('Location: index.php?action=login');
+    exit();
+}
+?>
+
 <!-- tableau modification chapitre -->
 <div class="row justify-content-center">
     <form action="index.php?action=updateChapitre&id_chapitre=<?=$data['episode']['id_chapitre']?>" class="col-lg-12"

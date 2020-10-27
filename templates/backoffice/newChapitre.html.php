@@ -7,6 +7,14 @@
 <?php endforeach;?>
 <?php endif;?>
 
+<!-- gestion authentification -->
+<?php
+if(!isset($_SESSION['auth'])){
+    $_SESSION['flash']['danger'] = "Veuillez vous identifié pour accéder a l\'administration";
+    header('Location: index.php?action=login');
+    exit();
+}
+?>
 
 <!-- tableaux d'ajout chapitre -->
 <div class="row justify-content-center">
@@ -16,7 +24,7 @@
         <div class="form-group">
             <label for="file">Séléctionner une image:</label>
             <input type="file" name="uploaded_file" id="uploaded_file">
-            <button type="submit" name="submit">Enregistrer</button>
+            
             <!-- L'attribut type = "file" de la balise <input> montre le champ d'entrée comme un contrôle de sélection de fichier, 
             avec un bouton "Parcourir" à côté du contrôle d'entrée -->
 
