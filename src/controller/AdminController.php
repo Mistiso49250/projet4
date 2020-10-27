@@ -159,16 +159,48 @@ class AdminController
     // sauvegarder un chapitre dans la bdd
     public function save($post)
     {
+        $verifierToken = new Token($this->session);
+        $fileName = null; 
+
+        if($verifierToken){
+            // Vérifier si le formulaire a été soumis            
+            if($_SERVER["REQUEST_METHOD"] === "POST"){  
+                // Vérifie si le fichier existe avant de le télécharger.
+                
+                $countNumChapitre = $this->chapitreManager->countNumChapitre($post['numchapitre']);        
+                if($_FILES["uploaded_file"]["name"] !=='' && file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
+                    $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
+                    header('Location: index.php?action=newChapitre');
+                    exit();
+                } 
+                
+                elseif($countNumChapitre !== 0){
+                    $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
+                    header('Location: index.php?action=newChapitre');
+                    exit();
+                }
+                else{
+                    move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "images/" . $_FILES["uploaded_file"]["name"]);
+                    $fileName = $_FILES["uploaded_file"]["name"];
+                } 
+                $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre']);
+                if($save === false){
+                    $this->session->setFlash('danger', 'Impossible de sauvegarder le chapitre !');
+                }
+                else{
+                    $this->session->setFlash('success', 'Le chapitre à bien été sauvegarder.');
+                    header('Location: index.php?action=admin');
+                    exit();
+                }
+                
+            }   
+        }
+        else
+        {
+            $this->session->setToken('danger', "Une erreur c'est produite");    
+        }
+
         
-        $save = $this->adminManager->save($post['titre'], $post['contenu_chapitre'], $post['extrait'], $post['numchapitre']);
-        if($save === false){
-            $this->session->setFlash('danger', 'Impossible de sauvegarder le chapitre !');
-        }
-        else{
-            $this->session->setFlash('success', 'Le chapitre à bien été sauvegarder.');
-            header('Location: index.php?action=admin');
-            exit();
-        }
         $this->view->render('newChapitre',[
             'session'=> $this->session,
             'countReportedComments'=> $this->reportManager->getReportedComments(),
