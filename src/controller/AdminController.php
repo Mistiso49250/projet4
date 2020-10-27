@@ -110,24 +110,23 @@ class AdminController
               null);
     }
 
-    //créer un chapitre
     public function newChapitre($post)
     {
         $verifierToken = new Token($this->session);
-        // $numChapitre = null;
         $fileName = null; 
-        $countNumChapitre = $this->chapitreManager->countNumChapitre($numChapitre);
         if($verifierToken){
-            // Vérifier si le formulaire a été soumis
+            // Vérifier si le formulaire a été soumis            
             if($_SERVER["REQUEST_METHOD"] === "POST"){  
                 // Vérifie si le fichier existe avant de le télécharger.
+                
+                $countNumChapitre = $this->chapitreManager->countNumChapitre($post['numchapitre']);        
                 if($_FILES["uploaded_file"]["name"] !=='' && file_exists("images/" . $_FILES["uploaded_file"]["name"])){ 
                     $this->session->setFlash('danger', $_FILES["uploaded_file"]["name"] . " existe déjà.");
                     header('Location: index.php?action=newChapitre');
                     exit();
                 } 
-                   
-                elseif($countNumChapitre !== $_POST['numchapitre']){
+                
+                elseif($countNumChapitre !== 0){
                     $this->session->setFlash('danger', "Ce numéro de chapitre est déjà utilisé.");
                     header('Location: index.php?action=newChapitre');
                     exit();
@@ -145,17 +144,15 @@ class AdminController
         }
         else
         {
-            $this->session->setToken('danger', "Une erreur c'est produite");	
+            $this->session->setToken('danger', "Une erreur c'est produite");    
         }
             
-
         $this->view->render('newChapitre',[
             'session'=> $this->session,
             'verifierToken' => $verifierToken->verifierToken(),
             'countReportedComments'=>$this->reportManager->getReportedComments(),
         ], null);
         
-
     }
 
 

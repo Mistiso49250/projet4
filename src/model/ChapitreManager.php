@@ -41,9 +41,9 @@ class ChapitreManager
     {
         $req = $this->db->prepare('SELECT count(*) as nb from chapitre where numchapitre = :numchapitre');
         $req->execute(['numchapitre'=> $numChapitre]);
-
-        return $req->fetchAll();
+        return (int)$req->fetch()['nb'];
     }
+
     
 
     //récupère les informations d'un chapitre
