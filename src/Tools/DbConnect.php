@@ -10,7 +10,7 @@ class DbConnect {
     {
         try
         {
-  $this->db = new \PDO('mysql:host=localhost;dbname=dami7711_forteroche;charset=utf8', 'dami7711_root', 'O6jJnyQ3hGwL');
+  $this->db = new \PDO('mysql:host=localhost;dbname=vnth3444_projet4;charset=utf8', 'vnth3444', 'E?@Zqrssn6kT');
    return $this->db;
         }
         catch(Exception $e)
